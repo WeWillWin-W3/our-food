@@ -30,4 +30,4 @@ Tais aplicativos tipicamente oferecem opções pratos prontos e opções customi
 
 
 ## Diagrama
-![Diagrama](./Diagrama.png)
+![Diagrama](./diagrama.png)

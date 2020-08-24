@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  db:
+    container_name: ourfood-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: ourfood
+  api:
+    container_name: ourfood-api
+    build: ./api
+    restart: always
+    ports:
+      - "3000:3000"

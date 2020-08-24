@@ -27,3 +27,7 @@ Tais aplicativos tipicamente oferecem opções pratos prontos e opções customi
 
 - [iFood](https://www.ifood.com.br)
 - [User Eats](https://www.ubereats.com)
+
+
+## Diagrama
+![Diagrama](./diagrama.png)

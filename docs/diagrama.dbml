@@ -12,6 +12,8 @@ table Restaurant {
   name varchar
   description varchar
   rate float
+  cnpj long
+  phone long
   location integer [ref: > Location.id]
   user varchar [ref: - User.id]
 }

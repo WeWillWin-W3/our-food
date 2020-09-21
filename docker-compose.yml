@@ -14,3 +14,9 @@ services:
     restart: always
     ports:
       - "3000:3000"
+  web:
+    container_name: ourfood-web
+    build: ./web
+    restart: always
+    ports:
+      - "80:80"

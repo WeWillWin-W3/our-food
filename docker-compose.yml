@@ -4,19 +4,19 @@ services:
   db:
     container_name: ourfood-db
     image: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: ourfood
   api:
     container_name: ourfood-api
     build: ./api
-    restart: always
+    restart: unless-stopped
     ports:
       - "3000:3000"
   web:
     container_name: ourfood-web
     build: ./web
-    restart: always
+    restart: unless-stopped
     ports:
       - "80:80"

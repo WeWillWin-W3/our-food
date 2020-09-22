@@ -8,6 +8,8 @@ services:
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: ourfood
+    ports: 
+      - "5432:5432"
   api:
     container_name: ourfood-api
     build: ./api

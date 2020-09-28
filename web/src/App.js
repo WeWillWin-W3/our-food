@@ -1,15 +1,23 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 import { GlobalStyle } from './styles/GlobalStyle'
+import { Home } from './pages/Home'
 
-export function App() {
-  return (
-    <>
-      <div className="App">
-        <h1>Hello, world!</h1>
-      </div>
-      <GlobalStyle/>
-    </>
-  )
-}
+export const App = () => (
+  <>
+    <Router>
+      <Switch>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+    <GlobalStyle />
+  </>
+)
 

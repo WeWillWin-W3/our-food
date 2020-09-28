@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const ImgPlaceholder = ({ width, height, borderRadius=10}) => (
-    <svg width={width} height={height}>
+export const ImgPlaceholder = ({ width, height, borderRadius=10, style}) => (
+    <svg width={width} height={height} style={style}>
         <rect width={width} height={height} rx={borderRadius} fill="#e9ecef"/>
         <line 
             x1={width - borderRadius/2} y1={borderRadius/2} 

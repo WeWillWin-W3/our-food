@@ -16,7 +16,7 @@ export const Home = () => (
             </Nav>
         </Navbar>
         <Main>
-            <ImgPlaceholder width={200} height={200} />
+            <ImgPlaceholder width={200} height={200} style={{ margin: '40px 0' }}/>
             <SearchBar/>
         </Main>
     </>

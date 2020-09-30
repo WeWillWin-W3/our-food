@@ -7,11 +7,15 @@ import {
 
 import { GlobalStyle } from './styles/GlobalStyle'
 import { Home } from './pages/Home'
+import { Pedidos } from './pages/Pedidos'
 
 export const App = () => (
   <>
     <Router>
       <Switch>
+        <Route path="/pedidos">
+          <Pedidos />
+        </Route>
         <Route path="/">
           <Home />
         </Route>

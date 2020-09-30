@@ -38,15 +38,17 @@ export const CardPrincipal = styled.div`
     color:rgba(0, 0, 0, 0.85);
 `
 
-export const CardTitle = styled.h3`
+export const CardTitle = styled.h4`
     margin-bottom: 6px;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 600;
 `
 
 export const CardSubTitle = styled.p`
-    margin-bottom: 20px;
-    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 28px;
+    font-size: 14px;
     font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
 `
 
 export const CardDescription = styled.span`

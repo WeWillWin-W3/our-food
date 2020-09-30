@@ -1,15 +1,19 @@
 import React from 'react'
 
 import { RestaurantCard } from './components/RestaurantCard'
-import { Container } from './styled'
+import { Container, Title, SubTitle } from './styled'
 
 export const Restaurants = () => (
-    <Container>
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-    </Container>
+    <>
+        <Title>Melhores Restaurantes</Title>
+        <SubTitle>Lista dos melhores restaurantes</SubTitle>
+        <Container>
+            <RestaurantCard />
+            <RestaurantCard />
+            <RestaurantCard />
+            <RestaurantCard />
+            <RestaurantCard />
+            <RestaurantCard />
+        </Container>
+    </>
 )

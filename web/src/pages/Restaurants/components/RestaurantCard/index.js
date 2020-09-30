@@ -8,7 +8,7 @@ export const RestaurantCard = () => (
         <CardPrincipal>
             <CardTitle>Cozinha da Maria</CardTitle>
             <CardSubTitle>Brasileira</CardSubTitle>
-            <CardDescription>Entrega grátis</CardDescription>
+            <CardDescription>30-35 min • R$ 5,00</CardDescription>
         </CardPrincipal>
     </Card>
 )

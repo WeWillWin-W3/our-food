@@ -12,6 +12,7 @@ export const Card = styled.div`
     padding: 83px;
     border-radius: 28px;
     background-color: white;
+    width: 28vw;
 `
 
 const IconStyle = css`
@@ -42,7 +43,6 @@ export const OtherOptionsBox = styled.div`
 export const OtherOption = styled.h4`
     color: #C0C0C0;
     margin-top: 28px;
-    font-family: roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -59,7 +59,6 @@ export const InputBox = styled.div`
     border-style: solid;
     border-width: 2px;
     margin-top: 10px;
-    width: 26vw;
     svg { 
         ${IconStyle}
     }

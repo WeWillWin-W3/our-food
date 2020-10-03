@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 export const Card = styled.div`
@@ -10,28 +9,24 @@ export const Card = styled.div`
     margin: 16px;
 
     background-color: #FFFFFF;
-    border: 2px solid rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
+
+    transition: all 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        border: 2px solid rgba(0, 0, 0, 0.35);
+    }
 `
 
-export const CardAvatar = ({ src, alt }) => (
-    <StyledCardAvatar>
-        <img alt={alt} src={src} />
-    </StyledCardAvatar>
-)
-
-export const StyledCardAvatar = styled.div`
+export const CardAvatar = styled.img`
         overflow: hidden;
         width: 80px;
         height: 80px;
         margin-right: 16px;
 
         border-radius: 6px;
-
-        img {
-            height: 100%;
-            width: 100%;
-        }
 `
 
 export const CardPrincipal = styled.div`

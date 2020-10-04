@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch, AiTwotonePushpin } from 'react-icons/ai';
 
 export const Navbar = styled.header`
     height: 70px;
@@ -53,6 +53,28 @@ const NavbarSearchInput = styled.input`
     border: none;
     outline: none;
     background-color: transparent;
+`
+
+export const NavbarDestination = ({ destination }) => (
+    <div>
+        <NavbarDestinationTitle>Entregar em:</NavbarDestinationTitle>
+        <NavbarDestinationValueBox>
+            <AiTwotonePushpin style={{ marginRight: '10px', fill: 'rgba(0, 0, 0, 0.65)' }} />
+            <span>{destination}</span>
+        </NavbarDestinationValueBox>
+    </div>
+)
+
+const NavbarDestinationTitle = styled.p`
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 5px;
+`
+
+const NavbarDestinationValueBox = styled.div`
+    display: flex;
+    align-items: center;
 `
 
 export const Nav = styled.nav`

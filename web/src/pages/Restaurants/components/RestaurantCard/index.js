@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, CardAvatar, CardPrincipal, CardTitle, CardSubTitle, CardDescription } from './styled'
 
-export default function RestaurantCard() {
+export function RestaurantCard() {
     return (
         <Card>
             <CardAvatar src="https://via.placeholder.com/80" alt="Main logo" />

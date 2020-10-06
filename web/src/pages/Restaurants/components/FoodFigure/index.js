@@ -2,7 +2,7 @@ import React from 'react'
 
 import { FoodFigure, FoodFigureImage, FoodFigureName } from './styled'
 
-export default function RestaurantCard({ name, src }) {
+export function FoodFigureComponent({ name, src }) {
     return (
         <FoodFigure>
             <FoodFigureImage alt="Brasileira" src="https://via.placeholder.com/100" />

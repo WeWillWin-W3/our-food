@@ -3,7 +3,7 @@ import React from 'react'
 import { Logo } from '../../../../components/Logo'
 import { Navbar, NavbarContainer, NavbarSearch, NavbarDestination, Nav, NavItem } from './styled'
 
-export default function NavbarComponent() {
+export function NavbarComponent() {
     return (
         <Navbar>
             <NavbarContainer>

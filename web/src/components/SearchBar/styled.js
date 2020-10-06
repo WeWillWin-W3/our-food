@@ -26,6 +26,9 @@ export const SearchResults = styled.div`
     background-color: #f5f5f5;
     padding: 12.5px 20px;
     border-radius: 0 0 9px 9px;
+    margin-right: 20px;
+    left: 0;
+    right: 0;
 
     div {
         display: flex;

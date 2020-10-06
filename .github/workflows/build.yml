@@ -6,9 +6,6 @@ on:
       - master
     paths:
       - 'web/**'
-  pull_request:
-    paths: 
-      - 'web/**'
     
 defaults:
   run:

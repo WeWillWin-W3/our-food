@@ -8,6 +8,7 @@ import {
 import { GlobalStyle } from './styles/GlobalStyle'
 import { Home } from './pages/Home'
 import { Pedidos } from './pages/Pedidos'
+import { SignIn } from './pages/SignIn'
 
 export const App = () => (
   <>
@@ -16,7 +17,10 @@ export const App = () => (
         <Route exact path="/pedidos">
           <Pedidos />
         </Route>
-        <Route path="/">
+        <Route exact path="/signin">
+          <SignIn />
+        </Route>
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

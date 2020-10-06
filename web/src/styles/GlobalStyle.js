@@ -58,4 +58,8 @@ export const GlobalStyle = createGlobalStyle`
     * {
         font-family: 'Montserrat', sans-serif;
     }
+
+    html, body, #root {
+        height: 100%;
+    }
 `;

@@ -7,17 +7,21 @@ import {
 
 import { GlobalStyle } from './styles/GlobalStyle'
 import { Home } from './pages/Home'
+import { Pedidos } from './pages/Pedidos'
 import { SignIn } from './pages/SignIn'
 
 export const App = () => (
   <>
     <Router>
       <Switch>
+        <Route exact path="/pedidos">
+          <Pedidos />
+        </Route>
+        <Route exact path="/signin">
+          <SignIn />
+        </Route>
         <Route exact path="/">
           <Home />
-        </Route>
-        <Route exact path="/SignIn">
-          <SignIn />
         </Route>
       </Switch>
     </Router>

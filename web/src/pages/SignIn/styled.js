@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Main = styled.main`
@@ -6,6 +5,8 @@ export const Main = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
+    background-color: #F0F0F0;
 `
 
 export const Card = styled.div`
@@ -16,7 +17,7 @@ export const Card = styled.div`
 `
 
 const IconStyle = css`
-    color: #707070;
+    color: #000000;
     font-size: 25px;
 `
 

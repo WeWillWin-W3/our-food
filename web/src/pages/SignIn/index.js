@@ -10,7 +10,7 @@ export const SignIn = () => {
 
     return (
         <>
-            <Main style={{ height: "100vh", backgroundColor: "#F0F0F0" }}>
+            <Main>
                 <Card>
                     <Title>
                         Fazer login
@@ -21,15 +21,15 @@ export const SignIn = () => {
                             <Input />
                         </InputBox>
                     </InputHeader>
-                    <InputHeader style={{ marginTop: "48px" }}>
+                    <InputHeader>
                         Senha
                         <InputBox>
                             <Input type={hidePassword ? "password" : "text"} />
                             {
                                 hidePassword ?
-                                    <AiFillEyeInvisible style={{ color: "#000000" }} onClick={() => setHidePassword(false)} />
+                                    <AiFillEyeInvisible onClick={() => setHidePassword(false)} />
                                     :
-                                    <AiFillEye style={{ color: "#000000" }} onClick={() => setHidePassword(true)} />
+                                    <AiFillEye onClick={() => setHidePassword(true)} />
 
                             }
                         </InputBox>
@@ -38,8 +38,8 @@ export const SignIn = () => {
                         Entrar
                     </Button>
                     <OtherOptionsBox>
-                        <OtherOption textAlign="start">Esqueceu sua senha?</OtherOption>
-                        <OtherOption textAlign="end">Cadastrar-se</OtherOption>
+                        <OtherOption align="start">Esqueceu sua senha?</OtherOption>
+                        <OtherOption align="end">Cadastrar-se</OtherOption>
                     </OtherOptionsBox>
                 </Card>
             </Main>

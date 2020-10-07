@@ -6,18 +6,24 @@ import { Card } from '../../components/Card'
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
-export const SignIn = () => {
+export const SignUp = () => {
 
     const [hidePassword, setHidePassword] = useState(true)
 
     return (
         <>
             <Main>
-                <Card title="Fazer login">
+                <Card title="Cadastrar-se">
+                    <InputHeader style={{ marginTop: "52px" }}>
+                        Nome Completo
+                        <InputBox>
+                            <Input placeholder="Digite seu nome completo aqui" />
+                        </InputBox>
+                    </InputHeader>
                     <InputHeader>
                         Email
                         <InputBox>
-                            <Input placeholder="Digite seu email aqui"/>
+                            <Input placeholder="Digite seu email aqui" />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
@@ -31,6 +37,12 @@ export const SignIn = () => {
                                     <AiFillEye onClick={() => setHidePassword(true)} />
 
                             }
+                        </InputBox>
+                    </InputHeader>
+                    <InputHeader>
+                        Celular (com DDD)
+                        <InputBox>
+                            <Input />
                         </InputBox>
                     </InputHeader>
                     <Button>

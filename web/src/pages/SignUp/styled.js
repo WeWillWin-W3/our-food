@@ -17,7 +17,7 @@ export const InputHeader = styled.label`
     font-weight: 500;
     font-size: 20px;
     color: #000000;
-    margin-top: 48px;
+    margin-top: 35px;
     display:block;
 `
 
@@ -54,7 +54,7 @@ export const Button = styled.button`
     border-radius: 9px;
     padding: 20px 20px;
     cursor: pointer;
-    margin-top: 93px;
+    margin-top: 46px;
     background: #C0C0C0;
     width: 100%;
     font-size: 28px;

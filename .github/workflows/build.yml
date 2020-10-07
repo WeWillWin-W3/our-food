@@ -6,18 +6,20 @@ on:
       - master
     paths:
       - 'web/**'
-    
-defaults:
-  run:
-    working-directory: ./web
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout gh-pages branch
         uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Checkout (default)
+        uses: actions/checkout@v2
+
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -25,33 +27,32 @@ jobs:
           node-version: 12.x
 
       - name: Install dependencies
+        working-directory: ./web
         run: yarn
 
       - name: Run build
+        working-directory: ./web
         run: yarn build
 
       - name: Create build artifact
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: build/
+          path: ./web/build/
 
       - name: Setup build branch
-        working-directory: ./
         run: |
-          git checkout gh-pages
+          git switch gh-pages
           mv web/build . 
           # Delete all folders except build
           ls | grep -v build | xargs rm -r
           mv build/* . && rm -r build
-
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "build: Building files on gh-pages"
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

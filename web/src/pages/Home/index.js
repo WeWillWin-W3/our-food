@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Navbar, Nav, NavItem, Main } from './styled'
+import { Navbar, Nav, NavItem, NavItemButton, Main } from './styled'
 import { Logo } from '../../components/Logo'
 import { ImgPlaceholder } from '../../components/ImgPlaceholder'
-import { SearchBar } from '../../components/SearchBar'
+import { SearchBar } from './components/SearchBar'
 
 export const Home = () => (
     <>
@@ -12,7 +12,7 @@ export const Home = () => (
             <Nav>
                 <NavItem>OurFood Restaurantes</NavItem>
                 <NavItem>Cadastre-se</NavItem>
-                <NavItem button>Entrar</NavItem>
+                <NavItemButton>Entrar</NavItemButton>
             </Nav>
         </Navbar>
         <Main>

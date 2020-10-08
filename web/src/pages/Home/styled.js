@@ -1,5 +1,11 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+
+import { Button } from '../../components/Button'
+
+export const NavItemButton = styled(Button).attrs(() => ({ outline: true }))`
+    padding: 10px 25px;
+`
 
 export const Navbar = styled.header`
     display: flex;
@@ -30,14 +36,6 @@ const StyledNav = styled.nav`
 export const NavItem = styled.li`
     font-weight: 500;
     color: #989898;
-    ${props => props.button && NavItemButton}
-`
-
-const NavItemButton = css`
-    border: #989898 solid 2px;
-    border-radius: 5px;
-    padding: 10px 25px;
-    cursor: pointer;
 `
 
 export const Main = styled.main`
@@ -45,5 +43,4 @@ export const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 `

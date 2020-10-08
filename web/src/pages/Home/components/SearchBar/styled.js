@@ -26,6 +26,9 @@ export const SearchResults = styled.div`
     background-color: #f5f5f5;
     padding: 12.5px 20px;
     border-radius: 0 0 9px 9px;
+    margin-right: 20px;
+    left: 0;
+    right: 0;
 
     div {
         display: flex;
@@ -63,17 +66,3 @@ export const SearchInput = styled.input`
     margin-left: 15px;
     font-size: 17px;
 `
-
-export const SearchButton = styled.button`
-    font-size: 100%;
-    font-family: inherit;
-    border: 0;
-
-    cursor: pointer;
-
-    font-weight: 500;
-    color: #fff;
-    padding: 20px 40px;
-    border-radius: 5px;
-    background-color: #c4c4c4;
-` 

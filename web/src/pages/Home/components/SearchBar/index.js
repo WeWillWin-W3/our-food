@@ -3,9 +3,10 @@ import { MdPlace, MdCancel, MdGpsFixed } from 'react-icons/md'
 
 import { 
     StyledSearchBar, SearchBoxWrapper, 
-    SearchInputBox, SearchInput, SearchResults, 
-    SearchButton 
+    SearchInputBox, SearchInput, SearchResults,  
 } from './styled'
+
+import { Button } from '../../../../components/Button'
 
 export const SearchBar = () => {
     const [inputText, setInputText] = useState('')
@@ -37,7 +38,7 @@ export const SearchBar = () => {
                 ))}
                 </SearchResults>
             </SearchBoxWrapper>
-            <SearchButton>Pesquisar</SearchButton>
+            <Button>Pesquisar</Button>
         </StyledSearchBar>
     )
 }

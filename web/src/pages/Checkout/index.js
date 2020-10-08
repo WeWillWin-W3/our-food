@@ -3,8 +3,11 @@ import React from 'react'
 import { Location } from './components/Location'
 import { Order } from './components/Order'
 import { Payment } from './components/Payment'
-import { Navbar, Main, Title, SubTitle, CheckoutButton, DivLeft, DivRight, Input, InputBox, Box, Div, TextMain, DivColumn, TextPrice, Line, TextRemoveEdit } from './styled'
+import { 
+    Navbar, Main, Title, SubTitle, Div,
+} from './styled'
 import { Logo } from '../../components/Logo'
+import { Button } from '../../components/Button'
 
 export const Checkout = () => (
     <>
@@ -18,7 +21,7 @@ export const Checkout = () => (
                 <Location />
                 <SubTitle>Pague pelo site</SubTitle>
                 <Payment />
-                <CheckoutButton>Finalizar pedido</CheckoutButton>
+                <Button style={{  width: '28vw' }}>Finalizar pedido</Button>
             </Div>
             <Div>
                 <Order />

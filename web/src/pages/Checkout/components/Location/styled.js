@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 export const Card = styled.div`
@@ -11,7 +10,7 @@ export const Card = styled.div`
 `
 
 export const CardPrincipal = styled.div`
-    color:rgba(0, 0, 0, 0.85);
+    color: rgba(0, 0, 0, 0.85);
 `
 
 export const CardNameStreet = styled.h3`

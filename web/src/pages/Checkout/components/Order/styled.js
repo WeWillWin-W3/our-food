@@ -1,14 +1,10 @@
-import React from 'react'
 import styled from 'styled-components'
 
 export const Box = styled.div`
-    padding: 15px 15px 15px 15px;
+    padding: 15px;
     border-radius: 9px;
     background-color: #DEE2E6;
-    margin-bottom: 15px;
-    margin-right: 45px;
-    margin-left: 80px;
-    margin-top: 80px;
+    margin: 80px 45px 15px 80px;
 `
 
 export const Div = styled.div`
@@ -17,9 +13,10 @@ export const Div = styled.div`
 
 export const DivColumn = styled.div`
     display: flex;
-`
 
-export const Line = styled.hr`
+    > * {
+        flex: 1;
+    }
 `
 
 export const Text = styled.p`
@@ -41,13 +38,16 @@ export const TextPrice = styled.p`
     text-align: right;
 `
 
-export const TextRemoveEdit = styled.p`
-    margin-top: 8px;
-    margin-left: 10px;
-    color: rgba(0, 0, 0, 0.6);
+export const FoodOptions = styled.div`
+    display: flex;
+    margin: 8px 0 300px;
     font-size: 14px;
     font-weight: bolder;
-    margin-bottom: 300px;
+`
+
+export const Option = styled.span`
+    color: ${props => props.danger ? '#f83031' : 'rgba(0, 0, 0, 0.6)' };
+    margin-right: 10px;
 `
 
 export const TextTitle = styled.p`

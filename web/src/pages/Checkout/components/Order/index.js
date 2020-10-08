@@ -1,22 +1,24 @@
 import React from 'react'
 
-import { Box, Div, DivColumn, Line, Text, TextMain, TextPrice, TextRemoveEdit, TextTitle } from './styled'
+import { 
+    Box, Div, DivColumn, Text, TextMain, Option,
+    TextPrice, FoodOptions, TextTitle 
+} from './styled'
 
 export const Order = () => (
     <Box>
         <Text>Seu pedido em</Text>
         <TextTitle>Nome do restaurante</TextTitle>
-        <Line></Line>
+        <hr />
         <DivColumn>
-            <Div>
-                <TextMain>Nome da comida</TextMain>
-            </Div>
-            <Div>
-                <TextPrice>R$ 00,00</TextPrice>
-            </Div>
+            <TextMain>Nome da comida</TextMain>
+            <TextPrice>R$ 00,00</TextPrice>
         </DivColumn>
-        <TextRemoveEdit>Editar Remover</TextRemoveEdit>
-        <Line></Line>
+        <FoodOptions>
+            <Option danger>Remover</Option>
+            <Option>Editar</Option>     
+        </FoodOptions>
+        <hr />
         <DivColumn>
             <Div>
                 <TextMain>Subtotal</TextMain>

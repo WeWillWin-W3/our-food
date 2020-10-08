@@ -1,7 +1,10 @@
 import React from 'react'
 import { ImgPlaceholder } from '../../../../components/ImgPlaceholder'
 
-import { Card, CardPrincipal, CardNameStreet, CardComplement, CardCity } from './styled'
+import { 
+    Card, CardPrincipal, CardNameStreet, 
+    CardComplement, CardCity 
+} from './styled'
 
 export const Location = () => (
     <Card>

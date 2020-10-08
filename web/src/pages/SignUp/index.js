@@ -49,8 +49,7 @@ export const SignUp = () => {
                         Entrar
                     </Button>
                     <OtherOptionsBox>
-                        <OtherOption align="start">Esqueceu sua senha?</OtherOption>
-                        <OtherOption align="end">Cadastrar-se</OtherOption>
+                        <OtherOption align="start">Já possui conta?</OtherOption>
                     </OtherOptionsBox>
                 </Card>
             </Main>

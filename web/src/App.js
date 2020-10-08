@@ -11,7 +11,9 @@ import { Home } from './pages/Home'
 import { Restaurants } from './pages/Restaurants'
 import { Pedidos } from './pages/Pedidos'
 import { SignIn } from './pages/SignIn'
-import { SignUp } from './pages/SignUp';
+import { SignUp } from './pages/SignUp'
+import { Location } from './pages/Location'
+
 
 export const App = () => (
   <>
@@ -27,7 +29,7 @@ export const App = () => (
           <Restaurants />
         </Route>
         <Route exact path="/">
-          <SignIn />
+          <SignUp />
         </Route>
       </Switch>
     </Router>

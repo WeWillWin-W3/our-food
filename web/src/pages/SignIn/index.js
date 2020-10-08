@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 
-import { InputHeader, Main, Title, Input, InputBox, Button, OtherOption, OtherOptionsBox, Card } from './styled'
+import { 
+    InputHeader, Main, Title, Input, InputBox, 
+    OtherOption, OtherOptionsBox, Card 
+} from './styled'
 
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Button } from '../../components/Button'
+
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export const SignIn = () => {
 
@@ -34,7 +39,7 @@ export const SignIn = () => {
                             }
                         </InputBox>
                     </InputHeader>
-                    <Button>
+                    <Button full style={{ marginTop: 60 }}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>

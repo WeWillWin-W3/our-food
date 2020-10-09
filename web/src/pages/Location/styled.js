@@ -21,21 +21,6 @@ export const InputHeader = styled.label`
     display:block;
 `
 
-export const OtherOptionsBox = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-
-export const OtherOption = styled.h4`
-    color: #C0C0C0;
-    margin-top: 28px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 23px;
-    cursor: pointer;
-`
-
 export const InputBox = styled.div`
     display: flex;
     align-items: center;

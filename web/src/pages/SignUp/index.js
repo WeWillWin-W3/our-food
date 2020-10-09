@@ -2,24 +2,30 @@ import React, { useState } from 'react'
 
 import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
 
-import { Card } from '../../components/Card'
-
 import { Button } from '../../components/Button'
 
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { Card } from '../../components/Card'
 
-export const SignIn = () => {
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+
+export const SignUp = () => {
 
     const [hidePassword, setHidePassword] = useState(true)
 
     return (
         <>
             <Main>
-                <Card title="Fazer login">
+                <Card title="Cadastrar-se">
                     <InputHeader style={{ marginTop: "52px" }}>
+                        Nome Completo
+                        <InputBox>
+                            <Input placeholder="Digite seu nome completo aqui" />
+                        </InputBox>
+                    </InputHeader>
+                    <InputHeader>
                         Email
                         <InputBox>
-                            <Input placeholder="Digite seu email aqui"/>
+                            <Input placeholder="Digite seu email aqui" />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
@@ -35,12 +41,17 @@ export const SignIn = () => {
                             }
                         </InputBox>
                     </InputHeader>
+                    <InputHeader>
+                        Celular (com DDD)
+                        <InputBox>
+                            <Input />
+                        </InputBox>
+                    </InputHeader>
                     <Button full style={{ marginTop: 46 }}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>
-                        <OtherOption align="start">Esqueceu sua senha?</OtherOption>
-                        <OtherOption align="end">Cadastrar-se</OtherOption>
+                        <OtherOption align="start">Já possui conta?</OtherOption>
                     </OtherOptionsBox>
                 </Card>
             </Main>

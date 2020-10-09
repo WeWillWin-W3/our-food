@@ -33,8 +33,8 @@ export const SearchBar = () => {
                     }
                 </SearchInputBox>
                 <SearchResults show={!!inputText}>
-                    {searchResults.map(restaurant => (
-                        <div><MdGpsFixed/>{restaurant}</div>
+                    {searchResults.map((restaurant, index) => (
+                        <div key={index}><MdGpsFixed/>{restaurant}</div>
                 ))}
                 </SearchResults>
             </SearchBoxWrapper>

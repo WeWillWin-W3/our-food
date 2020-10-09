@@ -26,11 +26,20 @@ export const App = () => (
         <Route exact path="/signin">
           <SignIn />
         </Route>
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+        <Route exact path="/location">
+          <Location />
+        </Route>
+        <Route exact path="/storeinformation">
+          <StoreInformation />
+        </Route>
         <Route exact path="/restaurants">
           <Restaurants />
         </Route>
         <Route exact path="/">
-          <SignIn />
+          <Home />
         </Route>
       </Switch>
     </Router>

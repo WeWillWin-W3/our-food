@@ -10,7 +10,7 @@ import {
     Page, PageMain, ColumnCards
 } from './styled'
 
-export const Pedidos = () => {
+export const RestaurantDashboard = () => {
     return (
         <Page>
             <Sidemenu>

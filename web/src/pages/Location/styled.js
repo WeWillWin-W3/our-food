@@ -34,17 +34,6 @@ export const InputBox = styled.div`
         ${IconStyle}
     }
 `
-export const Button = styled.button`
-    border: none;
-    border-radius: 9px;
-    padding: 20px 20px;
-    cursor: pointer;
-    margin-top: 46px;
-    background: #C0C0C0;
-    width: 100%;
-    font-size: 28px;
-    color: white;
-`
 
 export const Input = styled.input`
     outline: none;

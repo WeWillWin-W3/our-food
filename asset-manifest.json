@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/our-food/static/js/main.d868dfe8.chunk.js",
-    "main.js.map": "/our-food/static/js/main.d868dfe8.chunk.js.map",
+    "main.js": "/our-food/static/js/main.14dd3df1.chunk.js",
+    "main.js.map": "/our-food/static/js/main.14dd3df1.chunk.js.map",
     "runtime-main.js": "/our-food/static/js/runtime-main.1ea10737.js",
     "runtime-main.js.map": "/our-food/static/js/runtime-main.1ea10737.js.map",
     "static/js/2.af10cf73.chunk.js": "/our-food/static/js/2.af10cf73.chunk.js",
     "static/js/2.af10cf73.chunk.js.map": "/our-food/static/js/2.af10cf73.chunk.js.map",
     "index.html": "/our-food/index.html",
-    "precache-manifest.2b81e652929077a11ae4ccd57e121fa6.js": "/our-food/precache-manifest.2b81e652929077a11ae4ccd57e121fa6.js",
+    "precache-manifest.b2cd261ab2e058fc9d64947e70d354a4.js": "/our-food/precache-manifest.b2cd261ab2e058fc9d64947e70d354a4.js",
     "service-worker.js": "/our-food/service-worker.js",
     "static/js/2.af10cf73.chunk.js.LICENSE.txt": "/our-food/static/js/2.af10cf73.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1ea10737.js",
     "static/js/2.af10cf73.chunk.js",
-    "static/js/main.d868dfe8.chunk.js"
+    "static/js/main.14dd3df1.chunk.js"
   ]
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { InputHeader, Main, Input, InputBox, Button } from './styled'
+import { InputHeader, Main, Input, InputBox } from './styled'
 
 import { Card } from '../../components/Card'
 
+import { Button } from '../../components/Button'
 
 export const StoreInformation = () => {
     return (
@@ -28,7 +29,7 @@ export const StoreInformation = () => {
                             <Input placeholder="Digite o telefone da loja aqui" />
                         </InputBox>
                     </InputHeader>
-                    <Button>
+                    <Button full style={{ marginTop: 46 }}>
                         Continuar
                     </Button>
                 </Card>

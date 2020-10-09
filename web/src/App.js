@@ -30,7 +30,7 @@ export const App = () => (
           <Restaurants />
         </Route>
         <Route exact path="/">
-          <Location />
+          <SignIn />
         </Route>
       </Switch>
     </Router>

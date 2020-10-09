@@ -1,7 +1,9 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { AiOutlineSearch, AiTwotonePushpin } from 'react-icons/ai';
+
+import { Button } from '../../../../components/Button'
 
 export const Navbar = styled.header`
     height: 70px;
@@ -101,15 +103,8 @@ export const NavItem = styled.a`
     &:hover {
         color: rgba(0, 0, 0, 0.75);
     }
-
-    ${props => props.outline && NavItemOutline}
 `
 
-const NavItemOutline = css`
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
-
-    &:hover {
-        border: 2px solid rgba(0, 0, 0, 0.75);
-    }
+export const NavItemButton = styled(Button).attrs(() => ({ outline: true }))`
+    padding: 10px 25px;
 `

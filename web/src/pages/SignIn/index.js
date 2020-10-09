@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-import { InputHeader, Main, Input, InputBox, Button, OtherOption, OtherOptionsBox } from './styled'
+import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
 
 import { Card } from '../../components/Card'
 
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Button } from '../../components/Button'
+
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export const SignIn = () => {
 
@@ -33,7 +35,7 @@ export const SignIn = () => {
                             }
                         </InputBox>
                     </InputHeader>
-                    <Button>
+                    <Button full style={{ marginTop: 46 }}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-import { InputHeader, Main, Input, InputBox, Button, OtherOption, OtherOptionsBox } from './styled'
+import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
+
+import { Button } from '../../components/Button'
 
 import { Card } from '../../components/Card'
 
@@ -45,7 +47,7 @@ export const SignUp = () => {
                             <Input />
                         </InputBox>
                     </InputHeader>
-                    <Button>
+                    <Button full style={{ marginTop: 46 }}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>

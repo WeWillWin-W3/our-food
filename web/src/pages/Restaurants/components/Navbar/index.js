@@ -1,7 +1,10 @@
 import React from 'react'
 
 import { Logo } from '../../../../components/Logo'
-import { Navbar, NavbarContainer, NavbarSearch, NavbarDestination, Nav, NavItem } from './styled'
+import { 
+    Navbar, NavbarContainer, NavbarSearch, 
+    NavbarDestination, Nav, NavItem, NavItemButton 
+} from './styled'
 
 export function NavbarComponent() {
     return (
@@ -11,7 +14,7 @@ export function NavbarComponent() {
                 <NavbarSearch placeholder="Busque sua comida" />
                 <NavbarDestination destination="Av. São Carlos, 864" />
                 <Nav>
-                    <NavItem outline>Entrar</NavItem>
+                    <NavItemButton>Entrar</NavItemButton>
                     <NavItem>Sacola</NavItem>
                 </Nav>
             </NavbarContainer>

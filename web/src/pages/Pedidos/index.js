@@ -1,9 +1,9 @@
 import React from 'react'
 import { MdAssessment, MdAssignmentTurnedIn, MdLocalPizza, MdStoreMallDirectory } from 'react-icons/md'
 
-// TODO: Importar Button compartilhado
+import { Button } from '../../components/Button'
 import { 
-    Navbar, Button, Sidemenu, Avatar,
+    Navbar, Sidemenu, Avatar,
     MenuItems, MenuItem, Dashboard,
     DashboardHeader, Board, BoardColumn, 
     ColumnTitle, ColumnCard, HeaderTitle,
@@ -24,12 +24,12 @@ export const Pedidos = () => {
             </Sidemenu>
             <PageMain>
                 <Navbar>
-                    <Button>Sair</Button>
+                    <Button outline>Sair</Button>
                 </Navbar>
                 <Dashboard>
                     <DashboardHeader>
                         <HeaderTitle>Pedidos</HeaderTitle>
-                        <Button>Encerrar expediente</Button>
+                        <Button outline>Encerrar expediente</Button>
                     </DashboardHeader>
                     <Board>
                         <BoardColumn>

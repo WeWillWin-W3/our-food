@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { InputHeader, Main, Input, InputBox, Button } from './styled'
+import { InputHeader, Main, Input, InputBox } from './styled'
 
 import { Card } from '../../components/Card'
+
+import { Button } from '../../components/Button'
 
 export const Location = () => {
 
@@ -34,7 +36,7 @@ export const Location = () => {
                             <Input />
                         </InputBox>
                     </InputHeader>
-                    <Button>
+                    <Button full style={{ marginTop: 46 }}>
                         Cadastrar localização
                     </Button>
                 </Card>

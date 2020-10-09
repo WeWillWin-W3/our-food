@@ -13,6 +13,7 @@ import { Pedidos } from './pages/Pedidos'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Location } from './pages/Location'
+import { StoreInformation } from './pages/StoreInformation';
 
 
 export const App = () => (
@@ -29,7 +30,7 @@ export const App = () => (
           <Restaurants />
         </Route>
         <Route exact path="/">
-          <SignUp />
+          <Location />
         </Route>
       </Switch>
     </Router>

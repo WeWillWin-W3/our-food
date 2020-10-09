@@ -14,7 +14,7 @@ export const SignIn = () => {
         <>
             <Main>
                 <Card title="Fazer login">
-                    <InputHeader>
+                    <InputHeader style={{ marginTop: "52px" }}>
                         Email
                         <InputBox>
                             <Input placeholder="Digite seu email aqui"/>

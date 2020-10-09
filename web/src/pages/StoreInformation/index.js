@@ -4,38 +4,32 @@ import { InputHeader, Main, Input, InputBox, Button } from './styled'
 
 import { Card } from '../../components/Card'
 
-export const Location = () => {
 
+export const StoreInformation = () => {
     return (
         <>
             <Main>
-                <Card title="Localização">
+                <Card title="Informações da loja">
                     <InputHeader style={{ marginTop: "52px" }}>
-                        Rua
+                        Nome da loja
                         <InputBox>
-                            <Input placeholder="Digite o nome da rua aqui" />
+                            <Input placeholder="Digite o nome da loja aqui" />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
-                        Número
+                        CNPJ
                         <InputBox>
-                            <Input placeholder="Digite o número da residência aqui" />
+                            <Input placeholder="Digite o CNPJ da loja aqui" />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
-                        Bairro
+                        Telefone da loja
                         <InputBox>
-                            <Input placeholder="Digite seu bairro aqui" />
-                        </InputBox>
-                    </InputHeader>
-                    <InputHeader>
-                        Complemento
-                        <InputBox>
-                            <Input />
+                            <Input placeholder="Digite o telefone da loja aqui" />
                         </InputBox>
                     </InputHeader>
                     <Button>
-                        Cadastrar localização
+                        Continuar
                     </Button>
                 </Card>
             </Main>

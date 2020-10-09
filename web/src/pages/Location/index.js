@@ -33,7 +33,7 @@ export const Location = () => {
                     <InputHeader>
                         Complemento
                         <InputBox>
-                            <Input />
+                            <Input placeholder="Digite o complemento aqui" />
                         </InputBox>
                     </InputHeader>
                     <Button full style={{ marginTop: 46 }}>

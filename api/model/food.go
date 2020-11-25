@@ -10,7 +10,7 @@ type FoodData struct {
 type Food struct {
 	ID uint32 `json:"id" gorm:"primaryKey"`
 	FoodData
-	RestaurantID uint32
+	RestaurantID uint32 `json:"restaurant_id"`
 }
 
 func NewFood(foodData FoodData, restaurantID uint32) (*Food, error) {
@@ -28,6 +28,42 @@ func GetAllFoods() ([]Food, error) {
 	}
 
 	return foods, nil
+}
+
+func getFoodBy(query *Food) ([]Food, error) {
+	var foods []Food
+
+	if err := DB.Where(query).Find(&foods).Error; err != nil {
+		return nil, err
+	}
+
+	return foods, nil
+}
+
+func GetFoodByID(id uint32) (*Food, error) {
+	var food Food
+
+	if err := DB.First(&food, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &food, nil
+}
+
+func GetFoodByName(name string) ([]Food, error) {
+	return getFoodBy(&Food{FoodData: FoodData{Name: name}})
+}
+
+func GetFoodByCategory(category string) ([]Food, error) {
+	return getFoodBy(&Food{FoodData: FoodData{Category: category}})
+}
+
+func GetFoodByRestaurantID(restaurantID uint32) ([]Food, error) {
+	return getFoodBy(&Food{RestaurantID: restaurantID})
+}
+
+func GetFoodByRestaurantAndCategory(restaurantID uint32, category string) ([]Food, error) {
+	return getFoodBy(&Food{RestaurantID: restaurantID, FoodData: FoodData{Category: category}})
 }
 
 func CreateFood(foodData FoodData, restaurantID uint32) (*Food, error) {

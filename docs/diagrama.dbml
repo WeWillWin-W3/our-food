@@ -1,51 +1,51 @@
-table Food {
-  id integer [pk]
+table foods {
+  id serial [pk]
   name varchar
   description varchar
   category varchar
   price float
-  restaurant varchar [ref: > Restaurant.id]
+  restaurant_id varchar [ref: > restaurants.id]
 }
 
-table Restaurant {
-  id integer [pk]
+table restaurants {
+  id serial [pk]
   name varchar
   description varchar
   rate float
-  cnpj long
-  phone long
-  location integer [ref: > Location.id]
-  user varchar [ref: - User.id]
+  cnpj varchar
+  phone varchar
+  location_id integer [ref: > locations.id]
+  user_id integer [ref: > users.id]
 }
 
-table User {
-  id integer [pk]
+table users {
+  id serial [pk]
   name varchar
   email varchar
   password varchar
   role integer
-  location integer [ref: < Location.id]
+  location_id integer [ref: < locations.id]
 }
 
-table Location {
-  id integer [pk]
+table locations {
+  id serial [pk]
   number integer
   street varchar
   neighborhood varchar
   complement varchar
 }
 
-table Order {
-  id integer [pk]
+table orders {
+  id serial [pk]
   created_at timestamp
   rate float
-  user varchar [ref: > User.id]
-  restaurant varchar [ref: > Restaurant.id]
-  location integer [ref: > Location.id]
+  user_id integer [ref: > users.id]
+  restaurant_id integer [ref: > restaurants.id]
+  location_id integer [ref: > locations.id]
 }
 
-table OrderItem {
+table order_items {
   quantity integer 
-  food integer [pk, ref: > Food.id]
-  order integer [pk, ref: > Order.id]
+  food_id integer [pk, ref: > foods.id]
+  order_id integer [pk, ref: > orders.id]
 }

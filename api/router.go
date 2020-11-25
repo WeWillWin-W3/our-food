@@ -11,9 +11,14 @@ import (
 func SetupRoutes(app *fiber.App) {
 	api := app.Group("/v1", logger.New())
 
+	foods := api.Group("/foods")
+	foods.Get("/", controller.GetFoods)
+	foods.Get("/:food", controller.GetFoodByID)
+
 	restaurants := api.Group("/restaurants")
 	restaurants.Get("/", controller.GetRestaurants)
-	restaurants.Get("/:restaurant/foods/", controller.GetFoods)
+	restaurants.Get("/:restaurant", controller.GetRestaurantByID)
+	restaurants.Get("/:restaurant/foods/", controller.GetFoodsByRestaurant)
 	restaurants.Post("/:restaurant/foods/", controller.CreateFood)
 	restaurants.Put("/:restaurant/foods/:food", controller.UpdateFood)
 	restaurants.Delete("/:restaurant/foods/:food", controller.DeleteFood)

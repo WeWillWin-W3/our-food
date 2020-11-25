@@ -1,12 +1,6 @@
-FROM golang:latest as build-env
+FROM golang
 
 WORKDIR /go/src/app
-ADD . /go/src/app
+COPY . .
 
-RUN go build -o /go/bin/app
-
-FROM gcr.io/distroless/base
-COPY --from=build-env /go/bin/app /
-
-EXPOSE 3000
-CMD ["/app"]
+CMD ["go", "run", "."]

@@ -11,22 +11,28 @@ const (
 	RestaurantRole
 )
 
-type User struct {
-	ID       uint32 `json:"id" gorm:"primaryKey"`
+type UserData struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Password []byte `json:"password"`
-	Role     Role   `json:"role"`
+	Password []byte `json:"-"`
 }
 
-func NewUser(id uint32, name, email, password string, role Role) (*User, error) {
-	passwordHash, err := bcrypt.GenerateFromPassword([]byte(password), 2)
+type User struct {
+	ID uint32 `json:"id" gorm:"primaryKey"`
+	UserData
+	Role Role `json:"role"`
+}
+
+func NewUser(userData UserData, role Role) (*User, error) {
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(userData.Password), 2)
 
 	if err != nil {
 		return nil, err
 	}
 
-	user := &User{id, name, email, passwordHash, role}
+	userData.Password = passwordHash
+
+	user := &User{UserData: userData, Role: role}
 
 	return user, nil
 }
@@ -63,4 +69,18 @@ func GetUserByID(id uint32) (*User, error) {
 	}
 
 	return &user, nil
+}
+
+func CreateUser(userData UserData, role Role) (*User, error) {
+	user, err := NewUser(userData, role)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := DB.Create(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }

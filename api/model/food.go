@@ -1,5 +1,7 @@
 package model
 
+import "fmt"
+
 type FoodData struct {
 	Name        string  `json:"name"`
 	Description string  `json:"description"`
@@ -30,10 +32,25 @@ func GetAllFoods() ([]Food, error) {
 	return foods, nil
 }
 
-func getFoodBy(query *Food) ([]Food, error) {
+func GetFoodByNameAndCategory(name, category string) ([]Food, error) {
 	var foods []Food
 
-	if err := DB.Where(query).Find(&foods).Error; err != nil {
+	nameQuery := fmt.Sprintf("%%%s%%", name)
+	categoryQuery := fmt.Sprintf("%%%s%%", category)
+
+	if err := DB.Where("name ILIKE ? AND category ILIKE ?", nameQuery, categoryQuery).Find(&foods).Error; err != nil {
+		return nil, err
+	}
+
+	return foods, nil
+}
+
+func GetFoodByRestaurantAndCategory(restaurantID uint32, category string) ([]Food, error) {
+	var foods []Food
+
+	categoryQuery := fmt.Sprintf("%%%s%%", category)
+
+	if err := DB.Where("restaurant_id = ? AND category ILIKE ?", restaurantID, categoryQuery).Find(&foods).Error; err != nil {
 		return nil, err
 	}
 
@@ -48,22 +65,6 @@ func GetFoodByID(id uint32) (*Food, error) {
 	}
 
 	return &food, nil
-}
-
-func GetFoodByName(name string) ([]Food, error) {
-	return getFoodBy(&Food{FoodData: FoodData{Name: name}})
-}
-
-func GetFoodByCategory(category string) ([]Food, error) {
-	return getFoodBy(&Food{FoodData: FoodData{Category: category}})
-}
-
-func GetFoodByRestaurantID(restaurantID uint32) ([]Food, error) {
-	return getFoodBy(&Food{RestaurantID: restaurantID})
-}
-
-func GetFoodByRestaurantAndCategory(restaurantID uint32, category string) ([]Food, error) {
-	return getFoodBy(&Food{RestaurantID: restaurantID, FoodData: FoodData{Category: category}})
 }
 
 func CreateFood(foodData FoodData, restaurantID uint32) (*Food, error) {

@@ -1,5 +1,9 @@
 package model
 
+import (
+	"fmt"
+)
+
 type RestaurantData struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -34,18 +38,16 @@ func GetAllRestaurants() ([]Restaurant, error) {
 	return restaurants, nil
 }
 
-func getRestaurantBy(query *Restaurant) ([]Restaurant, error) {
-	var restaurant []Restaurant
+func GetRestaurantByName(name string) ([]Restaurant, error) {
+	var restaurants []Restaurant
 
-	if err := DB.Where(query).Find(&restaurant).Error; err != nil {
+	query := fmt.Sprintf("%%%s%%", name)
+
+	if err := DB.Where("name ILIKE ?", query).Find(&restaurants).Error; err != nil {
 		return nil, err
 	}
 
-	return restaurant, nil
-}
-
-func GetRestaurantByName(name string) ([]Restaurant, error) {
-	return getRestaurantBy(&Restaurant{RestaurantData: RestaurantData{Name: name}})
+	return restaurants, nil
 }
 
 func GetRestaurantByID(id uint32) (*Restaurant, error) {

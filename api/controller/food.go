@@ -13,10 +13,11 @@ func GetFoods(c *fiber.Ctx) error {
 	var foods []model.Food
 	var err error
 
-	if foodName := c.Query("name"); foodName != "" {
-		foods, err = model.GetFoodByName(foodName)
-	} else if foodCategory := c.Query("category"); foodCategory != "" {
-		foods, err = model.GetFoodByCategory(foodCategory)
+	foodName := c.Query("name")
+	foodCategory := c.Query("category")
+
+	if foodName != "" || foodCategory != "" {
+		foods, err = model.GetFoodByNameAndCategory(foodName, foodCategory)
 	} else {
 		foods, err = model.GetAllFoods()
 	}
@@ -37,13 +38,9 @@ func GetFoodsByRestaurant(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
-	var foods []model.Food
+	foodCategory := c.Query("category")
 
-	if foodCategory := c.Query("category"); foodCategory != "" {
-		foods, err = model.GetFoodByRestaurantAndCategory(uint32(restaurantID), foodCategory)
-	} else {
-		foods, err = model.GetFoodByRestaurantID(uint32(restaurantID))
-	}
+	foods, err := model.GetFoodByRestaurantAndCategory(uint32(restaurantID), foodCategory)
 
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())

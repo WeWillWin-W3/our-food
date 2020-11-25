@@ -7,8 +7,8 @@ import (
 type Role uint8
 
 const (
-	RestaurantRole Role = iota
-	ClientRole
+	ClientRole Role = iota
+	RestaurantRole
 )
 
 type User struct {
@@ -16,7 +16,7 @@ type User struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password []byte `json:"password"`
-	Role     `json:"role"`
+	Role     Role   `json:"role"`
 }
 
 func NewUser(id uint32, name, email, password string, role Role) (*User, error) {
@@ -31,12 +31,36 @@ func NewUser(id uint32, name, email, password string, role Role) (*User, error) 
 	return user, nil
 }
 
-func (u *User) ComparePassword(password string) bool {
-	err := bcrypt.CompareHashAndPassword(u.Password, []byte(password))
+func CompareHashPassword(hash []byte, password string) bool {
+	err := bcrypt.CompareHashAndPassword(hash, []byte(password))
 
 	if err != nil {
 		return false
 	}
 
 	return true
+}
+
+func (u *User) ComparePassword(password string) bool {
+	return CompareHashPassword(u.Password, password)
+}
+
+func GetAllUsers() ([]User, error) {
+	var users []User
+
+	if err := DB.Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
+func GetUserByID(id uint32) (*User, error) {
+	var user User
+
+	if err := DB.First(&user, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }

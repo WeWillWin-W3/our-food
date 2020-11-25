@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"our-food-api/model"
+	"ourfood-api/model"
 
 	"github.com/gofiber/fiber/v2"
 )

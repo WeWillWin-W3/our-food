@@ -1,7 +1,7 @@
 package main
 
 import (
-	"our-food-api/model"
+	"ourfood-api/model"
 
 	"log"
 

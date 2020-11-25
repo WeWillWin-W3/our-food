@@ -9,8 +9,8 @@ VALUES
 INSERT INTO
     users (id, name, email, password, role, location_id)
 VALUES
-    (1, 'Mata-onça', 'eu@mataonca.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1),
-    (2, 'Joãozinho', 'joaozinho007@hotmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 0, 2);
+    (1, 'Mata-onça', 'eu@mataonca.com', '$2a$10$d35z8YdynNXcgAgs2ZC5OO7F1mL63dH63JAvQTmQLAWaYyyufolVS', 1, 1),
+    (2, 'Joãozinho', 'joaozinho007@hotmail.com', '$2a$10$d35z8YdynNXcgAgs2ZC5OO7F1mL63dH63JAvQTmQLAWaYyyufolVS', 0, 2);
 
 INSERT INTO 
     restaurants (id, name, description, rating, cnpj, phone, location_id, user_id)

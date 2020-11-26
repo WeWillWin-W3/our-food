@@ -3,24 +3,35 @@ version: "3.4"
 services:
   db:
     container_name: ourfood-db
-    image: postgres
-    restart: unless-stopped
+    build: ./postgres
     environment:
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: ourfood
-    ports: 
+    ports:
       - "5432:5432"
+
+  pgadmin:
+    container_name: ourfood-pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user
+      PGADMIN_DEFAULT_PASSWORD: secret
+    logging:
+      driver: none
+
   api:
     container_name: ourfood-api
     build: ./api
-    restart: unless-stopped
-    depends_on: 
+    depends_on:
       - db
     ports:
       - "3000:3000"
+
   web:
     container_name: ourfood-web
     build: ./web
-    restart: unless-stopped
     ports:
       - "80:80"

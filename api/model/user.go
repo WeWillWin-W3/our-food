@@ -7,42 +7,87 @@ import (
 type Role uint8
 
 const (
-	RestaurantRole Role = iota
-	ClientRole
+	ClientRole Role = iota
+	RestaurantRole
 )
 
+type UserData struct {
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required"`
+	Role     Role   `json:"role" validate:"gte=0,lte=1"`
+	Location string `json:"location" validate:"required"`
+}
+
 type User struct {
-	ID *uint32 `json:"id"`
-	Name string `json:"name"`
-	Email string `json:"email"`
-	Password []byte `json:"password"`
-	Role `json:"role"`
+	ID uint32 `json:"id" gorm:"primaryKey"`
+	UserData
 }
 
-type PlainUser struct {
-	Name string
-	Email string
-	Password string
-}
-
-func NewUser(plainUser PlainUser, role Role) (*User, error) {
-	passwordHash, err := bcrypt.GenerateFromPassword([]byte(plainUser.Password), 2)
+func NewUser(userData UserData) (*User, error) {
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(userData.Password), 2)
 
 	if err != nil {
 		return nil, err
 	}
 
-	user := &User{nil, plainUser.Name, plainUser.Email, passwordHash, role}
+	userData.Password = string(passwordHash)
+
+	user := &User{UserData: userData}
 
 	return user, nil
 }
 
-func (u *User) ComparePassword(password string) bool {
-	err := bcrypt.CompareHashAndPassword(u.Password, []byte(password))
+func CompareHashPassword(hash string, password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 
 	if err != nil {
 		return false
 	}
 
 	return true
+}
+
+func (u *User) ComparePassword(password string) bool {
+	return CompareHashPassword(u.Password, password)
+}
+
+func GetAllUsers() ([]User, error) {
+	var users []User
+
+	if err := DB.Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
+func GetUserByID(id uint32) (*User, error) {
+	var user User
+
+	if err := DB.First(&user, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func CreateUser(userData UserData) (*User, error) {
+	err := defaultValidate.Struct(userData)
+
+	if err != nil {
+		return nil, err
+	}
+
+	user, err := NewUser(userData)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := DB.Create(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }

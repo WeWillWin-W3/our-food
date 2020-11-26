@@ -1,6 +1,8 @@
 package model
 
 import (
+	"fmt"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -14,7 +16,7 @@ const (
 type UserData struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Password []byte `json:"-"`
+	Password string `json:"password"`
 }
 
 type User struct {
@@ -26,19 +28,21 @@ type User struct {
 func NewUser(userData UserData, role Role) (*User, error) {
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(userData.Password), 2)
 
+	fmt.Println(userData)
+
 	if err != nil {
 		return nil, err
 	}
 
-	userData.Password = passwordHash
+	userData.Password = string(passwordHash)
 
 	user := &User{UserData: userData, Role: role}
 
 	return user, nil
 }
 
-func CompareHashPassword(hash []byte, password string) bool {
-	err := bcrypt.CompareHashAndPassword(hash, []byte(password))
+func CompareHashPassword(hash string, password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 
 	if err != nil {
 		return false

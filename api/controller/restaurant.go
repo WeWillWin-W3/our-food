@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// GetFoods lista todos os restaurants registradas na aplicação.
+// GetRestaurants lista todos os restaurants registradas na aplicação.
 // Restaurantes podem ser filtradas por nome (ex.: ?name=pizzaria)
 func GetRestaurants(c *fiber.Ctx) error {
 	var restaurants []model.Restaurant

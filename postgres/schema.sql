@@ -24,7 +24,7 @@ CREATE TABLE "restaurants" (
 CREATE TABLE "users" (
   "id" serial PRIMARY KEY,
   "name" varchar,
-  "email" varchar,
+  "email" varchar UNIQUE,
   "password" varchar,
   "role" integer,
   "location_id" integer
@@ -54,6 +54,12 @@ CREATE TABLE "order_items" (
   PRIMARY KEY ("food_id", "order_id")
 );
 
+CREATE TABLE "auth_tokens" (
+  "token" varchar PRIMARY KEY,
+  "user_id" integer,
+  "created_at" timestamp 
+);
+
 ALTER TABLE "foods" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
 
 ALTER TABLE "restaurants" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
@@ -71,4 +77,6 @@ ALTER TABLE "orders" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id
 ALTER TABLE "order_items" ADD FOREIGN KEY ("food_id") REFERENCES "foods" ("id");
 
 ALTER TABLE "order_items" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
+
+ALTER TABLE "auth_tokens" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 

@@ -17,7 +17,7 @@ CREATE TABLE "restaurants" (
   "rating" float,
   "cnpj" varchar,
   "phone" varchar,
-  "location_id" integer,
+  "location" varchar,
   "user_id" integer
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE "users" (
   "email" varchar UNIQUE,
   "password" varchar,
   "role" integer,
-  "location_id" integer
+  "location" varchar
 );
 
 CREATE TABLE "locations" (
@@ -44,7 +44,7 @@ CREATE TABLE "orders" (
   "rating" float,
   "user_id" integer,
   "restaurant_id" integer,
-  "location_id" integer
+  "location" varchar
 );
 
 CREATE TABLE "order_items" (
@@ -62,17 +62,11 @@ CREATE TABLE "auth_tokens" (
 
 ALTER TABLE "foods" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
 
-ALTER TABLE "restaurants" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
-
 ALTER TABLE "restaurants" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-
-ALTER TABLE "users" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("restaurant_id") REFERENCES "restaurants" ("id");
-
-ALTER TABLE "orders" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
 
 ALTER TABLE "order_items" ADD FOREIGN KEY ("food_id") REFERENCES "foods" ("id");
 

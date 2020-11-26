@@ -16,6 +16,7 @@ type UserData struct {
 	Email    string `json:"email" validate:"required,email"`
 	Password string `json:"password" validate:"required"`
 	Role     Role   `json:"role" validate:"gte=0,lte=1"`
+	Location string `json:"location" validate:"required"`
 }
 
 type User struct {

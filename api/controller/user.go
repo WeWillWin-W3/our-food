@@ -24,24 +24,17 @@ func GetUserByID(c *fiber.Ctx) error {
 }
 
 // CreateUser registra um usuário novo na aplicação.
-// O role do usuário é atribuido através pela query (?role=1)
 func CreateUser(c *fiber.Ctx) error {
 	var userData model.UserData
-	var role model.Role
 
-	roleQuery := c.Query("role")
-
-	if roleQuery == "" {
-		role = model.ClientRole
-	} else {
-		role = model.RestaurantRole
-	}
+	// Default Role value
+	userData.Role = model.ClientRole
 
 	if err := c.BodyParser(&userData); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 
-	user, err := model.CreateUser(userData, model.Role(role))
+	user, err := model.CreateUser(userData)
 
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())

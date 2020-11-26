@@ -3,10 +3,10 @@ package model
 import "fmt"
 
 type FoodData struct {
-	Name        string  `json:"name"`
+	Name        string  `json:"name" validate:"required"`
 	Description string  `json:"description"`
-	Category    string  `json:"category"`
-	Price       float64 `json:"price"`
+	Category    string  `json:"category" validate:"required"`
+	Price       float64 `json:"price" validate:"required,gte=0"`
 }
 
 type Food struct {
@@ -68,6 +68,12 @@ func GetFoodByID(id uint32) (*Food, error) {
 }
 
 func CreateFood(foodData FoodData, restaurantID uint32) (*Food, error) {
+	err := defaultValidate.Struct(foodData)
+
+	if err != nil {
+		return nil, err
+	}
+
 	food, err := NewFood(foodData, restaurantID)
 
 	if err != nil {

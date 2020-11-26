@@ -81,6 +81,30 @@ func UsersAuthToken(c *fiber.Ctx) error {
 	return c.Next()
 }
 
+func UsersAuthTokenByID(c *fiber.Ctx) error {
+	userID, err := strconv.Atoi(c.Params("user"))
+
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+	}
+
+	_, user, err := getUserTokenByAuthorizationHeader(c.Get("Authorization"))
+
+	if err != nil {
+		return fiber.NewError(fiber.StatusForbidden, "Token inválido")
+	}
+
+	if user.ID != uint32(userID) {
+		return fiber.NewError(fiber.StatusForbidden, "Permissão insuficiente")
+	}
+
+	// TODO: Expiração do token, etc
+
+	c.Locals("user", user)
+
+	return c.Next()
+}
+
 func RestaurantsAuthToken(c *fiber.Ctx) error {
 	restaurantID, err := strconv.Atoi(c.Params("restaurant"))
 

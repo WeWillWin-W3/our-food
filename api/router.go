@@ -28,7 +28,7 @@ func SetupRoutes(app *fiber.App) {
 	orders.Post("/", middleware.UsersAuthToken, controller.CreateOrder)
 
 	users := api.Group("/users")
-	users.Get("/:user", controller.GetUserByID)
+	users.Get("/:user", middleware.UsersAuthTokenByID, controller.GetUserByID)
 	users.Post("/", controller.CreateUser)
 	users.Post("/authenticate", middleware.UsersBasicAuth, controller.AuthenticateUser)
 }

@@ -1,8 +1,6 @@
 package model
 
 import (
-	"fmt"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -14,21 +12,19 @@ const (
 )
 
 type UserData struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required"`
+	Role     Role   `json:"role" validate:"gte=0,lte=1"`
 }
 
 type User struct {
 	ID uint32 `json:"id" gorm:"primaryKey"`
 	UserData
-	Role Role `json:"role"`
 }
 
-func NewUser(userData UserData, role Role) (*User, error) {
+func NewUser(userData UserData) (*User, error) {
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(userData.Password), 2)
-
-	fmt.Println(userData)
 
 	if err != nil {
 		return nil, err
@@ -36,7 +32,7 @@ func NewUser(userData UserData, role Role) (*User, error) {
 
 	userData.Password = string(passwordHash)
 
-	user := &User{UserData: userData, Role: role}
+	user := &User{UserData: userData}
 
 	return user, nil
 }
@@ -75,8 +71,14 @@ func GetUserByID(id uint32) (*User, error) {
 	return &user, nil
 }
 
-func CreateUser(userData UserData, role Role) (*User, error) {
-	user, err := NewUser(userData, role)
+func CreateUser(userData UserData) (*User, error) {
+	err := defaultValidate.Struct(userData)
+
+	if err != nil {
+		return nil, err
+	}
+
+	user, err := NewUser(userData)
 
 	if err != nil {
 		return nil, err

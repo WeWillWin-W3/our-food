@@ -5,10 +5,10 @@ import (
 )
 
 type RestaurantData struct {
-	Name        string `json:"name"`
+	Name        string `json:"name" validate:"required"`
 	Description string `json:"description"`
-	CNPJ        string `json:"cnpj"`
-	Phone       string `json:"phone"`
+	CNPJ        string `json:"cnpj" validate:"required"`
+	Phone       string `json:"phone" validate:"required"`
 }
 
 type Restaurant struct {

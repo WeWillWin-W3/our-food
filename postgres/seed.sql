@@ -25,3 +25,11 @@ VALUES
     (3, 'Pizza Portuguesa', '', 'Pizza', 55.0, 1),
     (4, 'Pizza Pantaneira', '', 'Pizza', 55.0, 1),
     (5, 'Pizza 4 Queijos', '', 'Pizza', 55.0, 1);
+
+-- O postgres não está atualizando as sequências quando os dados são inseridos
+-- na inicialização. Por isso, é preciso setar as sequências manualmente.
+
+ALTER SEQUENCE locations_id_seq RESTART WITH 3;  
+ALTER SEQUENCE users_id_seq RESTART WITH 3;    
+ALTER SEQUENCE restaurants_id_seq RESTART WITH 2;  
+ALTER SEQUENCE foods_id_seq RESTART WITH 6;

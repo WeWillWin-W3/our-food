@@ -15,10 +15,13 @@ import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Location } from './pages/Location'
 import { StoreInformation } from './pages/StoreInformation'
-import { OrderFood } from './pages/OrderFood' 
+import { OrderFood } from './pages/OrderFood'
+
+import APIProvider from './providers/APIProvider'
 
 export const App = () => (
   <>
+
     <Router>
       <Switch>
         <Route exact path="/dashboard">
@@ -50,6 +53,7 @@ export const App = () => (
         </Route>
       </Switch>
     </Router>
+
     <GlobalStyle />
   </>
 )

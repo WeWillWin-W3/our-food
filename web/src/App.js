@@ -21,39 +21,39 @@ import APIProvider from './providers/APIProvider'
 
 export const App = () => (
   <>
-
     <Router>
       <Switch>
-        <Route exact path="/dashboard">
-          <RestaurantDashboard />
-        </Route>
-        <Route exact path="/signin">
-          <SignIn />
-        </Route>
-        <Route exact path="/signup">
-          <SignUp />
-        </Route>
-        <Route exact path="/signup/location">
-          <Location />
-        </Route>
-        <Route exact path="/signup/storeinformation">
-          <StoreInformation />
-        </Route>
-        <Route exact path="/restaurants">
-          <Restaurants />
-        </Route>
-        <Route exact path="/checkout">
-          <Checkout />
-        </Route>
-        <Route exact path="/order">
-          <OrderFood />
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
+        <APIProvider>
+          <Route exact path="/dashboard">
+            <RestaurantDashboard />
+          </Route>
+          <Route exact path="/signin">
+            <SignIn />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
+          </Route>
+          <Route exact path="/signup/location">
+            <Location />
+          </Route>
+          <Route exact path="/signup/storeinformation">
+            <StoreInformation />
+          </Route>
+          <Route exact path="/restaurants">
+            <Restaurants />
+          </Route>
+          <Route exact path="/checkout">
+            <Checkout />
+          </Route>
+          <Route exact path="/order">
+            <OrderFood />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </APIProvider>
       </Switch>
     </Router>
-
     <GlobalStyle />
   </>
 )

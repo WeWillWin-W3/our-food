@@ -2,9 +2,9 @@ import React, { createContext, useContext } from 'react'
 
 const APIProviderContext = createContext({})
 
-const APIProvider = () => {
+const APIProvider = props => {
     return (
-        <APIProviderContext.Provider value={{}} />
+        <APIProviderContext.Provider value={{}} {...props} />
     )
 }
 

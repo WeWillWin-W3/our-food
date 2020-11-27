@@ -8,20 +8,13 @@ const axiosInstance = axios.create({
 });
 
 const getJsonFromFetch = async (fetchPromise) => {
-    try{
-        const response = await fetchPromise
-        console.log(response)
-        return await response.json()
+    const response = await fetchPromise
 
-    }catch(error){
-        console.log(error)
-        // throw new Error(response.Error)
+    if (!response.ok) {
+        throw new Error(response.Error)
     }
-    // if (!response.ok) {
-    //     throw new Error(response.Error)
-    // }
 
-    
+    return await response.json()
 }
 
 export const getAllFoods = async () =>
@@ -60,7 +53,7 @@ export const createFood = async (foodData, restaurantId, authToken) =>
             "Content-Type": "application/json",
             "Authorization": `Bearer ${authToken}`
         },
-        body: foodData
+        body: JSON.stringify(foodData)
     }))
 
 /**
@@ -76,7 +69,7 @@ export const updateFood = async (foodData, restaurantId, authToken) =>
             "Content-Type": "application/json",
             "Authorization": `Bearer ${authToken}`
         },
-        body: foodData
+        body: JSON.stringify(foodData)
     }))
 
 /**
@@ -93,14 +86,8 @@ export const deleteFood = async (foodId, restaurantId, authToken) =>
         }
     }))
 
-export const createUser = async ({name, email, password, phone, location, role = 0}) => {
-    try {
-        const response = await axiosInstance.post("/users", {name, email, password, phone, location, role})
-        console.log(response)
-    } catch (error) {
-        console.log(error)
-    }
-}
+export const createUser = async ({ name, email, password, phone, location, role = 0 }) =>
+    axiosInstance.post("/users", { name, email, password, phone, location, role })
 
 export const getUserById = async (userId) =>
     getJsonFromFetch(fetch(`${API_URL}/v1/users/${userId}`, {
@@ -113,9 +100,9 @@ export const orderFood = async (userId, locationId, restaurantId) =>
         headers: {
             "Content-Type": "application/json"
         },
-        body: {
+        body: JSON.stringify({
             "user_id": userId,
             "location_id": locationId,
             "restaurant_id": restaurantId
-        }
+        })
     }))

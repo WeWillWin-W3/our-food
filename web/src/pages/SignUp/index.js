@@ -1,31 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom";
 
 import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
-
 import { Button } from '../../components/Button'
-
 import { Card } from '../../components/Card'
 
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-import { createUser } from '../../providers/APIProvider/API'
+import { useAPI } from '../../providers/APIProvider';
 
 export const SignUp = () => {
+    const history = useHistory()
+    const API = useAPI()
 
-    const [hidePassword, setHidePassword] = useState(true)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [name, setName] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [location, setLocation] = useState("")
+    const [formState, setFormState] = useState({
+        hidePassword: true,
+        email: "jorge@email",
+        name: "",
+        password: "",
+        location: "",
+        phoneNumber: "67993211518"
+    })
+    const setFormField = (field, value) => setFormState({ ...formState, [field]: value })
+    const setFormFieldWithEvent = field => event => setFormField(field, event.target.value)
 
-    const onSignButtonClicked = async (event) => {
-        try {
-            await createUser({ name, email, password, phone: phoneNumber, location })
-        } catch {
-            alert("Deu ruim man")
+    const { hidePassword, email, phoneNumber, password, name, location } = formState
+
+    const onSignButtonClicked = () =>
+        API.createUser({ name, email, password, phone: phoneNumber, location })
+
+
+    useEffect(() => {
+        if (API.error) {
+            alert(`Deu ruim man: ${API.error}`)
         }
-    }
+    }, [API.error])
+
+    useEffect(() => {
+        if (API.user) {
+            history.push('/restaurants')
+        }
+    }, [API.user, history])
 
     return (
         <>
@@ -33,43 +48,55 @@ export const SignUp = () => {
                 <Card title="Cadastrar-se">
                     <InputHeader style={{ marginTop: "52px" }}>
                         Nome Completo
-                        <InputBox >
-                            <Input placeholder="Digite seu nome completo aqui" onChange={(event) => setName(event.target.value)} />
+                        <InputBox>
+                            <Input
+                                placeholder="Digite seu nome completo aqui"
+                                value={name}
+                                onChange={setFormFieldWithEvent('name')}
+                            />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
-                        Email:
+                        Email
                         <InputBox>
-                            <Input placeholder="Digite seu email aqui" onChange={(event) => setEmail(event.target.value)} />
+                            <Input
+                                placeholder="Digite seu email aqui"
+                                value={email}
+                                onChange={setFormFieldWithEvent('email')}
+                            />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
                         Senha
                         <InputBox>
-                            <Input placeholder="Digite sua senha aqui" type={hidePassword ? "password" : "text"} onChange={(event) => setPassword(event.target.value)} />
+                            <Input
+                                placeholder="Digite sua senha aqui"
+                                type={hidePassword ? "password" : "text"}
+                                value={password}
+                                onChange={setFormFieldWithEvent('password')}
+                            />
                             {
                                 hidePassword ?
-                                    <AiFillEyeInvisible onClick={() => setHidePassword(false)} />
+                                    <AiFillEyeInvisible onClick={() => setFormField('hidePassword', false)} />
                                     :
-                                    <AiFillEye onClick={() => setHidePassword(true)} />
-
+                                    <AiFillEye onClick={() => setFormField('hidePassword', true)} />
                             }
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
                         Celular (com DDD)
                         <InputBox>
-                            <Input value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
+                            <Input type="number" value={phoneNumber} onChange={setFormFieldWithEvent('phoneNumber')} />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
                         Localização
                         <InputBox>
-                            <Input value={location} onChange={(event) => setLocation(event.target.value)} />
+                            <Input value={location} onChange={setFormFieldWithEvent('location')} />
                         </InputBox>
                     </InputHeader>
                     <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>
-                        Entrar
+                        {API.loading ? <AiOutlineLoading3Quarters /> : "Entrar"}
                     </Button>
                     <OtherOptionsBox>
                         <OtherOption align="start">Já possui conta?</OtherOption>

@@ -6,6 +6,8 @@ import { Card } from '../../components/Card'
 
 import { Button } from '../../components/Button'
 
+import { Link } from 'react-router-dom'
+
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export const SignIn = () => {
@@ -40,7 +42,7 @@ export const SignIn = () => {
                     </Button>
                     <OtherOptionsBox>
                         <OtherOption align="start">Esqueceu sua senha?</OtherOption>
-                        <OtherOption align="end">Cadastrar-se</OtherOption>
+                        <Link to="/signup"><OtherOption align="end">Cadastrar-se</OtherOption></Link>
                     </OtherOptionsBox>
                 </Card>
             </Main>

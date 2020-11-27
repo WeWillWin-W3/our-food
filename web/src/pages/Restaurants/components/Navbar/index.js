@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { Logo } from '../../../../components/Logo'
 import { 
@@ -14,8 +15,8 @@ export function NavbarComponent() {
                 <NavbarSearch placeholder="Busque sua comida" />
                 <NavbarDestination destination="Av. São Carlos, 864" />
                 <Nav>
-                    <NavItemButton>Entrar</NavItemButton>
-                    <NavItem>Sacola</NavItem>
+                    <Link to= "/signin"><NavItemButton>Entrar</NavItemButton></Link>
+                    <Link to="/checkout"><NavItem>Sacola</NavItem></Link>
                 </Nav>
             </NavbarContainer>
         </Navbar>

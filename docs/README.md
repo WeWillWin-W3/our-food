@@ -13,7 +13,7 @@ Tais aplicativos tipicamente oferecem opções pratos prontos e opções customi
 
   - Adicionar o campo `image_url` no esquema do banco ([/api/postgres/schema.sql](/api/postgres/schema.sql)) e incluir esse campo nos dados do [/api/postgres/seed.sql](/api/postgres/seed.sql)
 
-  - Adicionar o atributo `ImageURL` no model [/api/src/model/food.go](/api/src/model/food.go), colocando a tag `\`json:"image_url"\`` para ele ser retornado e lido no json.
+  - Adicionar o atributo `ImageURL` no model [/api/src/model/food.go](/api/src/model/food.go), colocando a tag `` `json:"image_url"` `` para ele ser retornado e lido no json.
 
   - Se tudo estiver certo, a API já estará retornando o `image_url` nas comidas
 

@@ -1,13 +1,20 @@
 const API_URL = "http://localhost:3000/v1"
 
-const getJsonFromFetch = (fetchPromise) => {
-    const response = await fetchPromise
+const getJsonFromFetch = async (fetchPromise) => {
+    try{
+        const response = await fetchPromise
+        console.log(response)
+        return await response.json()
 
-    if (!response.ok) {
-        throw new Error()
+    }catch(error){
+        console.log(error)
+        // throw new Error(response.Error)
     }
+    // if (!response.ok) {
+    //     throw new Error(response.Error)
+    // }
 
-    return await response.json()
+    
 }
 
 export const getAllFoods = async () =>
@@ -56,7 +63,7 @@ export const createFood = async (foodData, restaurantId, authToken) =>
  * @param {string} authToken 
  */
 export const updateFood = async (foodData, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${food.id}`, {
+    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodData.id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -70,7 +77,7 @@ export const updateFood = async (foodData, restaurantId, authToken) =>
  * @param {number} foodId 
  * @param {string} authToken 
  */
-export const deleteFood = async (foodId, authToken) =>
+export const deleteFood = async (foodId, restaurantId, authToken) =>
     getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodId}`, {
         method: "DELETE",
         headers: {
@@ -79,3 +86,35 @@ export const deleteFood = async (foodId, authToken) =>
         }
     }))
 
+export const createUser = async ({email, password, name, role = 0}) =>
+    getJsonFromFetch(fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: {
+            "email": email,
+            "password": password,
+            "name": name,
+            "role": role,
+            "location": "Rua do Carlão"
+        }
+    }))
+
+export const getUserById = async (userId) =>
+    getJsonFromFetch(fetch(`${API_URL}/v1/users/${userId}`, {
+        method: "GET",
+    }))
+
+export const orderFood = async (userId, locationId, restaurantId) =>
+    getJsonFromFetch(fetch(`${API_URL}/v1/orders`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: {
+            "user_id": userId,
+            "location_id": locationId,
+            "restaurant_id": restaurantId
+        }
+    }))

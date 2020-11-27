@@ -8,30 +8,44 @@ import { Card } from '../../components/Card'
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
+import { createUser } from '../../providers/APIProvider/API'
+
 export const SignUp = () => {
 
     const [hidePassword, setHidePassword] = useState(true)
+    const [email, setEmail] = useState("jorge@email") 
+    const [password, setPassword] = useState("") 
+    const [name, setName] = useState("") 
+    const [phoneNumber, setPhoneNumber] = useState("67993211518") 
+
+    const onSignButtonClicked = async (event) => {
+        try{
+            await createUser({email, password, name})
+        } catch{
+            alert("Deu ruim man")
+        }
+    }
 
     return (
         <>
             <Main>
                 <Card title="Cadastrar-se">
                     <InputHeader style={{ marginTop: "52px" }}>
-                        Nome Completo
-                        <InputBox>
-                            <Input placeholder="Digite seu nome completo aqui" />
+                        Nome Completo 
+                        <InputBox >
+                            <Input placeholder="Digite seu nome completo aqui" onChange = {(event)=> setName(event.target.value)}/>
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
-                        Email
+                        Email: {email}
                         <InputBox>
-                            <Input placeholder="Digite seu email aqui" />
+                            <Input placeholder="Digite seu email aqui"  onChange = {(event)=> setEmail(event.target.value)} />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
                         Senha
                         <InputBox>
-                            <Input placeholder="Digite sua senha aqui" type={hidePassword ? "password" : "text"} />
+                            <Input placeholder="Digite sua senha aqui" type={hidePassword ? "password" : "text"} onChange = {(event)=> setPassword(event.target.value)} />
                             {
                                 hidePassword ?
                                     <AiFillEyeInvisible onClick={() => setHidePassword(false)} />
@@ -44,10 +58,10 @@ export const SignUp = () => {
                     <InputHeader>
                         Celular (com DDD)
                         <InputBox>
-                            <Input />
+                            <Input value = {phoneNumber} />
                         </InputBox>
                     </InputHeader>
-                    <Button full style={{ marginTop: 46 }}>
+                    <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>

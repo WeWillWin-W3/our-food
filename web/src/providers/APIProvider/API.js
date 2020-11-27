@@ -1,4 +1,11 @@
+import axios from "axios"
+
 const API_URL = "http://localhost:3000/v1"
+
+const axiosInstance = axios.create({
+    baseURL: API_URL,
+    timeout: 3000
+});
 
 const getJsonFromFetch = async (fetchPromise) => {
     try{
@@ -86,20 +93,14 @@ export const deleteFood = async (foodId, restaurantId, authToken) =>
         }
     }))
 
-export const createUser = async ({email, password, name, role = 0}) =>
-    getJsonFromFetch(fetch(`${API_URL}/users`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: {
-            "email": email,
-            "password": password,
-            "name": name,
-            "role": role,
-            "location": "Rua do Carlão"
-        }
-    }))
+export const createUser = async ({name, email, password, phone, location, role = 0}) => {
+    try {
+        const response = await axiosInstance.post("/users", {name, email, password, phone, location, role})
+        console.log(response)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const getUserById = async (userId) =>
     getJsonFromFetch(fetch(`${API_URL}/v1/users/${userId}`, {

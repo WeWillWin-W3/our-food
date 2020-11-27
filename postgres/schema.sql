@@ -26,6 +26,7 @@ CREATE TABLE "users" (
   "name" varchar,
   "email" varchar UNIQUE,
   "password" varchar,
+  "phone" varchar,
   "role" integer,
   "location" varchar
 );

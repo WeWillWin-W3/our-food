@@ -9,14 +9,16 @@ const APIProvider = props => {
         error: undefined,
         loading: false
     })
+    const updateState = (nextState) => setState({ ...state, ...nextState })
 
     const createUser = async (userData) => {
+        updateState({ error: undefined, loading: true })
+
         try {
-            setState({ ...state, error: undefined, loading: true })
             const user = await API.createUser(userData)
-            setState({ ...state, user: user, loading: false })
+            updateState({ user: user, loading: false })
         } catch (err) {
-            setState({ ...state, error: err.message })
+            updateState({ error: err.response.data, loading: false })
         }
     }
 

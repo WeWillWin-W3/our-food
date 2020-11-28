@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { NavbarComponent as Navbar } from './components/Navbar'
 import { FoodFigureComponent as FoodFigure } from './components/FoodFigure'
@@ -6,9 +7,10 @@ import { RestaurantCard } from './components/RestaurantCard'
 
 import { Container, Title, SubTitle } from './styled'
 
-import { useAPI } from '../../providers/APIProvider';
+import { useAPI } from '../../providers/APIProvider'
 
 export const Restaurants = () => {
+    const history = useHistory()
     const api = useAPI()
 
     useEffect(() => {
@@ -21,6 +23,10 @@ export const Restaurants = () => {
         if (api.error) {
         }
     }, [api.error])
+
+    const onRestaurantCardClicked = (id) => {
+        history.push(`/restaurants/${id}`)
+    }
 
     return (
         <>
@@ -37,7 +43,12 @@ export const Restaurants = () => {
             <Container>
                 {
                     api.restaurants.map(restaurant =>
-                        <RestaurantCard key={restaurant.id} name={restaurant.name} category={restaurant.category} description={restaurant.description}/>
+                        <RestaurantCard 
+                            key={restaurant.id} name={restaurant.name}
+                            id={restaurant.id}
+                            category={restaurant.category}
+                            description={restaurant.description}
+                            onRestaurantCardClicked={onRestaurantCardClicked}/>
                     )
                 }
             </Container>

@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Card, CardAvatar, CardPrincipal, CardTitle, CardSubTitle, CardDescription } from './styled'
 
-export function RestaurantCard({name, category, description}) {
+export function RestaurantCard({id, name, category, description, onRestaurantCardClicked}) {
     return (
-        <Card>
+        <Card onClick={() => onRestaurantCardClicked(id)}>
             <CardAvatar src="https://via.placeholder.com/80" alt="Main logo" />
             <CardPrincipal>
                 <CardTitle>{name}</CardTitle>

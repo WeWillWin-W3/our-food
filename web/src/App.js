@@ -11,6 +11,7 @@ import { Home } from './pages/Home'
 import { Checkout } from './pages/Checkout'
 import { Restaurants } from './pages/Restaurants'
 import { RestaurantDashboard } from './pages/RestaurantDashboard'
+import { RestaurantFoods } from './pages/RestaurantFoods'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Location } from './pages/Location'
@@ -41,6 +42,9 @@ export const App = () => (
           </Route>
           <Route exact path="/restaurants">
             <Restaurants />
+          </Route>
+          <Route exact path="/restaurants/:id">
+            <RestaurantFoods />
           </Route>
           <Route exact path="/checkout">
             <Checkout />

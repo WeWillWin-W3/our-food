@@ -11,6 +11,7 @@ type RestaurantData struct {
 	Phone       string `json:"phone" validate:"required"`
 	Location    string `json:"location" validate:"required"`
 	UserID      uint32 `json:"user_id"`
+	Category    string `json:"category"`
 }
 
 type Restaurant struct {

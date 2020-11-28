@@ -19,7 +19,6 @@ export const Restaurants = () => {
 
     useEffect(() => {
         if (api.error) {
-            console.log('')
         }
     }, [api.error])
 
@@ -38,7 +37,7 @@ export const Restaurants = () => {
             <Container>
                 {
                     api.restaurants.map(restaurant =>
-                        <RestaurantCard key={restaurant.id} />
+                        <RestaurantCard key={restaurant.id} name={restaurant.name} category={restaurant.category} description={restaurant.description}/>
                     )
                 }
             </Container>

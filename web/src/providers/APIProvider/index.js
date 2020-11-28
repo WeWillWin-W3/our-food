@@ -18,9 +18,9 @@ const APIProvider = props => {
     const getRestaurants = async () => {
         try{
             updateState({ loading: true })
-            const {data} = await API.getRestaurants()
-            console.log(data)
-            updateState({restaurants: data, loading: false})
+            const restaurants = await API.getRestaurants()
+            console.log(restaurants)
+            updateState({restaurants: restaurants, loading: false})
         }catch(err){
             updateState({error: err.response.data, loading: false})
         }

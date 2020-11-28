@@ -15,6 +15,7 @@ func SetupRoutes(app *fiber.App) {
 	foods := api.Group("/foods")
 	foods.Get("/", controller.GetFoods)
 	foods.Get("/:food", controller.GetFoodByID)
+	foods.Get("/categories", controller.GetFoodCategories)
 
 	restaurants := api.Group("/restaurants")
 	restaurants.Get("/", controller.GetRestaurants)

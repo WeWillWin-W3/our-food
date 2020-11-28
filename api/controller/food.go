@@ -29,6 +29,16 @@ func GetFoods(c *fiber.Ctx) error {
 	return c.JSON(foods)
 }
 
+func GetFoodCategories(c *fiber.Ctx) error {
+    categories, err := model.GetFoodCategories()
+
+    if err != nil {
+        return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+    }
+
+    return c.JSON(categories)
+}
+
 // GetFoodsByRestaurant lista todas as comidas registradas em um restaurante.
 // Comidas podem ser filtradas por categoria (ex.: ?category=pizza)
 func GetFoodsByRestaurant(c *fiber.Ctx) error {

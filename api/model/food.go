@@ -32,6 +32,16 @@ func GetAllFoods() ([]Food, error) {
 	return foods, nil
 }
 
+func GetFoodCategories() ([]string, error) {
+    var categories []string
+
+    if err := DB.Model(&Food{}).Pluck("category", &categories).Error; err != nil {
+        return nil, err
+    }
+
+    return categories, nil
+}
+
 func GetFoodByNameAndCategory(name, category string) ([]Food, error) {
 	var foods []Food
 

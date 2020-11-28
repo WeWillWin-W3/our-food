@@ -16,16 +16,14 @@ const APIProvider = props => {
     const logout = () => updateState({ user: undefined })
 
     const getRestaurants = async () => {
-        updateState({ error: undefined })
         try{
             updateState({ loading: true })
-            const restaurants = await API.getRestaurants()
-            console.log(restaurants)
-            updateState({restaurants: restaurants, loading: false})
+            const {data} = await API.getRestaurants()
+            console.log(data)
+            updateState({restaurants: data, loading: false})
         }catch(err){
             updateState({error: err.response.data, loading: false})
         }
-        
     }
 
     const createUser = async (userData) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { NavbarComponent as Navbar } from './components/Navbar'
 import { FoodFigureComponent as FoodFigure } from './components/FoodFigure'
@@ -8,25 +8,20 @@ import { Container, Title, SubTitle } from './styled'
 
 import { useAPI } from '../../providers/APIProvider';
 
-
 export const Restaurants = () => {
-    const [restaurants, setRestaurants] = useState([])
     const api = useAPI()
 
     useEffect(() => {
-        loadRestaurants()
+        if (api.restaurants.length === 0) {
+            api.getRestaurants()
+        }
     }, [api.restaurants])
 
     useEffect(() => {
         if (api.error) {
-            alert(`Deu ruim man: ${api.error}`)
+            console.log('')
         }
     }, [api.error])
-
-    const loadRestaurants = async () => {
-        await api.getRestaurants()
-        setRestaurants(api.restaurants)
-    }
 
     return (
         <>
@@ -42,7 +37,7 @@ export const Restaurants = () => {
             <SubTitle>Lista dos melhores restaurantes</SubTitle>
             <Container>
                 {
-                    restaurants.map(restaurant =>
+                    api.restaurants.map(restaurant =>
                         <RestaurantCard key={restaurant.id} />
                     )
                 }

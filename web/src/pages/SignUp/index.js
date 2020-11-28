@@ -36,11 +36,11 @@ export const SignUp = () => {
         }
     }, [API.error])
 
-    // useEffect(() => {
-    //     if (API.user) {
-    //         history.push('/restaurants')
-    //     }
-    // }, [API.user, history])
+    useEffect(() => {
+        if (API.user) {
+            history.push('/restaurants')
+        }
+    }, [API.user, history])
 
     return (
         <>

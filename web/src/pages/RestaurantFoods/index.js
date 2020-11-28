@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from 'react-router-dom'
 
 import { NavbarComponent as Navbar } from './components/Navbar'
 import { FoodCard } from './components/FoodCard'
@@ -9,6 +9,7 @@ import { Container, Title, SubTitle } from './styled'
 import { useAPI } from '../../providers/APIProvider'
 
 export const RestaurantFoods = () => {
+    const history = useHistory()
     const api = useAPI()
 
     let { id: restaurantId } = useParams();
@@ -18,6 +19,11 @@ export const RestaurantFoods = () => {
             api.getFoodsByRestaurant(restaurantId)
         }
     }, [api.foods])
+
+    const onFoodCardClicked = () => {
+        console.log('aa')
+        history.push('/order')
+    }
 
     return (
         <>
@@ -31,7 +37,8 @@ export const RestaurantFoods = () => {
                             key={food.id}
                             name={food.name}
                             category={food.category}
-                            price={food.price} />
+                            price={food.price}
+                            onFoodCardClicked={onFoodCardClicked} />
                     )
                 }
             </Container>

@@ -8,19 +8,32 @@ const APIProvider = props => {
         user: undefined,
         authToken: undefined,
         error: undefined,
-        loading: false
+        loading: false,
+        restaurants: []
     })
     const updateState = (nextState) => setState({ ...state, ...nextState })
 
     const logout = () => updateState({ user: undefined })
 
+    const getRestaurants = async () => {
+        updateState({ error: undefined })
+        try{
+            updateState({ loading: true })
+            const restaurants = await API.getRestaurants()
+            console.log(restaurants)
+            updateState({restaurants: restaurants, loading: false})
+        }catch(err){
+            updateState({error: err.response.data, loading: false})
+        }
+        
+    }
+
     const createUser = async (userData) => {
         updateState({ error: undefined })
 
         if (!state.user) {
-            updateState({ loading: true })
-
             try {
+                updateState({ loading: true })
                 const user = await API.createUser(userData)
                 updateState({ user: user, loading: false })
 
@@ -31,15 +44,14 @@ const APIProvider = props => {
 
             return;
         }
-
-        updateState({ error: "O usuário está logado. Faça logout primeiro" })
     }
 
     return (
         <APIProviderContext.Provider value={{
             ...state,
             createUser,
-            logout
+            logout,
+            getRestaurants
         }} {...props} />
     )
 }

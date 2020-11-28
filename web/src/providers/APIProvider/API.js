@@ -90,12 +90,12 @@ export const createUser = async ({ name, email, password, phone, location, role 
     axiosInstance.post("/users", { name, email, password, phone, location, role })
 
 export const getUserById = async (userId) =>
-    getJsonFromFetch(fetch(`${API_URL}/v1/users/${userId}`, {
+    getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
         method: "GET",
     }))
 
 export const orderFood = async (userId, locationId, restaurantId) =>
-    getJsonFromFetch(fetch(`${API_URL}/v1/orders`, {
+    getJsonFromFetch(fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

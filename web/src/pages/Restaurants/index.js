@@ -6,18 +6,26 @@ import { RestaurantCard } from './components/RestaurantCard'
 
 import { Container, Title, SubTitle } from './styled'
 
-import { getRestaurants } from '../../providers/APIProvider/API'
+import { useAPI } from '../../providers/APIProvider';
+
 
 export const Restaurants = () => {
     const [restaurants, setRestaurants] = useState([])
+    const api = useAPI()
 
     useEffect(() => {
-        onComponentDidMount()
-    })
+        loadRestaurants()
+    }, [api.restaurants])
 
-    const onComponentDidMount = async () => {
-        const restaurants = await getRestaurants()
-        setRestaurants(restaurants)
+    useEffect(() => {
+        if (api.error) {
+            alert(`Deu ruim man: ${api.error}`)
+        }
+    }, [api.error])
+
+    const loadRestaurants = async () => {
+        await api.getRestaurants()
+        setRestaurants(api.restaurants)
     }
 
     return (
@@ -35,7 +43,7 @@ export const Restaurants = () => {
             <Container>
                 {
                     restaurants.map(restaurant =>
-                        <RestaurantCard key={restaurant.id}/>
+                        <RestaurantCard key={restaurant.id} />
                     )
                 }
             </Container>

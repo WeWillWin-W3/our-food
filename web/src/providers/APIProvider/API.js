@@ -106,3 +106,8 @@ export const orderFood = async (userId, locationId, restaurantId) =>
             "restaurant_id": restaurantId
         })
     }))
+
+export const getRestaurants = async () => {
+    const {data} = await axiosInstance.get("/restaurants")
+    return data
+}

@@ -19,13 +19,8 @@ export const Restaurants = () => {
         }
     }, [api.restaurants])
 
-    useEffect(() => {
-        if (api.error) {
-        }
-    }, [api.error])
-
     const onRestaurantCardClicked = (id) => {
-        history.push(`/restaurants/${id}`)
+        history.push(`/restaurants/${id}/foods`)
     }
 
     return (

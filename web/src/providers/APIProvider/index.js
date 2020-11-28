@@ -9,21 +9,12 @@ const APIProvider = props => {
         authToken: undefined,
         error: undefined,
         loading: false,
-        restaurants: []
+        restaurants: [],
+        foods: []
     })
     const updateState = (nextState) => setState({ ...state, ...nextState })
 
     const logout = () => updateState({ user: undefined })
-
-    const getRestaurants = async () => {
-        try{
-            updateState({ loading: true })
-            const restaurants = await API.getRestaurants()
-            updateState({restaurants: restaurants, loading: false})
-        }catch(err){
-            updateState({error: err.response.data, loading: false})
-        }
-    }
 
     const createUser = async (userData) => {
         updateState({ error: undefined })
@@ -43,12 +34,33 @@ const APIProvider = props => {
         }
     }
 
+    const getRestaurants = async () => {
+        try {
+            updateState({loading: true})
+            const restaurants = await API.getRestaurants()
+            updateState({restaurants: restaurants, loading: false})
+        } catch(err){
+            updateState({error: err.response.data, loading: false})
+        }
+    }
+
+    const getFoodsByRestaurant = async (restaurantId) => {
+        try {
+            updateState({loading: true})
+            const foods = await API.getFoodByRestaurant(restaurantId)
+            updateState({foods: foods, loading: false})
+        } catch(err) {
+            updateState({error: err.response.data, loading: false})
+        }
+    }
+
     return (
         <APIProviderContext.Provider value={{
             ...state,
             createUser,
             logout,
-            getRestaurants
+            getRestaurants,
+            getFoodsByRestaurant
         }} {...props} />
     )
 }

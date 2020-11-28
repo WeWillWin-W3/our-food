@@ -26,10 +26,10 @@ export const getAllFoods = async () =>
  * 
  * @param {number} restaurantId 
  */
-export const getFoodByRestaurant = async (restaurantId) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods`, {
-        method: "GET",
-    }))
+export const getFoodByRestaurant = async (restaurantId) => {
+    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
+    return data
+}
 
 /**
  * 

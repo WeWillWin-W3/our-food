@@ -43,7 +43,7 @@ export const App = () => (
           <Route exact path="/restaurants">
             <Restaurants />
           </Route>
-          <Route exact path="/restaurants/:id">
+          <Route exact path="/restaurants/:id/foods">
             <RestaurantFoods />
           </Route>
           <Route exact path="/checkout">

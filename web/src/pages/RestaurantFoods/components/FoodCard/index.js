@@ -2,14 +2,14 @@ import React from 'react'
 
 import { Card, CardAvatar, CardPrincipal, CardTitle, CardSubTitle, CardDescription } from './styled'
 
-export function FoodCard() {
+export function FoodCard({name, category, price}) {
     return (
         <Card>
             <CardAvatar src="https://via.placeholder.com/80" alt="Main logo" />
             <CardPrincipal>
-                <CardTitle>Pizza de lombo ao creme</CardTitle>
-                <CardSubTitle>Pizza muito boa</CardSubTitle>
-                <CardDescription>Descrição</CardDescription>
+                <CardTitle>{name}</CardTitle>
+                <CardSubTitle>{category}</CardSubTitle>
+                <CardDescription>R$ {price}</CardDescription>
             </CardPrincipal>
         </Card>
     )

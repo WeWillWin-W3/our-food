@@ -21,7 +21,6 @@ export const RestaurantFoods = () => {
     }, [api.foods])
 
     const onFoodCardClicked = () => {
-        console.log('aa')
         history.push('/order')
     }
 

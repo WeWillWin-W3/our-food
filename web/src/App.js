@@ -10,13 +10,15 @@ import { GlobalStyle } from './styles/GlobalStyle'
 import { Home } from './pages/Home'
 import { Checkout } from './pages/Checkout'
 import { Restaurants } from './pages/Restaurants'
-import { RestaurantOrders } from './pages/Dashboard/Orders'
 import { RestaurantFoods } from './pages/RestaurantFoods'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Location } from './pages/Location'
 import { StoreInformation } from './pages/StoreInformation'
 import { OrderFood } from './pages/OrderFood'
+
+import { DashboardOrders } from './pages/Dashboard/Orders'
+import { DashboardFoods } from './pages/Dashboard/Foods'
 
 import APIProvider from './providers/APIProvider'
 
@@ -26,7 +28,10 @@ export const App = () => (
       <Switch>
         <APIProvider>
           <Route exact path="/dashboard">
-            <RestaurantOrders />
+            <DashboardOrders />
+          </Route>
+          <Route exact path="/dashboard/foods">
+            <DashboardFoods />
           </Route>
           <Route exact path="/signin">
             <SignIn />

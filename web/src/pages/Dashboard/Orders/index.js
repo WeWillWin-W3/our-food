@@ -3,7 +3,7 @@ import React from 'react'
 import { DashboardTemplate } from '../components/DashboardTemplate'
 import { Board, BoardColumn, ColumnTitle, ColumnCard, ColumnCards} from './styled'
 
-export const RestaurantOrders = () => {
+export const DashboardOrders = () => {
     return (
         <DashboardTemplate title="Pedidos">
             <Board>

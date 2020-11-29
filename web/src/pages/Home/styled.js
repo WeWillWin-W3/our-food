@@ -27,7 +27,7 @@ const StyledNav = styled.nav`
         display: flex;
         align-items: center;
 
-        li:not(:last-child) {
+        a:not(:last-child) {
             margin-right: 30px;
         }
     }

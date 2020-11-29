@@ -4,15 +4,16 @@ import { Navbar, Nav, NavItem, NavItemButton, Main } from './styled'
 import { Logo } from '../../components/Logo'
 import { ImgPlaceholder } from '../../components/ImgPlaceholder'
 import { SearchBar } from './components/SearchBar'
+import {Link} from "react-router-dom";
 
 export const Home = () => (
     <>
         <Navbar>
             <Logo/>
             <Nav>
-                <NavItem>OurFood Restaurantes</NavItem>
-                <NavItem>Cadastre-se</NavItem>
-                <NavItemButton>Entrar</NavItemButton>
+                <Link to="/restaurants"><NavItem>OurFood Restaurantes</NavItem></Link>
+                <Link to="/signup"><NavItem>Cadastre-se</NavItem></Link>
+                <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
             </Nav>
         </Navbar>
         <Main>

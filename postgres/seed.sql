@@ -1,5 +1,4 @@
 -- Arquivo de inserção dos valores iniciais do banco
-
 INSERT INTO
     users (name, email, password, role, location)
 VALUES

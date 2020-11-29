@@ -9,6 +9,9 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/basicauth"
 )
 
+
+// UsersBasicAuth autentica uma rota através do padrão Basic Authentication
+// (https://swagger.io/docs/specification/authentication/basic-authentication/)
 func UsersBasicAuth(c *fiber.Ctx) error {
 	users, err := model.GetAllUsers()
 
@@ -67,6 +70,7 @@ func getUserTokenByAuthorizationHeader(header string) (*model.AuthToken, *model.
 	return token, user, err
 }
 
+// UsersAuthToken permite apenas usuários autenticados acessem a rota.
 func UsersAuthToken(c *fiber.Ctx) error {
 	_, user, err := getUserTokenByAuthorizationHeader(c.Get("Authorization"))
 
@@ -81,6 +85,8 @@ func UsersAuthToken(c *fiber.Ctx) error {
 	return c.Next()
 }
 
+// UsersAuthTokenByID permite apenas que o próprio usuário acesse a rota.
+// O usuário é definido pelo parâmetro :user
 func UsersAuthTokenByID(c *fiber.Ctx) error {
 	userID, err := strconv.Atoi(c.Params("user"))
 
@@ -105,7 +111,10 @@ func UsersAuthTokenByID(c *fiber.Ctx) error {
 	return c.Next()
 }
 
-func RestaurantsAuthToken(c *fiber.Ctx) error {
+
+// RestaurantsAuthTokenByID permite apenas que o usuário do restaurante
+// acesse a rota. O restaurante é definido pelo parâmetro :restaurant
+func RestaurantsAuthTokenByID(c *fiber.Ctx) error {
 	restaurantID, err := strconv.Atoi(c.Params("restaurant"))
 
 	if err != nil {
@@ -126,6 +135,24 @@ func RestaurantsAuthToken(c *fiber.Ctx) error {
 
 	if token.UserID != restaurant.UserID {
 		return fiber.NewError(fiber.StatusForbidden, "Credenciais inválidas")
+	}
+
+	c.Locals("user", user)
+
+	return c.Next()
+}
+
+// RestaurantsAuthToken permite apenas que usuários com o role
+// RestaurantRole utilizem uma rota
+func RestaurantsAuthToken(c *fiber.Ctx) error {
+	_, user, err := getUserTokenByAuthorizationHeader(c.Get("Authorization"))
+
+	if err != nil {
+		return err
+	}
+
+	if user.Role != model.RestaurantRole {
+		return fiber.NewError(fiber.StatusForbidden, "Permissão insuficiente")
 	}
 
 	c.Locals("user", user)

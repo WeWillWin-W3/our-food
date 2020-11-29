@@ -1,51 +1,67 @@
-table foods {
-  id serial [pk]
-  name varchar
-  description varchar
-  category varchar
-  price float
-  restaurant_id varchar [ref: > restaurants.id]
+Table "foods" {
+  "id" int [pk, increment]
+  "name" varchar
+  "description" varchar
+  "category" varchar
+  "price" float
+  "restaurant_id" integer
 }
 
-table restaurants {
-  id serial [pk]
-  name varchar
-  description varchar
-  rate float
-  cnpj varchar
-  phone varchar
-  location_id integer [ref: > locations.id]
-  user_id integer [ref: > users.id]
+Table "restaurants" {
+  "id" int [pk, increment]
+  "name" varchar
+  "description" varchar
+  "rating" float
+  "cnpj" varchar
+  "phone" varchar
+  "location" varchar
+  "user_id" integer
 }
 
-table users {
-  id serial [pk]
-  name varchar
-  email varchar
-  password varchar
-  role integer
-  location_id integer [ref: < locations.id]
+Table "users" {
+  "id" int [pk, increment]
+  "name" varchar
+  "email" varchar [unique]
+  "password" varchar
+  "role" integer
+  "location" varchar
 }
 
-table locations {
-  id serial [pk]
-  number integer
-  street varchar
-  neighborhood varchar
-  complement varchar
+Table "orders" {
+  "id" int [pk, increment]
+  "created_at" timestamp
+  "rating" float
+  "user_id" integer
+  "restaurant_id" integer
+  "location" varchar
 }
 
-table orders {
-  id serial [pk]
-  created_at timestamp
-  rate float
-  user_id integer [ref: > users.id]
-  restaurant_id integer [ref: > restaurants.id]
-  location_id integer [ref: > locations.id]
+Table "order_items" {
+  "quantity" integer
+  "food_id" integer
+  "order_id" integer
+
+Indexes {
+  (food_id, order_id) [pk]
+}
 }
 
-table order_items {
-  quantity integer 
-  food_id integer [pk, ref: > foods.id]
-  order_id integer [pk, ref: > orders.id]
+Table "auth_tokens" {
+  "token" varchar [pk]
+  "user_id" integer
+  "created_at" timestamp
 }
+
+Ref:"restaurants"."id" < "foods"."restaurant_id"
+
+Ref:"users"."id" < "restaurants"."user_id"
+
+Ref:"users"."id" < "orders"."user_id"
+
+Ref:"restaurants"."id" < "orders"."restaurant_id"
+
+Ref:"foods"."id" < "order_items"."food_id"
+
+Ref:"orders"."id" < "order_items"."order_id"
+
+Ref:"users"."id" < "auth_tokens"."user_id"

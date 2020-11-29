@@ -41,3 +41,24 @@ func GetRestaurantByID(c *fiber.Ctx) error {
 
 	return c.JSON(restaurant)
 }
+
+func CreateRestaurant(c *fiber.Ctx) error {
+	user := c.Locals("user").(*model.User)
+
+	var restaurantData model.RestaurantData
+
+	if err := c.BodyParser(&restaurantData); err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
+
+	restaurantData.UserID = user.ID
+
+	restaurant, err := model.CreateRestaurant(restaurantData)
+
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
+
+	c.SendStatus(fiber.StatusCreated)
+	return c.JSON(restaurant)
+}

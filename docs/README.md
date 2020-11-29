@@ -5,12 +5,19 @@ Tais aplicativos tipicamente oferecem opções pratos prontos e opções customi
 
 ## Histórias de Usuário
 
+### Jorjão
 - [ ] Usuários podem navegar por diferentes opções comidas
-- [ ] Usuários podem vizualizar estabelecimentos
+- [x] Usuários podem vizualizar estabelecimentos **e Carlão brabo**
+- [ ]  ~~Usuários~~ e estabelecimentos podem se cadastrar na plataforma
+
+### Lucão
 - [ ] Usuários podem vizualizar detalhes das comidas
+
+### Luquinhas
 - [ ] Usuários podem realizar o pedido de comidas
 - [ ] Usuários podem buscar por comidas e estabelecimentos
-- [ ] Usuários e estabelecimentos podem se cadastrar na plataforma
+
+### Carlão
 - [ ] Estabelecimentos podem cadastrar comidas
 - [ ] Estabelecimentos podem editar e remover comidas
 

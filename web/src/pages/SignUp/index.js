@@ -29,7 +29,6 @@ export const SignUp = () => {
     const onSignButtonClicked = () =>
         API.createUser({ name, email, password, phone: phoneNumber, location })
 
-
     useEffect(() => {
         if (API.error) {
             alert(`Deu ruim man: ${API.error}`)

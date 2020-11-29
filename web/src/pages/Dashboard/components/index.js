@@ -110,6 +110,6 @@ export const Sidemenu = styled.aside`
 `
 
 export const HeaderTitle = styled.h2`
-    font-size: 50px;
-    font-weight: 400;
+    font-size: 38px;
+    font-weight: 500;
 `

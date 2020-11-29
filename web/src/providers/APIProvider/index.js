@@ -44,6 +44,9 @@ const APIProvider = props => {
     const getFoodsByRestaurant = async (restaurantId) =>
         API.getFoodByRestaurant(restaurantId)
 
+    const createFood = async (food, restaurantId, authToken) =>
+        API.createFood(food, restaurantId, authToken)
+
     return (
         <APIProviderContext.Provider value={{
             state,
@@ -52,7 +55,8 @@ const APIProvider = props => {
             getRestaurants,
             getFoodsByRestaurant,
             getRestaurantById,
-            getFoodsCategories
+            getFoodsCategories,
+            createFood
         }} {...props} />
     )
 }

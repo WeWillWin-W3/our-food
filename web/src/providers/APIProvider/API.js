@@ -33,6 +33,27 @@ export const getFoodByRestaurant = async (restaurantId) => {
 
 /**
  * 
+ * @param {number} restaurantId 
+ */
+
+export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
+    const {data} = await axiosInstance.get(`/foods/${restaurantId}`)
+    return data
+}
+
+/**
+ * 
+ * @param {number} restaurantId 
+ * @param {string} category
+ */
+
+export const getFoodByRestaurantAndCategory = async (restaurantId, category) => {
+    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
+    return data
+}
+
+/**
+ * 
  * @param {number} foodId 
  */
 export const getFoodById = async (foodId) =>
@@ -91,6 +112,11 @@ export const createUser = async ({ name, email, password, phone, location, role 
 
 export const getUserById = async (userId) =>
     getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
+        method: "GET",
+    }))
+
+export const getRestaurantById = async (restaurantId) =>
+    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}`, {
         method: "GET",
     }))
 

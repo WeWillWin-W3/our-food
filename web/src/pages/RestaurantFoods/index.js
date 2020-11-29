@@ -15,10 +15,11 @@ export const RestaurantFoods = () => {
     let { id: restaurantId } = useParams();
 
     useEffect(() => {
-        if (api.foods.length === 0) {
-            api.getFoodsByRestaurant(restaurantId)
-        }
-    }, [api.foods])
+        (async() => {
+            await api.getRestaurantById(restaurantId)
+            await api.getFoodsByRestaurant(restaurantId)
+        })()
+    }, [])
 
     const onFoodCardClicked = () => {
         history.push('/order')
@@ -27,16 +28,16 @@ export const RestaurantFoods = () => {
     return (
         <>
             <Navbar />
-            <Title>Pizzaria Matei Onça</Title>
-            <SubTitle>Lista dos melhores restaurantes</SubTitle>
+            <Title>{api.restaurantSelected.name}</Title>
             <Container>
                 {
-                    api.foods.map(food => 
-                        <FoodCard 
+                    api.foods.map(food =>
+                        <FoodCard
                             key={food.id}
                             name={food.name}
                             category={food.category}
                             price={food.price}
+                            description={food.description}
                             onFoodCardClicked={onFoodCardClicked} />
                     )
                 }

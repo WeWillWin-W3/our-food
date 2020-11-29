@@ -10,7 +10,9 @@ const APIProvider = props => {
         error: undefined,
         loading: false,
         restaurants: [],
-        foods: []
+        foods: [],
+        restaurantSelected: {},
+        categories: []
     })
     const updateState = (nextState) => setState({ ...state, ...nextState })
 
@@ -44,6 +46,28 @@ const APIProvider = props => {
         }
     }
 
+    const getRestaurantById = async (restaurantId) => {
+        try {
+            updateState({loading: true})
+            const restaurantSelected = await API.getRestaurantById(restaurantId)
+            setState({ ...state, restaurantSelected })
+            console.log(state.restaurantSelected)
+            console.log(restaurantSelected)
+        } catch(err){
+            updateState({error: err.response.data, loading: false})
+        }
+    }
+
+    const getFoodsCategories = async (restaurantId) => {
+        try {
+            updateState({loading: true})
+            const categories = await API.getFoodsCategoriesByRestaurant(restaurantId)
+            updateState({categories: categories, loading: false})
+        } catch(err) {
+            updateState({error: err.response.data, loading: false})
+        }
+    }
+
     const getFoodsByRestaurant = async (restaurantId) => {
         try {
             updateState({loading: true})
@@ -60,7 +84,9 @@ const APIProvider = props => {
             createUser,
             logout,
             getRestaurants,
-            getFoodsByRestaurant
+            getFoodsByRestaurant,
+            getRestaurantById,
+            getFoodsCategories
         }} {...props} />
     )
 }

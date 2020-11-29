@@ -46,8 +46,9 @@ export const FoodOptions = styled.div`
 `
 
 export const Option = styled.span`
-    color: ${props => props.danger ? '#f83031' : 'rgba(0, 0, 0, 0.6)' };
+    color: ${props => props.danger ? '#f83031' : 'rgba(0, 0, 0, 0.6)'};
     margin-right: 10px;
+    cursor: pointer;
 `
 
 export const TextTitle = styled.p`

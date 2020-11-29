@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { NavbarComponent as Navbar } from './components/Navbar'
+import { NavbarComponent as Navbar } from '../../components/Navbar'
 import { FoodCard } from './components/FoodCard'
 
-import { Container, Title, SubTitle } from './styled'
+import { Container, Title } from './styled'
 
 import { useAPI } from '../../providers/APIProvider'
 
@@ -25,9 +25,12 @@ export const RestaurantFoods = () => {
                 console.log(err)
             }
         })()
-    }, [])
+    }, [api, restaurantId])
 
-    const onFoodCardClicked = () => history.push('/order')
+    const onFoodCardClicked = (food) => () => history.push({
+        pathname: '/order',
+        state: { food, restaurant: restaurantSelected }
+    })
 
     return (
         <>
@@ -42,7 +45,7 @@ export const RestaurantFoods = () => {
                             category={food.category}
                             price={food.price}
                             description={food.description}
-                            onFoodCardClicked={onFoodCardClicked} />
+                            onFoodCardClicked={onFoodCardClicked(food)} />
                     )
                 }
             </Container>

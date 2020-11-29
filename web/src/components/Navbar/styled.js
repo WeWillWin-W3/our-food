@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { AiOutlineSearch, AiTwotonePushpin } from 'react-icons/ai';
 
-import { Button } from '../../../../components/Button'
+import { Button } from '../Button'
 
 export const Navbar = styled.header`
     height: 70px;
@@ -22,10 +22,11 @@ export const NavbarContainer = styled.div`
     justify-content: space-between;
 `
 
-export const NavbarSearch = ({ placeholder }) => (
+export const NavbarSearch = ({ placeholder, value, onChange, results }) => (
     <NavbarSearchBox>
         <AiOutlineSearch style={{ marginRight: '10px', fill: 'rgba(0, 0, 0, 0.65)' }} />
-        <NavbarSearchInput type="text" placeholder={placeholder} />
+        <NavbarSearchInput type="text" placeholder={placeholder} value={value} onChange={onChange} />
+        <SearchResults>{results.toString()}</SearchResults>
     </NavbarSearchBox>
 )
 
@@ -47,6 +48,25 @@ const NavbarSearchBox = styled.div`
     &:focus-within {
         border: 2px solid rgba(0, 0, 0, 0.5);
     }
+`
+
+export const SearchResults = styled.div`
+    display: ${props => !!props.show ? 'block' : 'none'};
+    position: absolute;
+    background-color: #f5f5f5;
+    padding: 12.5px 20px;
+    border-radius: 0 0 9px 9px;
+    margin-right: 20px;
+    left: 0;
+    right: 0;
+
+    div {
+        display: flex;
+        align-items: center;
+        margin: 10px 10px 10px 0;
+        color: #707070;
+    }
+
 `
 
 const NavbarSearchInput = styled.input`
@@ -84,8 +104,7 @@ export const Nav = styled.nav`
     align-items: center;
 `
 
-export const NavItem = styled.a`
-    text-decoration: none;
+export const NavItem = styled.div`
     padding: 10px 30px;
 
     font-size: 18px;

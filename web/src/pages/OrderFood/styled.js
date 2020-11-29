@@ -9,7 +9,7 @@ export const Page = styled.main`
     justify-content: center;
     height: 100%;
     background-color: #f0f0f0;
-` 
+`
 export const OrderCard = styled.div`
     background-color: #fff;
     padding: 20px 40px 40px 40px;
@@ -18,10 +18,10 @@ export const OrderCard = styled.div`
     > * {
         margin-bottom: 25px;
     }
-` 
-export const CloseButton = () => (
-    <StyledCloseButton>
-        <MdClose/>
+`
+export const CloseButton = (props) => (
+    <StyledCloseButton {...props}>
+        <MdClose />
     </StyledCloseButton>
 )
 
@@ -29,6 +29,7 @@ const StyledCloseButton = styled.div`
     display: flex;
     flex-direction: row-reverse;
     margin-bottom: 10px;
+    cursor: pointer;
 
     svg {
         font-size: 20px;
@@ -113,11 +114,11 @@ export const OrderOptions = styled.div`
     justify-content: flex-end;
     margin: 0;
 `
-export const OptionQuantity = () => (
+export const OptionQuantity = ({ value, onAdd, onRemove }) => (
     <StyledOptionQuantity>
-        <MdRemove />
-        <span>1</span>
-        <MdAdd />
+        <MdRemove onClick={onRemove} />
+        <span>{value}</span>
+        <MdAdd onClick={onAdd} />
     </StyledOptionQuantity>
 )
 
@@ -141,10 +142,10 @@ const StyledOptionQuantity = styled(Option)`
     }
 `
 
-export const OptionAction = ({ amount }) => (
-    <StyledOptionAction>
+export const OptionAction = (props) => (
+    <StyledOptionAction {...props}>
         <span>Adicionar</span>
-        <span>{amount}</span>
+        <span>{props.amount}</span>
     </StyledOptionAction>
 )
 
@@ -152,4 +153,5 @@ export const StyledOptionAction = styled(Option)`
     justify-content: space-between;
     font-size: 13px;
     width: 150px;
+    cursor: pointer;
 `

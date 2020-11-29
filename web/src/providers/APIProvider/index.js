@@ -8,7 +8,8 @@ const APIProvider = props => {
         user: undefined,
         authToken: undefined,
         error: undefined,
-        loading: false
+        loading: false,
+        bag: []
     })
 
     const updateState = (nextState) => setState({ ...state, ...nextState })
@@ -33,6 +34,9 @@ const APIProvider = props => {
         }
     }
 
+    const addFoodToBag = (food, quantity) => updateState({ bag: [...state.bag, { ...food, quantity }] })
+    const removeFoodFromBag = (foodId) => updateState({ bag: state.bag.filter(food => food.id !== foodId) })
+
     const getRestaurants = () => API.getRestaurants()
 
     const getRestaurantById = (restaurantId) =>
@@ -44,15 +48,25 @@ const APIProvider = props => {
     const getFoodsByRestaurant = async (restaurantId) =>
         API.getFoodByRestaurant(restaurantId)
 
+    const getRestaurantsByName = async (name) =>
+        API.getRestaurantsByName(name)
+
+    const getFoodsByName = async (name) =>
+        API.getFoodsByName(name)
+
     return (
         <APIProviderContext.Provider value={{
-            state,
+            ...state,
             createUser,
             logout,
             getRestaurants,
             getFoodsByRestaurant,
             getRestaurantById,
-            getFoodsCategories
+            getRestaurantsByName,
+            getFoodsByName,
+            getFoodsCategories,
+            addFoodToBag,
+            removeFoodFromBag
         }} {...props} />
     )
 }

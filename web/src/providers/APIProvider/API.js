@@ -27,7 +27,7 @@ export const getAllFoods = async () =>
  * @param {number} restaurantId 
  */
 export const getFoodByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
     return data
 }
 
@@ -37,7 +37,7 @@ export const getFoodByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/foods/${restaurantId}`)
+    const { data } = await axiosInstance.get(`/foods/${restaurantId}`)
     return data
 }
 
@@ -48,7 +48,7 @@ export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodByRestaurantAndCategory = async (restaurantId, category) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
     return data
 }
 
@@ -133,7 +133,17 @@ export const orderFood = async (userId, locationId, restaurantId) =>
         })
     }))
 
-    export const getRestaurants = async () => {
-        const {data} = await axiosInstance.get("/restaurants")
-        return data
-    }
+export const getRestaurants = async () => {
+    const { data } = await axiosInstance.get("/restaurants")
+    return data
+}
+
+export const getRestaurantsByName = async (name) => {
+    const { data } = await axiosInstance.get(`/restaurants?name=${name}`)
+    return data
+}
+
+export const getFoodsByName = async (name) => {
+    const { data } = await axiosInstance.get(`/foods?name=${name}`)
+    return data
+}

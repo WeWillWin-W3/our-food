@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { NavbarComponent as Navbar } from './components/Navbar'
@@ -13,11 +13,17 @@ export const Restaurants = () => {
     const history = useHistory()
     const api = useAPI()
 
+    const [restaurants, setRestaurants] = useState([])
+
     useEffect(() => {
-        if (api.restaurants.length === 0) {
-            api.getRestaurants()
-        }
-    }, [api.restaurants])
+        (async () => {
+            try {
+                setRestaurants(await api.getRestaurants())
+            }catch(error){
+                console.log(error)
+            }
+        })()
+    }, [])
 
     const onRestaurantCardClicked = (id) => {
         history.push(`/restaurants/${id}/foods`)
@@ -37,7 +43,7 @@ export const Restaurants = () => {
             <SubTitle>Lista dos melhores restaurantes</SubTitle>
             <Container>
                 {
-                    api.restaurants.map(restaurant =>
+                    restaurants.map(restaurant =>
                         <RestaurantCard 
                             key={restaurant.id} name={restaurant.name}
                             id={restaurant.id}

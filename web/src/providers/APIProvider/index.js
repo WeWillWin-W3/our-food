@@ -33,15 +33,7 @@ const APIProvider = props => {
         }
     }
 
-    const getRestaurants = async () => {
-        try {
-            updateState({ loading: true })
-            const restaurants = await API.getRestaurants()
-            updateState({ restaurants: restaurants, loading: false })
-        } catch (err) {
-            updateState({ error: err.response.data, loading: false })
-        }
-    }
+    const getRestaurants = () => API.getRestaurants()
 
     const getRestaurantById = (restaurantId) =>
         API.getRestaurantById(restaurantId)

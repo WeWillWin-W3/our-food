@@ -18,7 +18,8 @@ CREATE TABLE "restaurants" (
   "cnpj" varchar,
   "phone" varchar,
   "location" varchar,
-  "user_id" integer
+  "user_id" integer,
+  "category" varchar
 );
 
 CREATE TABLE "users" (
@@ -26,6 +27,7 @@ CREATE TABLE "users" (
   "name" varchar,
   "email" varchar UNIQUE,
   "password" varchar,
+  "phone" varchar,
   "role" integer,
   "location" varchar
 );

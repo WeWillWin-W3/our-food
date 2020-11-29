@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { NavbarComponent as Navbar } from './components/Navbar'
 import { FoodCard } from './components/FoodCard'
 
-import { Container, Title, SubTitle } from './styled'
+import { Container, Title } from './styled'
 
 import { useAPI } from '../../providers/APIProvider'
 

@@ -18,7 +18,7 @@ import { StoreInformation } from './pages/StoreInformation'
 import { OrderFood } from './pages/OrderFood'
 
 import { DashboardOrders } from './pages/Dashboard/Orders'
-import { DashboardFoods } from './pages/Dashboard/Foods'
+import { DashboardCreateFoods } from './pages/Dashboard/Foods/CreateFood'
 
 import APIProvider from './providers/APIProvider'
 
@@ -31,7 +31,7 @@ export const App = () => (
             <DashboardOrders />
           </Route>
           <Route exact path="/dashboard/foods">
-            <DashboardFoods />
+            <DashboardCreateFoods />
           </Route>
           <Route exact path="/signin">
             <SignIn />

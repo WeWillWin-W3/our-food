@@ -68,7 +68,6 @@ export const getFoodById = async (foodId) =>
  * @param {string} authToken 
  */
 export const createFood = async (food, restaurantId, authToken) => {
-    console.log(food, restaurantId, authToken)
     const {data} = axiosInstance.post(`/restaurants/${restaurantId}/foods`,
                                         food, {headers: {"Authorization": `Bearer ${authToken}`}})
     return data

@@ -9,7 +9,8 @@ import {
     Page, PageMain
 } from './index'
 
-export const DashboardTemplate = ({ children, title }) => {
+export const DashboardTemplate = ({ children, title, hasSpecialAction,
+                                    specialActionTitle, onSpecialActionButtonClicked }) => {
     return (
         <Page>
             <Sidemenu>
@@ -28,7 +29,14 @@ export const DashboardTemplate = ({ children, title }) => {
                 <Dashboard>
                     <DashboardHeader>
                         <HeaderTitle>{title}</HeaderTitle>
-                        {/* <Button outline>Encerrar expediente</Button> */}
+                        {
+                            hasSpecialAction &&
+                            <Button
+                                onClick={onSpecialActionButtonClicked}
+                                outline>
+                                        {specialActionTitle}
+                            </Button>
+                        }
                     </DashboardHeader>
                     {children}
                 </Dashboard>

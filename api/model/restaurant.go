@@ -18,17 +18,6 @@ type Restaurant struct {
 	ID uint32 `json:"id" gorm:"primaryKey"`
 	RestaurantData
 	Rating     float32 `json:"rating"`
-	LocationID uint32  `json:"location_id"`
-	UserID     uint32  `json:"user_id"`
-}
-
-func NewRestaurant(restaurantData RestaurantData, locationID, userID uint32) (*Restaurant, error) {
-	return &Restaurant{
-		Rating:         0,
-		RestaurantData: restaurantData,
-		LocationID:     locationID,
-		UserID:         userID,
-	Rating float32 `json:"rating"`
 }
 
 func NewRestaurant(restaurantData RestaurantData) (*Restaurant, error) {

@@ -3,9 +3,6 @@ package model
 import "time"
 
 type OrderData struct {
-	UserID       uint32 `json:"user_id"`
-	LocationID   uint32 `json:"location_id"`
-	RestaurantID uint32 `json:"restaurant_id"`
 	Location     string `json:"location" validate:"required"`
 	UserID       uint32 `json:"user_id" validate:"required"`
 	RestaurantID uint32 `json:"restaurant_id" validate:"required"`

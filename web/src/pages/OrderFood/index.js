@@ -43,7 +43,7 @@ export const OrderFood = () => {
                                 <CardHeader>
                                         <HeaderTitle>{food.name}</HeaderTitle>
                                         <HeaderSubtitle>{food.description}</HeaderSubtitle>
-                                        <HeaderPrice>R${food.price}</HeaderPrice>
+                                        <HeaderPrice>R$ {food.price?.toFixed(2)}</HeaderPrice>
                                 </CardHeader>
                                 <OrderRestaurant>
                                         {restaurant.name}

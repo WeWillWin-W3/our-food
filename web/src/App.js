@@ -23,8 +23,8 @@ import { DashboardCreateFood } from './pages/Dashboard/Foods/CreateFood'
 
 import APIProvider from './providers/APIProvider'
 
-const RESTAURANT_CLIENT_ROLE = 0
-const RESTAURANT_OWNER_ROLE = 1
+import { userRole } from './constants'
+const { RESTAURANT_OWNER_ROLE } = userRole
 
 export const App = () => (
   <>
@@ -60,7 +60,7 @@ export const App = () => (
                     exact
                     path="/dashboard/foods/create"
                     redirectTo="/signin"
-                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
+                    redirectIf={!api.user}
                   >
                     <DashboardCreateFood />
                   </PrivateRoute>

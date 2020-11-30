@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import * as API from './API'
 
+import { userRole } from '../../constants'
+const { RESTAURANT_OWNER_ROLE } = userRole
+
 const APIReducer = (state, { type, payload }) => {
     switch (type) {
         case 'start-request':
@@ -11,6 +14,7 @@ const APIReducer = (state, { type, payload }) => {
                 ...state,
                 authToken: payload.authToken,
                 user: payload.user,
+                restaurant: payload.restaurant,
                 loading: false
             }
         case 'user-logout':
@@ -31,6 +35,7 @@ const APIProviderContext = createContext({})
 const APIProvider = props => {
     const [state, dispatch] = useReducer(APIReducer, {
         user: undefined,
+        restaurant: undefined,
         authToken: undefined,
         error: undefined,
         loading: false
@@ -77,9 +82,21 @@ const APIProvider = props => {
         try {
             const { token: authToken, user_id: userId } = await API.signIn({ email, password })
             const user = await API.getUserById(userId, authToken)
-            dispatch({ type: 'user-logged-in', payload: { user, authToken } })
+            let restaurant = undefined
+            if (user.role === RESTAURANT_OWNER_ROLE) {
+                // TODO: criar rota para buscar restaurante do usuário
+                const restaurantsFromApi = await API.getRestaurants()
+                for (const restaurantFromApi of restaurantsFromApi) {
+                    if (restaurantFromApi.user_id === user.id) {
+                        restaurant = restaurantFromApi
+                        break
+                    }
+                }
+            }
+            dispatch({ type: 'user-logged-in', payload: { user, authToken, restaurant } })
         } catch (error) {
-            dispatch({ type: 'error', payload: { error: error.response.data } })
+            console.log(error)
+            dispatch({ type: 'error', payload: { error: error.message } })
         }
     }
 

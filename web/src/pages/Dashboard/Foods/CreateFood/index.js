@@ -22,6 +22,8 @@ export const DashboardCreateFood = () => {
 
     const { name, description, category, price } = formState
 
+    console.log(API)
+
     const onFormSubmited = async (event) => {
         try {
             event.preventDefault()

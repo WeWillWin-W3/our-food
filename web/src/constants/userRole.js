@@ -1,0 +1,4 @@
+export default {
+    RESTAURANT_CLIENT_ROLE: 0,
+    RESTAURANT_OWNER_ROLE: 1
+}

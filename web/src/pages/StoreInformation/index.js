@@ -5,22 +5,32 @@ import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 
 import { useAPI } from '../../providers/APIProvider'
+import { useHistory } from 'react-router-dom'
 
 export const StoreInformation = () => {
     const [formState, setFormState] = useState({
-        storeName: "",
-        cnpj: "",
-        phoneNumber: ""
+        storeName: '',
+        cnpj: '',
+        phoneNumber: '',
+        location: ''
     })
 
-    const { storeName, cnpj, phoneNumber } = formState
+    const { storeName, cnpj, phoneNumber, location } = formState
 
     const API = useAPI()
+    const history = useHistory()
 
     const setFormField = (field, value) => setFormState({ ...formState, [field]: value })
     const setFormFieldWithEvent = field => event => setFormField(field, event.target.value)
 
-    const onSignButtonClicked = async () => await API.createRestaurant({ storeName, cnpj, phoneNumber })
+    const onSignButtonClicked = async () => {
+        try {
+            await API.createRestaurant({ storeName, cnpj, phoneNumber, location })
+            history.push('/restaurants')
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <>
@@ -46,6 +56,12 @@ export const StoreInformation = () => {
                         Telefone da loja
                         <InputBox>
                             <Input placeholder="Digite o telefone da loja aqui" value={phoneNumber} onChange={setFormFieldWithEvent('phoneNumber')} />
+                        </InputBox>
+                    </InputHeader>
+                    <InputHeader>
+                        Localização
+                        <InputBox>
+                            <Input placeholder="Localização do restaurante" value={location} onChange={setFormFieldWithEvent('location')} />
                         </InputBox>
                     </InputHeader>
                     <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>

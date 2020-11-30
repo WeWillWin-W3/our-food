@@ -28,7 +28,12 @@ export const SignUp = () => {
 
     const onSignButtonClicked = async () => {
         await API.createUser({ name, email, password, phone: phoneNumber, location })
-        history.push(`/signup/storeInformation`)
+        history.push('/')
+    }
+
+    const onRegisterRestaurantButtonClicked = async () => {
+        await API.createUser({ name, email, password, phone: phoneNumber, location, role: 1 })
+        history.push('/signup/storeInformation')
     }
 
     useEffect(() => {
@@ -36,12 +41,6 @@ export const SignUp = () => {
             alert(`Deu ruim man: ${API.error}`)
         }
     }, [API.error])
-
-    useEffect(() => {
-        if (API.user) {
-            history.push('/restaurants')
-        }
-    }, [API.user, history])
 
     return (
         <>
@@ -99,8 +98,16 @@ export const SignUp = () => {
                     <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>
                         {API.loading ? <AiOutlineLoading3Quarters /> : "Entrar"}
                     </Button>
+                    <Button full outline style={{ marginTop: 46 }} onClick={onRegisterRestaurantButtonClicked}>
+                        {API.loading ? <AiOutlineLoading3Quarters /> : "Registrar restaurante"}
+                    </Button>
                     <OtherOptionsBox>
-                        <OtherOption align="start">Já possui conta?</OtherOption>
+                        <OtherOption
+                            align="start"
+                            onClick={() => history.push('/signin')}
+                        >
+                            Já possui conta?
+                        </OtherOption>
                     </OtherOptionsBox>
                 </Card>
             </Main>

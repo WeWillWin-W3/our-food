@@ -139,21 +139,19 @@ export const getUserById = async (userId, token) => {
     return data
 }
 
-export const createRestaurant = async ({ storeName, cnpj, phoneNumber, userId }) => {
-    const data = await getJsonFromFetch(fetch(`${API_URL}/restaurants`, {
-        method: "POST",
+export const createRestaurant = async ({ storeName: name, cnpj, phoneNumber: phone, location, userId, token }) => {
+    const { data } = await axiosInstance.post(`/restaurants`, {
+        name,
+        cnpj,
+        phone,
+        userId,
+        location
+    }, {
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer a9e6c675-4d76-483f-b1bb-9e3d4288fa3e`
-        },
-        body: JSON.stringify({
-            "name": storeName,
-            "cnpj": cnpj,
-            "phone": phoneNumber,
-            "userId": userId
-        })
-    }))
-    console.log(data)
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
     return data
 }
 

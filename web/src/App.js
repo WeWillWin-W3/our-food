@@ -14,7 +14,7 @@ import { RestaurantDashboard } from './pages/RestaurantDashboard'
 import { RestaurantFoods } from './pages/RestaurantFoods'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
-import { Location } from './pages/Location'
+// import { Location } from './pages/Location'
 import { StoreInformation } from './pages/StoreInformation'
 import { OrderFood } from './pages/OrderFood'
 
@@ -58,18 +58,9 @@ export const App = () => (
 
                   <PrivateRoute
                     exact
-                    path="/signup/location"
-                    redirectTo="/restaurants"
-                    redirectIf={!!api.user}
-                  >
-                    <Location />
-                  </PrivateRoute>
-
-                  <PrivateRoute
-                    exact
                     path="/signup/storeinformation"
                     redirectTo="/restaurants"
-                    redirectIf={!!api.user}
+                    redirectIf={!!api.user || api.user?.role !== 1}
                   >
                     <StoreInformation />
                   </PrivateRoute>

@@ -19,11 +19,11 @@ export const Restaurants = () => {
         (async () => {
             try {
                 setRestaurants(await api.getRestaurants())
-            }catch(error){
+            } catch (error) {
                 console.log(error)
             }
         })()
-    }, [])
+    }, [api])
 
     const onRestaurantCardClicked = (id) => {
         history.push(`/restaurants/${id}/foods`)
@@ -44,12 +44,12 @@ export const Restaurants = () => {
             <Container>
                 {
                     restaurants.map(restaurant =>
-                        <RestaurantCard 
+                        <RestaurantCard
                             key={restaurant.id} name={restaurant.name}
                             id={restaurant.id}
                             category={restaurant.category}
                             description={restaurant.description}
-                            onRestaurantCardClicked={onRestaurantCardClicked}/>
+                            onRestaurantCardClicked={onRestaurantCardClicked} />
                     )
                 }
             </Container>

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { InputHeader, Main, Input, InputBox } from './styled'
-
+import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 
-import { useAPI } from '../../providers/APIProvider';
-
-import { Button } from '../../components/Button'
+import { useAPI } from '../../providers/APIProvider'
 
 export const StoreInformation = () => {
-
     const [formState, setFormState] = useState({
         storeName: "",
         cnpj: "",

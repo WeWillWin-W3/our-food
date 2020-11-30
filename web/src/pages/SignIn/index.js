@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-
-import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
-
-import { Card } from '../../components/Card'
-
-import { Button } from '../../components/Button'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
+import { Card } from '../../components/Card'
+import { Button } from '../../components/Button'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 import { useAPI } from '../../providers/APIProvider'
@@ -25,7 +22,15 @@ export const SignIn = () => {
 
     const { email, password } = formState
 
-    const onSigninButtonClicked = async () => await API.signIn({ email, password })
+    const onSigninButtonClicked = () => {
+        API.signIn({ email, password })
+    }
+
+    useEffect(() => {
+        if (API.error) {
+            alert(API.error)
+        }
+    }, [API.error])
 
     return (
         <>

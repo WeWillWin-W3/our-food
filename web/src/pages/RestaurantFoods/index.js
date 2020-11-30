@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { NavbarComponent as Navbar } from './components/Navbar'
 import { FoodCard } from './components/FoodCard'
 
-import { Container, Title, SubTitle } from './styled'
+import { Container, Title } from './styled'
 
 import { useAPI } from '../../providers/APIProvider'
 
@@ -28,13 +28,13 @@ export const RestaurantFoods = () => {
                         [food.category]: true,
                     }),
                     {}
-                );
+                )
                 setCategories(Object.keys(categoriesMap))
             } catch (err) {
                 console.log(err)
             }
         })()
-    }, [])
+    }, [api, restaurantId])
 
     const onFoodCardClicked = () => history.push('/order')
 
@@ -42,28 +42,28 @@ export const RestaurantFoods = () => {
         <>
             <Navbar />
             <Title fontSize={50}>{restaurantSelected?.name}</Title>
-                {
-                    categories.map(category => (
-                        <>
-                            <Title>{category}</Title>
-                            <Container>
-                                {
-                                    foods.filter((food) => food.category === category).map(
-                                        food =>
-                                            <FoodCard
-                                                key={food.id}
-                                                name={food.name}
-                                                category={food.category}
-                                                price={food.price}
-                                                description={food.description}
-                                                onFoodCardClicked={onFoodCardClicked} />
-                                    )
+            {
+                categories.map(category => (
+                    <>
+                        <Title>{category}</Title>
+                        <Container>
+                            {
+                                foods.filter((food) => food.category === category).map(
+                                    food =>
+                                        <FoodCard
+                                            key={food.id}
+                                            name={food.name}
+                                            category={food.category}
+                                            price={food.price}
+                                            description={food.description}
+                                            onFoodCardClicked={onFoodCardClicked} />
+                                )
 
-                                }
-                            </Container>
-                        </>
-                    ))
-                }
+                            }
+                        </Container>
+                    </>
+                ))
+            }
         </>
     )
 }

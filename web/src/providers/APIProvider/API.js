@@ -1,8 +1,8 @@
-import axios from "axios"
+import axios from 'axios'
 
-let base64 = require('base-64');
+// const base64 = (data) => Buffer.from(data).toString('base64')
 
-const API_URL = "http://localhost:3000/v1"
+const API_URL = 'http://localhost:3000/v1'
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
@@ -109,39 +109,33 @@ export const deleteFood = async (foodId, restaurantId, authToken) =>
         }
     }))
 
-export const createUser = async ({ name, email, password, phone, location, role = 1 }) =>
-    {
-        let {data} = await axiosInstance.post("/users", { name, email, password, phone, location, role })
-        return data
-    }
-
-export const signIn = async ({ email, password }) =>{
-    let data = await getJsonFromFetch(fetch(`${API_URL}/users/authenticate`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Basic ${base64.encode(email + ":" + password)}`
-        },
-        body: JSON.stringify({
-            "email": email,
-            "password": password
-        })
-    }))
-    console.log(data)
+export const createUser = async ({ name, email, password, phone, location, role = 1 }) => {
+    const { data } = await axiosInstance.post("/users", { name, email, password, phone, location, role })
     return data
 }
 
-export const getUserById = async (userId, token) =>
-    getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
-        method: "GET",
+export const signIn = async ({ email: username, password }) => {
+    const { data } = await axiosInstance.post('/users/authenticate', {}, {
+        auth: {
+            username, password
+        }
+    })
+
+    return data
+}
+
+export const getUserById = async (userId, token) => {
+    const { data } = await axiosInstance.get(`/users/${userId}`, {
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         }
-    }))
+    })
 
-export const createRestaurant = async ({ storeName, cnpj, phoneNumber, userId }) =>{
-    let data = await getJsonFromFetch(fetch(`${API_URL}/restaurants`, {
+    return data
+}
+
+export const createRestaurant = async ({ storeName, cnpj, phoneNumber, userId }) => {
+    const data = await getJsonFromFetch(fetch(`${API_URL}/restaurants`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

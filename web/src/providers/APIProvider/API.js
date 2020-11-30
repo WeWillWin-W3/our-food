@@ -131,9 +131,13 @@ export const signIn = async ({ email, password }) =>{
     return data
 }
 
-export const getUserById = async (userId) =>
+export const getUserById = async (userId, token) =>
     getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
         method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
     }))
 
 export const createRestaurant = async ({ storeName, cnpj, phoneNumber, userId }) =>{

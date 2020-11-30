@@ -51,6 +51,19 @@ const APIProvider = props => {
         return API.getFoodByRestaurant(restaurantId)
     }
 
+    const signIn = async ({email, password}) => {
+        try {
+            updateState({ loading: true })
+            const {token, user_id} = await API.signIn({email, password})
+            const user = await API.getUserById(user_id, token)
+            updateState({ authToken: token, user: user, loading: false })
+            // TODO: verificar bug de não atualizar estado.
+        } catch (err) {
+            console.log(err)
+            updateState({ error: err.response.data, loading: false })
+        }
+    }
+
     return (
         <APIProviderContext.Provider value={{
             state,
@@ -60,7 +73,8 @@ const APIProvider = props => {
             getFoodsByRestaurant,
             getRestaurantById,
             getFoodsCategories,
-            createRestaurant
+            createRestaurant,
+            signIn
         }} {...props} />
     )
 }

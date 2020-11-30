@@ -17,8 +17,7 @@ export const DashboardFindFood = () => {
         (async () => {
             if (!found) {
                 try {
-                    // TODO: pegar restaurantId do state
-                    const restaurantId = 1
+                    const restaurantId = API.restaurant.id
                     setFoods(await API.getFoodsByRestaurant(restaurantId))
                     setFound(true)
                 } catch (err) {

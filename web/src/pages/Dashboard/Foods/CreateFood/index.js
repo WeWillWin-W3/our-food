@@ -22,16 +22,15 @@ export const DashboardCreateFood = () => {
 
     const { name, description, category, price } = formState
 
-    console.log(API)
-
     const onFormSubmited = async (event) => {
         try {
             event.preventDefault()
-            // TODO: pegar id do restaurante do state
-            const {authToken} = API
-            const restaurantId = 1
-            const food = {name, description, category, price: Number(price)}            
+
+            const restaurantId = API.restaurant.id
+            const authToken = API.authToken
+            const food = { name, description, category, price: Number(price) }            
             await API.createFood(food, restaurantId, authToken)
+
             goToFindFoodPage()
         } catch (error) {
             alert('Ops, não foi possível realizar a operação.')

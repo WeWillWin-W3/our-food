@@ -42,7 +42,7 @@ export const App = () => (
                     exact
                     path="/dashboard"
                     redirectTo="/signin"
-                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <DashboardOrders />
                   </PrivateRoute>
@@ -51,7 +51,7 @@ export const App = () => (
                     exact
                     path="/dashboard/foods"
                     redirectTo="/signin"
-                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <DashboardFindFood />
                   </PrivateRoute>

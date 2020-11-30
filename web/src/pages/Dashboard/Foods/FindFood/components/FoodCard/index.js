@@ -1,10 +1,16 @@
 import React from 'react'
 
-import { Card, CardAvatar, CardPrincipal, CardTitle, CardSubTitle, CardDescription } from './styled'
+import { Card, CardAvatar, DeleteButton, CardPrincipal, CardTitle, CardSubTitle, CardDescription } from './styled'
 
-export function FoodCard({name, category, price}) {
+export function FoodCard({id, name, category, price, onDeleteButtonClicked}) {
+
+    const handleDeleteButtonClick = () => {
+        onDeleteButtonClicked({id, name})
+    }
+
     return (
         <Card>
+            <DeleteButton onDeleteButtonClicked={handleDeleteButtonClick} />
             <CardAvatar src="https://via.placeholder.com/80" alt="Main logo" />
             <CardPrincipal>
                 <CardTitle>{name}</CardTitle>

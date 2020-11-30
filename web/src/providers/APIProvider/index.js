@@ -103,6 +103,9 @@ const APIProvider = props => {
     const createFood = async (food, restaurantId, authToken) =>
         API.createFood(food, restaurantId, authToken)
 
+    const deleteFood = async (foodId, restaurantId, authToken) =>
+        API.deleteFood(foodId, restaurantId, authToken)
+
     return (
         <APIProviderContext.Provider value={{
             ...state,
@@ -113,6 +116,7 @@ const APIProvider = props => {
             getRestaurantById,
             getFoodsCategories,
             createFood,
+            deleteFood,
             getFoodsCategoriesByRestaurant,
             createRestaurant,
             signIn

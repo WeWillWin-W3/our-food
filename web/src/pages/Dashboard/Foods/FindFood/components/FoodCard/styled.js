@@ -1,6 +1,10 @@
+import React from 'react'
 import styled from 'styled-components'
 
+import { MdDelete } from 'react-icons/md'
+
 export const Card = styled.div`
+    position: relative;
     display: flex;
     width: 300px;
     max-width: 350px;
@@ -17,6 +21,30 @@ export const Card = styled.div`
         cursor: pointer;
         border: 2px solid rgba(0, 0, 0, 0.35);
     }
+`
+
+export const DeleteButton = ({onDeleteButtonClicked}) => (
+    <StyledDeleteButton onClick={onDeleteButtonClicked}>
+        <MdDelete/>
+    </StyledDeleteButton>
+)
+
+const StyledDeleteButton = styled.div`
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    svg {
+        font-size: 20px;
+        color: #333;
+
+        transition: all .3s;
+    }
+
+    svg:hover {
+        color: red;
+    }
+
 `
 
 export const CardAvatar = styled.img`

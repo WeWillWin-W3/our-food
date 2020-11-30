@@ -75,7 +75,7 @@ export const getFoodById = async (foodId) =>
  * @param {string} authToken 
  */
 export const createFood = async (food, restaurantId, authToken) => {
-    const {data} = axiosInstance.post(`/restaurants/${restaurantId}/foods`,
+    const {data} = await axiosInstance.post(`/restaurants/${restaurantId}/foods`,
                                         food, {headers: {"Authorization": `Bearer ${authToken}`}})
     return data
 }
@@ -101,14 +101,12 @@ export const updateFood = async (foodData, restaurantId, authToken) =>
  * @param {number} foodId 
  * @param {string} authToken 
  */
-export const deleteFood = async (foodId, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodId}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        }
-    }))
+export const deleteFood = async (foodId, restaurantId, authToken) => {
+    await axiosInstance.delete(`/restaurants/${restaurantId}/foods/${foodId}`,
+            {headers: {"Authorization": `Bearer ${authToken}`}})
+}
+
+       
 
 export const createUser = async ({ name, email, password, phone, location, role = 1 }) => {
     const { data } = await axiosInstance.post("/users", { name, email, password, phone, location, role })

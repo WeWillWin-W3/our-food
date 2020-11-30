@@ -15,20 +15,21 @@ export const SignUp = () => {
 
     const [formState, setFormState] = useState({
         hidePassword: true,
-        email: "jorge@email",
+        email: "",
         name: "",
         password: "",
         location: "",
-        phoneNumber: "67993211518"
+        phoneNumber: ""
     })
     const setFormField = (field, value) => setFormState({ ...formState, [field]: value })
     const setFormFieldWithEvent = field => event => setFormField(field, event.target.value)
 
     const { hidePassword, email, phoneNumber, password, name, location } = formState
 
-    const onSignButtonClicked = () =>
-        API.createUser({ name, email, password, phone: phoneNumber, location })
-
+    const onSignButtonClicked = async () => {
+        await API.createUser({ name, email, password, phone: phoneNumber, location })
+        history.push(`/signup/storeInformation`)
+    }
 
     useEffect(() => {
         if (API.error) {

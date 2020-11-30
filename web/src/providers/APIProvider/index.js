@@ -22,10 +22,10 @@ const APIProvider = props => {
             try {
                 updateState({ loading: true })
                 const user = await API.createUser(userData)
-                updateState({ user: user, loading: false })
-
-                // TODO: Autenticar o usuário e obter o authToken
+                const { token } = await API.signIn({ email: userData.email, password: userData.password })
+                updateState({ authToken: token, user: user, loading: false })
             } catch (err) {
+                console.log(err)
                 updateState({ error: err.response.data, loading: false })
             }
 
@@ -33,16 +33,23 @@ const APIProvider = props => {
         }
     }
 
-    const getRestaurants = () => API.getRestaurants()
+    const createRestaurant = async ({ storeName, cnpj, phoneNumber }) => 
+    {
+        console.log(state)
+        API.createRestaurant({ storeName, cnpj, phoneNumber, userId: state.user.id })
+    }
 
-    const getRestaurantById = (restaurantId) =>
+    const getRestaurants = async () => API.getRestaurants()
+
+    const getRestaurantById = async (restaurantId) =>
         API.getRestaurantById(restaurantId)
 
     const getFoodsCategories = async (restaurantId) =>
         API.getFoodsCategoriesByRestaurant(restaurantId)
 
-    const getFoodsByRestaurant = async (restaurantId) =>
-        API.getFoodByRestaurant(restaurantId)
+    const getFoodsByRestaurant = async (restaurantId) => {
+        return API.getFoodByRestaurant(restaurantId)
+    }
 
     return (
         <APIProviderContext.Provider value={{
@@ -52,13 +59,12 @@ const APIProvider = props => {
             getRestaurants,
             getFoodsByRestaurant,
             getRestaurantById,
-            getFoodsCategories
+            getFoodsCategories,
+            createRestaurant
         }} {...props} />
     )
 }
-
 APIProvider.Consumer = APIProviderContext.Consumer
 
 export default APIProvider
-
 export const useAPI = () => useContext(APIProviderContext)

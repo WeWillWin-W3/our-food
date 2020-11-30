@@ -1,5 +1,7 @@
 import axios from "axios"
 
+let base64 = require('base-64');
+
 const API_URL = "http://localhost:3000/v1"
 
 const axiosInstance = axios.create({
@@ -27,7 +29,7 @@ export const getAllFoods = async () =>
  * @param {number} restaurantId 
  */
 export const getFoodByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
     return data
 }
 
@@ -37,7 +39,7 @@ export const getFoodByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/foods/${restaurantId}`)
+    const { data } = await axiosInstance.get(`/foods/${restaurantId}`)
     return data
 }
 
@@ -48,7 +50,7 @@ export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodByRestaurantAndCategory = async (restaurantId, category) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
     return data
 }
 
@@ -107,13 +109,50 @@ export const deleteFood = async (foodId, restaurantId, authToken) =>
         }
     }))
 
-export const createUser = async ({ name, email, password, phone, location, role = 0 }) =>
-    axiosInstance.post("/users", { name, email, password, phone, location, role })
+export const createUser = async ({ name, email, password, phone, location, role = 1 }) =>
+    {
+        let {data} = await axiosInstance.post("/users", { name, email, password, phone, location, role })
+        return data
+    }
+
+export const signIn = async ({ email, password }) =>{
+    let data = await getJsonFromFetch(fetch(`${API_URL}/users/authenticate`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Basic ${base64.encode(email + ":" + password)}`
+        },
+        body: JSON.stringify({
+            "email": email,
+            "password": password
+        })
+    }))
+    console.log(data)
+    return data
+}
 
 export const getUserById = async (userId) =>
     getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
         method: "GET",
     }))
+
+export const createRestaurant = async ({ storeName, cnpj, phoneNumber, userId }) =>{
+    let data = await getJsonFromFetch(fetch(`${API_URL}/restaurants`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer a9e6c675-4d76-483f-b1bb-9e3d4288fa3e`
+        },
+        body: JSON.stringify({
+            "name": storeName,
+            "cnpj": cnpj,
+            "phone": phoneNumber,
+            "userId": userId
+        })
+    }))
+    console.log(data)
+    return data
+}
 
 export const getRestaurantById = async (restaurantId) =>
     getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}`, {
@@ -133,7 +172,7 @@ export const orderFood = async (userId, locationId, restaurantId) =>
         })
     }))
 
-    export const getRestaurants = async () => {
-        const {data} = await axiosInstance.get("/restaurants")
-        return data
-    }
+export const getRestaurants = async () => {
+    const { data } = await axiosInstance.get("/restaurants")
+    return data
+}

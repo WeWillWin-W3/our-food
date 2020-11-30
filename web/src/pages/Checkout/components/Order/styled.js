@@ -40,7 +40,7 @@ export const TextPrice = styled.p`
 
 export const FoodOptions = styled.div`
     display: flex;
-    margin: 8px 0 300px;
+    margin: 8px 0 45px;
     font-size: 14px;
     font-weight: bolder;
 `

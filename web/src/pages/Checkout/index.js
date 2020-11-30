@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Location } from './components/Location'
 import { Payment } from './components/Payment'
@@ -22,6 +22,16 @@ export const Checkout = () => {
         .reduce((preco, food) => preco + food.price * food.quantity, 0)
         .toFixed(2)
 
+    const api = useAPI()
+    const restaurantId = bag[bag.length - 1].restaurant_id
+    const [restaurantSelected, setRestaurantSelected] = useState({})
+
+    useEffect(() => {
+        api.getRestaurantById(restaurantId)
+            .then(setRestaurantSelected)
+            .catch(error => console.log(error))
+    }, [api, restaurantId])
+    
     return (
         <>
             <Navbar>
@@ -39,7 +49,7 @@ export const Checkout = () => {
                 <Div>
                     <Box>
                         <Text>Seu pedido em</Text>
-                        <TextTitle>Nome do restaurante</TextTitle>
+                        <TextTitle>{restaurantSelected?.name}</TextTitle>
                         <hr />
                         {bag.map((food, index) => (
                             <div key={index}>

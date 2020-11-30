@@ -23,6 +23,9 @@ import { DashboardCreateFood } from './pages/Dashboard/Foods/CreateFood'
 
 import APIProvider from './providers/APIProvider'
 
+const RESTAURANT_CLIENT_ROLE = 0
+const RESTAURANT_OWNER_ROLE = 1
+
 export const App = () => (
   <>
     <Router>
@@ -39,28 +42,28 @@ export const App = () => (
                     exact
                     path="/dashboard"
                     redirectTo="/signin"
-                    redirectIf={!api.user}
+                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <DashboardOrders />
                   </PrivateRoute>
 
-                  <Route
+                  <PrivateRoute
                     exact
                     path="/dashboard/foods"
                     redirectTo="/signin"
-                    redirectIf={!api.user}
+                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <DashboardFindFood />
-                  </Route>
+                  </PrivateRoute>
                   
-                  <Route 
+                  <PrivateRoute 
                     exact
                     path="/dashboard/foods/create"
                     redirectTo="/signin"
-                    redirectIf={!api.user}
+                    redirectIf={!api.user || api.user.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <DashboardCreateFood />
-                  </Route>
+                  </PrivateRoute>
                   
                   <PrivateRoute
                     exact

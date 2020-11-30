@@ -61,8 +61,11 @@ const APIProvider = props => {
     const getRestaurantById = async (restaurantId) =>
         API.getRestaurantById(restaurantId)
 
-    const getFoodsCategories = async (restaurantId) =>
+    const getFoodsCategoriesByRestaurant = async (restaurantId) =>
         API.getFoodsCategoriesByRestaurant(restaurantId)
+
+    const getFoodsCategories = async () =>
+        API.getFoodsCategories()
 
     const getFoodsByRestaurant = async (restaurantId) => {
         return API.getFoodByRestaurant(restaurantId)
@@ -89,6 +92,7 @@ const APIProvider = props => {
             getFoodsByRestaurant,
             getRestaurantById,
             getFoodsCategories,
+            getFoodsCategoriesByRestaurant,
             createRestaurant,
             signIn
         }} {...props} />

@@ -43,6 +43,11 @@ export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
     return data
 }
 
+export const getFoodsCategories = async () => {
+    const { data } = await axiosInstance.get('/foods/categories')
+    return data
+}
+
 /**
  * 
  * @param {number} restaurantId 

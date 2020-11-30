@@ -30,13 +30,13 @@ func GetFoods(c *fiber.Ctx) error {
 }
 
 func GetFoodCategories(c *fiber.Ctx) error {
-    categories, err := model.GetFoodCategories()
+	categories, err := model.GetFoodCategories()
 
-    if err != nil {
-        return fiber.NewError(fiber.StatusInternalServerError, err.Error())
-    }
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+	}
 
-    return c.JSON(categories)
+	return c.JSON(categories)
 }
 
 // GetFoodsByRestaurant lista todas as comidas registradas em um restaurante.

@@ -14,17 +14,15 @@ import { useAPI } from '../../providers/APIProvider'
 export const NavbarComponent = () => {
     const [foodSearchText, setFoodSearchText] = useState('')
     const [foodSearchResults, setFoodSearchResults] = useState([])
-    const { getFoodsByName, getRestaurantById } = useAPI()
+    const { getFoodsByName, getRestaurantById, user } = useAPI()
     const history = useHistory()
 
-    // TODO: Pegar do api.user.location
-    const destination = 'Av. São Carlos, 864'
+    const destination = user?.location
 
-    const onInputChange = (e) => {
-        setFoodSearchText(e.target.value)
-    }
+    const onInputChange = (e) => setFoodSearchText(e.target.value)
 
     useEffect(() => {
+        // TODO: Usar estratégia de throttle/debounce
         getFoodsByName(foodSearchText)
             .then(foods => setFoodSearchResults(foods.slice(0, 4)))
     }, [foodSearchText, getFoodsByName])
@@ -59,7 +57,7 @@ export const NavbarComponent = () => {
                         </div>
                     ))}
                 />
-                <NavbarDestination destination={destination} />
+                {destination && <NavbarDestination destination={destination} />}
                 <Nav>
                     <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
                     <Link to="/checkout"><NavItem>Sacola</NavItem></Link>

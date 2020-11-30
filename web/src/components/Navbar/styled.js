@@ -26,7 +26,6 @@ export const NavbarSearch = ({ placeholder, value, onChange, results }) => (
     <NavbarSearchBox>
         <AiOutlineSearch style={{ marginRight: '10px', fill: 'rgba(0, 0, 0, 0.65)' }} />
         <NavbarSearchInput type="text" placeholder={placeholder} value={value} onChange={onChange} />
-        <SearchResults>{results.toString()}</SearchResults>
     </NavbarSearchBox>
 )
 
@@ -48,25 +47,6 @@ const NavbarSearchBox = styled.div`
     &:focus-within {
         border: 2px solid rgba(0, 0, 0, 0.5);
     }
-`
-
-export const SearchResults = styled.div`
-    display: ${props => !!props.show ? 'block' : 'none'};
-    position: absolute;
-    background-color: #f5f5f5;
-    padding: 12.5px 20px;
-    border-radius: 0 0 9px 9px;
-    margin-right: 20px;
-    left: 0;
-    right: 0;
-
-    div {
-        display: flex;
-        align-items: center;
-        margin: 10px 10px 10px 0;
-        color: #707070;
-    }
-
 `
 
 const NavbarSearchInput = styled.input`

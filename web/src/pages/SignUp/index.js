@@ -15,31 +15,32 @@ export const SignUp = () => {
 
     const [formState, setFormState] = useState({
         hidePassword: true,
-        email: "jorge@email",
+        email: "",
         name: "",
         password: "",
         location: "",
-        phoneNumber: "67993211518"
+        phoneNumber: ""
     })
     const setFormField = (field, value) => setFormState({ ...formState, [field]: value })
     const setFormFieldWithEvent = field => event => setFormField(field, event.target.value)
 
     const { hidePassword, email, phoneNumber, password, name, location } = formState
 
-    const onSignButtonClicked = () =>
-        API.createUser({ name, email, password, phone: phoneNumber, location })
+    const onSignButtonClicked = async () => {
+        await API.createUser({ name, email, password, phone: phoneNumber, location })
+        history.push('/')
+    }
+
+    const onRegisterRestaurantButtonClicked = async () => {
+        await API.createUser({ name, email, password, phone: phoneNumber, location, role: 1 })
+        history.push('/signup/storeInformation')
+    }
 
     useEffect(() => {
         if (API.error) {
             alert(`Deu ruim man: ${API.error}`)
         }
     }, [API.error])
-
-    useEffect(() => {
-        if (API.user) {
-            history.push('/restaurants')
-        }
-    }, [API.user, history])
 
     return (
         <>
@@ -97,8 +98,16 @@ export const SignUp = () => {
                     <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>
                         {API.loading ? <AiOutlineLoading3Quarters /> : "Entrar"}
                     </Button>
+                    <Button full outline style={{ marginTop: 46 }} onClick={onRegisterRestaurantButtonClicked}>
+                        {API.loading ? <AiOutlineLoading3Quarters /> : "Registrar restaurante"}
+                    </Button>
                     <OtherOptionsBox>
-                        <OtherOption align="start">Já possui conta?</OtherOption>
+                        <OtherOption
+                            align="start"
+                            onClick={() => history.push('/signin')}
+                        >
+                            Já possui conta?
+                        </OtherOption>
                     </OtherOptionsBox>
                 </Card>
             </Main>

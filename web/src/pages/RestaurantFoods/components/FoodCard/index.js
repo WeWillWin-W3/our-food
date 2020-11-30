@@ -9,7 +9,7 @@ export function FoodCard({name, category, price, onFoodCardClicked, description}
             <CardPrincipal>
                 <CardTitle>{name}</CardTitle>
                 <CardSubTitle>{category}</CardSubTitle>
-                <CardDescription>{description}</CardDescription>
+                <CardDescription>Entrega: {price} R$</CardDescription>
             </CardPrincipal>
         </Card>
     )

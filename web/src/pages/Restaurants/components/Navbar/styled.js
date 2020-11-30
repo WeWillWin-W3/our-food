@@ -84,7 +84,7 @@ export const Nav = styled.nav`
     align-items: center;
 `
 
-export const NavItem = styled.a`
+export const NavItem = styled.div`
     text-decoration: none;
     padding: 10px 30px;
 

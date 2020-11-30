@@ -2,11 +2,11 @@ import React from 'react'
 
 import { FoodFigure, FoodFigureImage, FoodFigureName } from './styled'
 
-export function FoodFigureComponent({ name, src }) {
+export function FoodFigureComponent({ name, src = "https://via.placeholder.com/100", ...rest }) {
     return (
-        <FoodFigure>
-            <FoodFigureImage alt="Brasileira" src="https://via.placeholder.com/100" />
-            <FoodFigureName>Brasileira</FoodFigureName>
+        <FoodFigure {...rest}>
+            <FoodFigureImage alt={name} src={src} />
+            <FoodFigureName>{name}</FoodFigureName>
         </FoodFigure>
     )
 }

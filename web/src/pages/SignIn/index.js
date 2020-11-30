@@ -22,9 +22,8 @@ export const SignIn = () => {
 
     const { email, password } = formState
 
-    const onSigninButtonClicked = () => {
+    const onSigninButtonClicked = () =>
         API.signIn({ email, password })
-    }
 
     useEffect(() => {
         if (API.error) {

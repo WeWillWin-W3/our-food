@@ -10,7 +10,7 @@ const APIReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 authToken: payload.authToken,
-                user: payload.authToken,
+                user: payload.user,
                 loading: false
             }
         case 'user-logout':
@@ -76,12 +76,9 @@ const APIProvider = props => {
             const user = await API.getUserById(userId, authToken)
             dispatch({ type: 'user-logged-in', payload: { user, authToken } })
         } catch (error) {
-            console.log(error)
             dispatch({ type: 'error', payload: { error: error.response.data } })
         }
     }
-
-    console.log(state)
 
     return (
         <APIProviderContext.Provider value={{

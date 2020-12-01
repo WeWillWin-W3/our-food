@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { NavbarComponent as Navbar } from './components/Navbar'
+import { NavbarComponent as Navbar } from '../../components/Navbar'
 import { FoodCard } from './components/FoodCard'
 
 import { Container, Title } from './styled'
@@ -34,34 +34,38 @@ export const RestaurantFoods = () => {
                 console.log(err)
             }
         })()
-    }, [api, restaurantId])
+    }, [api, restaurantId, history])
 
-    const onFoodCardClicked = () => history.push('/order')
+    const onFoodCardClicked = (food) => () => history.push({
+        pathname: '/order',
+        state: { food, restaurant: restaurantSelected }
+    })
 
     return (
         <>
             <Navbar />
             <Title fontSize={50}>{restaurantSelected?.name}</Title>
             {
-                categories.map(category => (
-                    <>
+                categories.map((category, index) => (
+                    <div key={index}>
                         <Title>{category}</Title>
                         <Container>
                             {
                                 foods.filter((food) => food.category === category).map(
-                                    food =>
+                                    (food, index) => (
                                         <FoodCard
-                                            key={food.id}
+                                            key={index}
                                             name={food.name}
                                             category={food.category}
                                             price={food.price}
                                             description={food.description}
-                                            onFoodCardClicked={onFoodCardClicked} />
+                                            onFoodCardClicked={onFoodCardClicked(food)} />
+                                    )
                                 )
 
                             }
                         </Container>
-                    </>
+                    </div>
                 ))
             }
         </>

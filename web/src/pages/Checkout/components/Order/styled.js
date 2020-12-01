@@ -40,14 +40,15 @@ export const TextPrice = styled.p`
 
 export const FoodOptions = styled.div`
     display: flex;
-    margin: 8px 0 300px;
+    margin: 8px 0 45px;
     font-size: 14px;
     font-weight: bolder;
 `
 
 export const Option = styled.span`
-    color: ${props => props.danger ? '#f83031' : 'rgba(0, 0, 0, 0.6)' };
+    color: ${props => props.danger ? '#f83031' : 'rgba(0, 0, 0, 0.6)'};
     margin-right: 10px;
+    cursor: pointer;
 `
 
 export const TextTitle = styled.p`

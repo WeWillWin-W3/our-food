@@ -1,18 +1,17 @@
 import React from 'react'
 import { ImgPlaceholder } from '../../../../components/ImgPlaceholder'
 
-import { 
-    Card, CardPrincipal, CardNameStreet, 
-    CardComplement, CardCity 
+import {
+    Card, CardPrincipal,
+    // CardNameStreet, CardCity,
+    CardComplement
 } from './styled'
 
-export const Location = () => (
+export const Location = ({ location = "Faça login para selecionar o endereço" }) => (
     <Card>
-        <ImgPlaceholder width={80} height={80} style={{ margin: '0px 5px 0px 0px' }}/>
+        <ImgPlaceholder width={80} height={80} style={{ margin: '0px 5px 0px 0px' }} />
         <CardPrincipal>
-            <CardNameStreet>Nome da rua, n°</CardNameStreet>
-            <CardComplement>Complemento</CardComplement>
-            <CardCity>Cidade</CardCity>
+            <CardComplement>{location}</CardComplement>
         </CardPrincipal>
     </Card>
 )

@@ -11,6 +11,7 @@ export const Main = styled.main`
     padding: 20px 0 50px 45px;
     background-color: #F0F0F0;
     display: flex;
+    height: 100%;
 `
 
 export const Div = styled.div`

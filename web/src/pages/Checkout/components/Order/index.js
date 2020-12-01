@@ -1,23 +1,28 @@
 import React from 'react'
 
-import { 
+import {
     Box, Div, DivColumn, Text, TextMain, Option,
-    TextPrice, FoodOptions, TextTitle 
+    TextPrice, FoodOptions, TextTitle
 } from './styled'
 
-export const Order = () => (
+export const Order = ({ bag = [] }) => (
     <Box>
         <Text>Seu pedido em</Text>
         <TextTitle>Nome do restaurante</TextTitle>
         <hr />
-        <DivColumn>
-            <TextMain>Nome da comida</TextMain>
-            <TextPrice>R$ 00,00</TextPrice>
-        </DivColumn>
-        <FoodOptions>
-            <Option danger>Remover</Option>
-            <Option>Editar</Option>     
-        </FoodOptions>
+        {bag.map((food, index) => (
+            <div key={index}>
+                <DivColumn>
+                    <TextMain>{food.name}</TextMain>
+                    <TextPrice>R$ {(food.price * food.quantity).toFixed(2)} ({food.quantity})</TextPrice>
+                </DivColumn>
+                <FoodOptions>
+                    <Option danger>Remover</Option>
+                    <Option>Editar</Option>
+                </FoodOptions>
+            </div>
+        ))}
+
         <hr />
         <DivColumn>
             <Div>

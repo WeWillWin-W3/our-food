@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { NavbarComponent as Navbar } from './components/Navbar'
+import { NavbarComponent as Navbar } from '../../components/Navbar'
 import { FoodFigureComponent as FoodFigure } from './components/FoodFigure'
 import { RestaurantCard } from './components/RestaurantCard'
-
 import { Container, Title, SubTitle } from './styled'
 
 import { useAPI } from '../../providers/APIProvider'
+
 
 export const Restaurants = () => {
     const history = useHistory()

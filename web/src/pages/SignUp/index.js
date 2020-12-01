@@ -38,7 +38,7 @@ export const SignUp = () => {
 
     useEffect(() => {
         if (API.error) {
-            alert(`Deu ruim man: ${API.error}`)
+            alert(`Confira seus dados: ${API.error}`)
         }
     }, [API.error])
 

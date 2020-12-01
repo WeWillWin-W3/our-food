@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { AiOutlineSearch, AiTwotonePushpin } from 'react-icons/ai';
 
-import { Button } from '../../../../components/Button'
+import { Button } from '../Button'
 
 export const Navbar = styled.header`
     height: 70px;
@@ -22,10 +22,10 @@ export const NavbarContainer = styled.div`
     justify-content: space-between;
 `
 
-export const NavbarSearch = ({ placeholder }) => (
+export const NavbarSearch = ({ placeholder, value, onChange, results }) => (
     <NavbarSearchBox>
         <AiOutlineSearch style={{ marginRight: '10px', fill: 'rgba(0, 0, 0, 0.65)' }} />
-        <NavbarSearchInput type="text" placeholder={placeholder} />
+        <NavbarSearchInput type="text" placeholder={placeholder} value={value} onChange={onChange} />
     </NavbarSearchBox>
 )
 
@@ -86,6 +86,7 @@ export const Nav = styled.nav`
 
 export const NavItem = styled.div`
     text-decoration: none;
+
     padding: 10px 30px;
 
     font-size: 18px;

@@ -1,18 +1,35 @@
-import React, { useState } from 'react'
-
-import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
-
-import { Card } from '../../components/Card'
-
-import { Button } from '../../components/Button'
+import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { InputHeader, Main, Input, InputBox, OtherOption, OtherOptionsBox } from './styled'
+import { Card } from '../../components/Card'
+import { Button } from '../../components/Button'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
+import { useAPI } from '../../providers/APIProvider'
+
 export const SignIn = () => {
+    const API = useAPI()
 
     const [hidePassword, setHidePassword] = useState(true)
+    const [formState, setFormState] = useState({
+        email: "",
+        password: ""
+    })
+    const setFormField = (field, value) => setFormState({ ...formState, [field]: value })
+    const setFormFieldWithEvent = field => event => setFormField(field, event.target.value)
+
+    const { email, password } = formState
+
+    const onSigninButtonClicked = () =>
+        API.signIn({ email, password })
+
+    useEffect(() => {
+        if (API.error) {
+            alert(API.error)
+        }
+    }, [API.error])
 
     return (
         <>
@@ -21,13 +38,21 @@ export const SignIn = () => {
                     <InputHeader style={{ marginTop: "52px" }}>
                         Email
                         <InputBox>
-                            <Input placeholder="Digite seu email aqui"/>
+                            <Input
+                                placeholder="Digite seu email aqui"
+                                value={email}
+                                onChange={setFormFieldWithEvent('email')}
+                            />
                         </InputBox>
                     </InputHeader>
                     <InputHeader>
                         Senha
                         <InputBox>
-                            <Input placeholder="Digite sua senha aqui" type={hidePassword ? "password" : "text"} />
+                            <Input
+                                placeholder="Digite sua senha aqui"
+                                type={hidePassword ? "password" : "text"}
+                                value={password}
+                                onChange={setFormFieldWithEvent('password')} />
                             {
                                 hidePassword ?
                                     <AiFillEyeInvisible onClick={() => setHidePassword(false)} />
@@ -37,7 +62,7 @@ export const SignIn = () => {
                             }
                         </InputBox>
                     </InputHeader>
-                    <Button full style={{ marginTop: 46 }}>
+                    <Button full style={{ marginTop: 46 }} onClick={onSigninButtonClicked}>
                         Entrar
                     </Button>
                     <OtherOptionsBox>

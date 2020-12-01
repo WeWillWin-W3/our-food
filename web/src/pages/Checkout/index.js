@@ -22,16 +22,22 @@ export const Checkout = () => {
         .reduce((preco, food) => preco + food.price * food.quantity, 0)
         .toFixed(2)
 
-    const api = useAPI()
-    const restaurantId = bag[bag.length - 1].restaurant_id
+    const { getRestaurantById, user } = useAPI()
+    const restaurantId = bag[bag.length - 1]?.restaurant_id
     const [restaurantSelected, setRestaurantSelected] = useState({})
 
     useEffect(() => {
-        api.getRestaurantById(restaurantId)
-            .then(setRestaurantSelected)
-            .catch(error => console.log(error))
-    }, [api, restaurantId])
-    
+        if (restaurantId) {
+            return getRestaurantById(restaurantId)
+                .then(setRestaurantSelected)
+                .catch(error => console.log(error))
+        }
+
+        console.log(restaurantId)
+
+        setRestaurantSelected({ name: "Nenhum restaurante selecionado" })
+    }, [getRestaurantById, restaurantId])
+
     return (
         <>
             <Navbar>
@@ -41,7 +47,7 @@ export const Checkout = () => {
                 <Div>
                     <Title>Finalizar seu pedido</Title>
                     <SubTitle>Endereço</SubTitle>
-                    <Location />
+                    <Location location={user?.location} />
                     <SubTitle>Pague pelo site</SubTitle>
                     <Payment />
                     <Button style={{ width: '28vw' }}>Finalizar pedido</Button>

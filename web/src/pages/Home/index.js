@@ -6,14 +6,14 @@ import { Logo } from '../../components/Logo'
 import { ImgPlaceholder } from '../../components/ImgPlaceholder'
 import { SearchBar } from '../../components/SearchBar'
 import { MdGpsFixed } from 'react-icons/md'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 import { useAPI } from '../../providers/APIProvider'
 
 export const Home = () => {
     const [inputText, setInputText] = useState('')
     const [searchResults, setSearchResults] = useState([])
-    const { getRestaurantsByName } = useAPI()
+    const { getRestaurantsByName, user } = useAPI()
 
     const getSearchResults = _.throttle(() =>
         getRestaurantsByName(inputText)
@@ -33,8 +33,14 @@ export const Home = () => {
                 <Logo />
                 <Nav>
                     <Link to="/restaurants"><NavItem>OurFood Restaurantes</NavItem></Link>
-                    <Link to="/signup"><NavItem>Cadastre-se</NavItem></Link>
-                    <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
+                    {
+                        !!user ?
+                            <div>Bem vindo, {user.name}</div> :
+                            <>
+                                <Link to="/signup"><NavItem>Cadastre-se</NavItem></Link>
+                                <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
+                            </>
+                    }
                 </Nav>
             </Navbar>
             <Main>
@@ -56,7 +62,7 @@ export const Home = () => {
                         </Link>
                     ))}
                 />
-            </Main>
+            </Main >
         </>
     )
 }

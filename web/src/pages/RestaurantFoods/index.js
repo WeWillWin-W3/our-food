@@ -13,19 +13,28 @@ export const RestaurantFoods = () => {
     const api = useAPI()
     const [foods, setFoods] = useState([])
     const [restaurantSelected, setRestaurantSelected] = useState({})
-
+    const [categories, setCategories] = useState([])
     const { id: restaurantId } = useParams()
 
     useEffect(() => {
         (async () => {
             try {
                 setRestaurantSelected(await api.getRestaurantById(restaurantId))
-                setFoods(await api.getFoodsByRestaurant(restaurantId))
+                const localFoods = await api.getFoodsByRestaurant(restaurantId)
+                setFoods(localFoods)
+                const categoriesMap = localFoods.reduce(
+                    (categoriesMap, food) => ({
+                        ...categoriesMap,
+                        [food.category]: true,
+                    }),
+                    {}
+                )
+                setCategories(Object.keys(categoriesMap))
             } catch (err) {
                 console.log(err)
             }
         })()
-    }, [api, restaurantId])
+    }, [api, restaurantId, history])
 
     const onFoodCardClicked = (food) => () => history.push({
         pathname: '/order',
@@ -35,20 +44,30 @@ export const RestaurantFoods = () => {
     return (
         <>
             <Navbar />
-            <Title>{restaurantSelected?.name}</Title>
-            <Container>
-                {
-                    foods.map(food =>
-                        <FoodCard
-                            key={food.id}
-                            name={food.name}
-                            category={food.category}
-                            price={food.price}
-                            description={food.description}
-                            onFoodCardClicked={onFoodCardClicked(food)} />
-                    )
-                }
-            </Container>
+            <Title fontSize={50}>{restaurantSelected?.name}</Title>
+            {
+                categories.map((category, index) => (
+                    <div key={index}>
+                        <Title>{category}</Title>
+                        <Container>
+                            {
+                                foods.filter((food) => food.category === category).map(
+                                    (food, index) => (
+                                        <FoodCard
+                                            key={index}
+                                            name={food.name}
+                                            category={food.category}
+                                            price={food.price}
+                                            description={food.description}
+                                            onFoodCardClicked={onFoodCardClicked(food)} />
+                                    )
+                                )
+
+                            }
+                        </Container>
+                    </div>
+                ))
+            }
         </>
     )
 }

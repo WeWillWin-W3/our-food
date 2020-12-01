@@ -85,6 +85,8 @@ export const Nav = styled.nav`
 `
 
 export const NavItem = styled.div`
+    text-decoration: none;
+
     padding: 10px 30px;
 
     font-size: 18px;

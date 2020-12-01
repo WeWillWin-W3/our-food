@@ -14,8 +14,8 @@ func SetupRoutes(app *fiber.App) {
 
 	foods := api.Group("/foods")
 	foods.Get("/", controller.GetFoods)
-	foods.Get("/:food", controller.GetFoodByID)
 	foods.Get("/categories", controller.GetFoodCategories)
+	foods.Get("/:food", controller.GetFoodByID)
 
 	restaurants := api.Group("/restaurants")
 	restaurants.Get("/", controller.GetRestaurants)
@@ -25,7 +25,7 @@ func SetupRoutes(app *fiber.App) {
 	restaurants.Post("/:restaurant/foods", middleware.RestaurantsAuthTokenByID, controller.CreateFood)
 	restaurants.Put("/:restaurant/foods/:food", middleware.RestaurantsAuthTokenByID, controller.UpdateFood)
 	restaurants.Delete("/:restaurant/foods/:food", middleware.RestaurantsAuthTokenByID, controller.DeleteFood)
-  
+
 	orders := api.Group("/orders")
 	orders.Post("/", middleware.UsersAuthToken, controller.CreateOrder)
 

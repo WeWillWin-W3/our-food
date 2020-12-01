@@ -59,7 +59,11 @@ export const NavbarComponent = () => {
                 />
                 {destination && <NavbarDestination destination={destination} />}
                 <Nav>
-                    <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
+                    {
+                        !!user ?
+                            <div>Bem vindo, {user.name}</div> :
+                            <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
+                    }
                     <Link to="/checkout"><NavItem>Sacola</NavItem></Link>
                 </Nav>
             </NavbarContainer>

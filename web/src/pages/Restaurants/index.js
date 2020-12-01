@@ -14,11 +14,13 @@ export const Restaurants = () => {
     const api = useAPI()
 
     const [restaurants, setRestaurants] = useState([])
+    const [categories, setCategories] = useState([])
 
     useEffect(() => {
         (async () => {
             try {
                 setRestaurants(await api.getRestaurants())
+                setCategories(await api.getFoodsCategories())
             } catch (error) {
                 console.log(error)
             }
@@ -33,11 +35,9 @@ export const Restaurants = () => {
         <>
             <Navbar />
             <Container>
-                <FoodFigure />
-                <FoodFigure />
-                <FoodFigure />
-                <FoodFigure />
-                <FoodFigure />
+                {categories.map((category, index) => (
+                    <FoodFigure key={index} name={category} />
+                ))}
             </Container>
             <Title>Melhores Restaurantes</Title>
             <SubTitle>Lista dos melhores restaurantes</SubTitle>

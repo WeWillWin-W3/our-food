@@ -2,7 +2,7 @@ import React from 'react'
 import {
   HashRouter as Router,
   Switch,
-  Route
+  Route, Redirect
 } from "react-router-dom";
 
 import { GlobalStyle } from './styles/GlobalStyle'
@@ -14,7 +14,7 @@ import { RestaurantDashboard } from './pages/RestaurantDashboard'
 import { RestaurantFoods } from './pages/RestaurantFoods'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
-import { Location } from './pages/Location'
+// import { Location } from './pages/Location'
 import { StoreInformation } from './pages/StoreInformation'
 import { OrderFood } from './pages/OrderFood'
 
@@ -25,21 +25,49 @@ export const App = () => (
     <Router>
       <Switch>
         <APIProvider>
-          <Route exact path="/dashboard">
-            <RestaurantDashboard />
-          </Route>
-          <Route exact path="/signin">
-            <SignIn />
-          </Route>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-          <Route exact path="/signup/location">
-            <Location />
-          </Route>
-          <Route exact path="/signup/storeinformation">
-            <StoreInformation />
-          </Route>
+          <APIProvider.Consumer>
+            {
+              api => (
+                <>
+                  <PrivateRoute
+                    exact
+                    path="/dashboard"
+                    redirectTo="/signin"
+                    redirectIf={!api.user}
+                  >
+                    <RestaurantDashboard />
+                  </PrivateRoute>
+
+                  <PrivateRoute
+                    exact
+                    path="/signin"
+                    redirectTo="/restaurants"
+                    redirectIf={!!api.user}
+                  >
+                    <SignIn />
+                  </PrivateRoute>
+
+                  <PrivateRoute
+                    exact
+                    path="/signup"
+                    redirectTo="/restaurants"
+                    redirectIf={!!api.user}
+                  >
+                    <SignUp />
+                  </PrivateRoute>
+
+                  <PrivateRoute
+                    exact
+                    path="/signup/storeinformation"
+                    redirectTo="/restaurants"
+                    redirectIf={!!api.user || api.user?.role !== 1}
+                  >
+                    <StoreInformation />
+                  </PrivateRoute>
+                </>
+              )
+            }
+          </APIProvider.Consumer>
           <Route exact path="/restaurants">
             <Restaurants />
           </Route>
@@ -62,3 +90,14 @@ export const App = () => (
   </>
 )
 
+const PrivateRoute = ({
+  children,
+  redirectTo = "/signin",
+  redirectIf = true,
+  ...rest
+}) => (
+    <Route
+      {...rest}>
+      {redirectIf ? <Redirect to={redirectTo} /> : children}
+    </Route>
+  )

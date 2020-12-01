@@ -5,28 +5,23 @@ import { useHistory } from 'react-router-dom'
 import { DashboardTemplate } from '../../components/DashboardTemplate'
 import { Container } from './styled'
 import { FoodCard } from './components/FoodCard'
-import { deleteFood } from '../../../../providers/APIProvider/API'
 
 export const DashboardFindFood = () => {
     const API = useAPI()
     const history = useHistory()
 
     const [foods, setFoods] = useState([])
-    const [found, setFound] = useState(false)
 
     useEffect(() => {
         (async () => {
-            if (!found) {
-                try {
-                    const restaurantId = API.restaurant.id
-                    setFoods(await API.getFoodsByRestaurant(restaurantId))
-                    setFound(true)
-                } catch (err) {
-                    console.log(err)
-                }
+            try {
+                const restaurantId = API.restaurant.id
+                setFoods(await API.getFoodsByRestaurant(restaurantId))
+            } catch (err) {
+                console.log(err)
             }
         })()
-    }, [foods])
+    }, [API])
 
     const goToCreateFoodPage = () => {
         history.push('/dashboard/foods/create')

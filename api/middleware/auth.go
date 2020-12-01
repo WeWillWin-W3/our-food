@@ -9,7 +9,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/basicauth"
 )
 
-
 // UsersBasicAuth autentica uma rota através do padrão Basic Authentication
 // (https://swagger.io/docs/specification/authentication/basic-authentication/)
 func UsersBasicAuth(c *fiber.Ctx) error {
@@ -110,7 +109,6 @@ func UsersAuthTokenByID(c *fiber.Ctx) error {
 
 	return c.Next()
 }
-
 
 // RestaurantsAuthTokenByID permite apenas que o usuário do restaurante
 // acesse a rota. O restaurante é definido pelo parâmetro :restaurant

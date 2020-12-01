@@ -1,6 +1,8 @@
-import axios from "axios"
+import axios from 'axios'
 
-const API_URL = "http://localhost:3000/v1"
+// const base64 = (data) => Buffer.from(data).toString('base64')
+
+const API_URL = 'http://localhost:3000/v1'
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
@@ -27,7 +29,7 @@ export const getAllFoods = async () =>
  * @param {number} restaurantId 
  */
 export const getFoodByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/foods`)
     return data
 }
 
@@ -37,7 +39,12 @@ export const getFoodByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
-    const {data} = await axiosInstance.get(`/foods/${restaurantId}`)
+    const { data } = await axiosInstance.get(`/foods/${restaurantId}`)
+    return data
+}
+
+export const getFoodsCategories = async () => {
+    const { data } = await axiosInstance.get('/foods/categories')
     return data
 }
 
@@ -48,7 +55,7 @@ export const getFoodsCategoriesByRestaurant = async (restaurantId) => {
  */
 
 export const getFoodByRestaurantAndCategory = async (restaurantId, category) => {
-    const {data} = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
+    const { data } = await axiosInstance.get(`/restaurants/${restaurantId}/${category}/foods`)
     return data
 }
 
@@ -63,19 +70,15 @@ export const getFoodById = async (foodId) =>
 
 /**
  * 
- * @param {{name: string, description: string, category: string, price: number}} foodData 
+ * @param {{name: string, description: string, category: string, price: number}} food 
  * @param {number} restaurantId 
  * @param {string} authToken 
  */
-export const createFood = async (foodData, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        },
-        body: JSON.stringify(foodData)
-    }))
+export const createFood = async (food, restaurantId, authToken) => {
+    const {data} = await axiosInstance.post(`/restaurants/${restaurantId}/foods`,
+                                        food, {headers: {"Authorization": `Bearer ${authToken}`}})
+    return data
+}
 
 /**
  * 
@@ -83,37 +86,63 @@ export const createFood = async (foodData, restaurantId, authToken) =>
  * @param {number} restaurantId 
  * @param {string} authToken 
  */
-export const updateFood = async (foodData, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodData.id}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        },
-        body: JSON.stringify(foodData)
-    }))
+export const updateFood = async (foodData, restaurantId, authToken) => {
+    await axiosInstance.put(`/restaurants/${restaurantId}/foods/${foodData.id}`,
+                            foodData, {headers: {"Authorization": `Bearer ${authToken}`}})
+}
 
 /**
  * 
  * @param {number} foodId 
  * @param {string} authToken 
  */
-export const deleteFood = async (foodId, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodId}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
+export const deleteFood = async (foodId, restaurantId, authToken) => {
+    await axiosInstance.delete(`/restaurants/${restaurantId}/foods/${foodId}`,
+            {headers: {"Authorization": `Bearer ${authToken}`}})
+}
+
+       
+
+export const createUser = async ({ name, email, password, phone, location, role = 1 }) => {
+    const { data } = await axiosInstance.post("/users", { name, email, password, phone, location, role })
+    return data
+}
+
+export const signIn = async ({ email: username, password }) => {
+    const { data } = await axiosInstance.post('/users/authenticate', {}, {
+        auth: {
+            username, password
         }
-    }))
+    })
 
-export const createUser = async ({ name, email, password, phone, location, role = 0 }) =>
-    axiosInstance.post("/users", { name, email, password, phone, location, role })
+    return data
+}
 
-export const getUserById = async (userId) =>
-    getJsonFromFetch(fetch(`${API_URL}/users/${userId}`, {
-        method: "GET",
-    }))
+export const getUserById = async (userId, token) => {
+    const { data } = await axiosInstance.get(`/users/${userId}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    return data
+}
+
+export const createRestaurant = async ({ storeName: name, cnpj, phoneNumber: phone, location, userId, token }) => {
+    const { data } = await axiosInstance.post(`/restaurants`, {
+        name,
+        cnpj,
+        phone,
+        userId,
+        location
+    }, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    return data
+}
 
 export const getRestaurantById = async (restaurantId) =>
     getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}`, {
@@ -133,7 +162,7 @@ export const orderFood = async (userId, locationId, restaurantId) =>
         })
     }))
 
-    export const getRestaurants = async () => {
-        const {data} = await axiosInstance.get("/restaurants")
-        return data
-    }
+export const getRestaurants = async () => {
+    const { data } = await axiosInstance.get("/restaurants")
+    return data
+}

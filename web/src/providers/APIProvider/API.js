@@ -86,7 +86,6 @@ export const createRestaurant = async ({
     })
         .then(({ data }) => data)
 
-
 export const getRestaurantById = (restaurantId) =>
     axiosInstance.get(`/restaurants/${restaurantId}`)
         .then(({ data }) => data)

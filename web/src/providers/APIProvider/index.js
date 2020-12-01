@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import * as API from './API'
+import { userRole } from '../../constants'
+
+const { RESTAURANT_OWNER_ROLE } = userRole
 
 const simpleSessionStorageAdapter = (reducer, dispatch) => (action) => {
     const stateDiff = reducer({ bag: [] }, action)
@@ -25,7 +28,6 @@ const getInitialStateFromSessionStorage = (initialState) =>
             }
         }, initialState)
 
-
 const APIReducer = (state, { type, payload }) => {
     switch (type) {
         case 'start-request':
@@ -36,6 +38,7 @@ const APIReducer = (state, { type, payload }) => {
                 ...state,
                 authToken: payload.authToken,
                 user: payload.user,
+                restaurant: payload.restaurant,
                 loading: false
             }
         case 'user-logout':
@@ -60,6 +63,7 @@ const APIProviderContext = createContext({})
 const APIProvider = props => {
     const [state, defaultDispatch] = useReducer(APIReducer, getInitialStateFromSessionStorage({
         user: undefined,
+        restaurant: undefined,
         authToken: undefined,
         error: undefined,
         loading: false,
@@ -104,17 +108,18 @@ const APIProvider = props => {
     const getFoodsCategories = async () =>
         API.getFoodsCategories()
 
-    const getFoodsByRestaurant = async (restaurantId) => {
-        return API.getFoodByRestaurant(restaurantId)
-    }
-
     const signIn = async ({ email, password }) => {
         dispatch({ type: 'start-request' })
 
         try {
             const { token: authToken, user_id: userId } = await API.signIn({ email, password })
             const user = await API.getUserById(userId, authToken)
-            dispatch({ type: 'user-logged-in', payload: { user, authToken } })
+
+            const restaurant = user.role === RESTAURANT_OWNER_ROLE ?
+                (await API.getRestaurants()).find((restaurant) => restaurant.user_id === user.id) :
+                undefined
+
+            dispatch({ type: 'user-logged-in', payload: { user, authToken, restaurant } })
         } catch (error) {
             console.log(error)
             dispatch({ type: 'error', payload: { error: error.response?.data || error.message } })
@@ -126,6 +131,21 @@ const APIProvider = props => {
 
     const getFoodsByName = async (name) =>
         API.getFoodsByName(name)
+
+    const getFoodsByRestaurant = async (restaurantId) =>
+        API.getFoodByRestaurant(restaurantId)
+
+    const createFood = async (food, restaurantId, authToken) =>
+        API.createFood(food, restaurantId, authToken)
+
+    const deleteFood = async (foodId, restaurantId, authToken) =>
+        API.deleteFood(foodId, restaurantId, authToken)
+
+    const getFoodById = async (foodId) =>
+        API.getFoodById(foodId)
+
+    const updateFood = async (food, restaurantId, authToken) =>
+        API.updateFood(food, restaurantId, authToken)
 
     return (
         <APIProviderContext.Provider value={{
@@ -140,6 +160,10 @@ const APIProvider = props => {
             getFoodsCategories,
             addFoodToBag,
             removeFoodFromBag,
+            createFood,
+            deleteFood,
+            getFoodById,
+            updateFood,
             getFoodsCategoriesByRestaurant,
             createRestaurant,
             signIn

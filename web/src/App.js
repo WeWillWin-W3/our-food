@@ -10,21 +10,31 @@ import { GlobalStyle } from './styles/GlobalStyle'
 import { Home } from './pages/Home'
 import { Checkout } from './pages/Checkout'
 import { Restaurants } from './pages/Restaurants'
-import { RestaurantDashboard } from './pages/RestaurantDashboard'
 import { RestaurantFoods } from './pages/RestaurantFoods'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
-// import { Location } from './pages/Location'
+import { Location } from './pages/Location'
 import { StoreInformation } from './pages/StoreInformation'
 import { OrderFood } from './pages/OrderFood'
 
+import { DashboardOrders } from './pages/Dashboard/Orders'
+import { DashboardFindFood } from './pages/Dashboard/Foods/FindFood'
+import { DashboardCreateFood } from './pages/Dashboard/Foods/CreateFood'
+import { DashboardEditFood } from './pages/Dashboard/Foods/EditFood'
+
 import APIProvider from './providers/APIProvider'
+
+import { userRole } from './constants'
+const { RESTAURANT_OWNER_ROLE } = userRole
 
 export const App = () => (
   <>
     <Router>
       <Switch>
         <APIProvider>
+          <Route exact path="/signup/location">
+            <Location />
+          </Route>
           <APIProvider.Consumer>
             {
               api => (
@@ -33,11 +43,38 @@ export const App = () => (
                     exact
                     path="/dashboard"
                     redirectTo="/signin"
-                    redirectIf={!api.user}
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
                   >
-                    <RestaurantDashboard />
+                    <DashboardOrders />
                   </PrivateRoute>
 
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/foods"
+                    redirectTo="/signin"
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
+                  >
+                    <DashboardFindFood />
+                  </PrivateRoute>
+                  
+                  <PrivateRoute 
+                    exact
+                    path="/dashboard/foods/create"
+                    redirectTo="/signin"
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
+                  >
+                    <DashboardCreateFood />
+                  </PrivateRoute>
+
+                  <PrivateRoute 
+                    exact
+                    path="/dashboard/foods/edit/:id"
+                    redirectTo="/signin"
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
+                  >
+                    <DashboardEditFood />
+                  </PrivateRoute>
+                  
                   <PrivateRoute
                     exact
                     path="/signin"

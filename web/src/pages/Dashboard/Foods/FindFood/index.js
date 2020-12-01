@@ -27,6 +27,10 @@ export const DashboardFindFood = () => {
         history.push('/dashboard/foods/create')
     }
 
+    const onEditButtonClicked = ({id}) => {
+        history.push(`/dashboard/foods/edit/${id}`)
+    }
+
     const onDeleteButtonClicked = ({id, name}) => {
         const shouldIDelete = window.confirm(`Você tem certeza que deseja excluir a comida ${name}?`)
         if (shouldIDelete) {
@@ -63,6 +67,7 @@ export const DashboardFindFood = () => {
                                     category={category}
                                     price={price}
                                     description={description}
+                                    onEditButtonClicked={onEditButtonClicked}
                                     onDeleteButtonClicked={onDeleteButtonClicked}/>
                             )
                         })

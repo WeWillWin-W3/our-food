@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { MdDelete } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md'
 
 export const Card = styled.div`
     position: relative;
@@ -42,9 +42,31 @@ const StyledDeleteButton = styled.div`
     }
 
     svg:hover {
-        color: red;
+        color: #E64A19;
+    }
+`
+
+export const EditButton = ({onEditButtonClicked}) => (
+    <StyledEditButton onClick={onEditButtonClicked}>
+        <MdEdit/>
+    </StyledEditButton>
+)
+
+const StyledEditButton = styled.div`
+    position: absolute;
+    top: 6px;
+    right: 26px;
+
+    svg {
+        font-size: 20px;
+        color: #333;
+
+        transition: all .3s;
     }
 
+    svg:hover {
+        color: #FFC107;
+    }
 `
 
 export const CardAvatar = styled.img`

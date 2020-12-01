@@ -72,10 +72,6 @@ const APIProvider = props => {
     const getFoodsCategories = async () =>
         API.getFoodsCategories()
 
-    const getFoodsByRestaurant = async (restaurantId) => {
-        return API.getFoodByRestaurant(restaurantId)
-    }
-
     const signIn = async ({ email, password }) => {
         dispatch({ type: 'start-request' })
 
@@ -100,11 +96,20 @@ const APIProvider = props => {
         }
     }
 
+    const getFoodsByRestaurant = async (restaurantId) =>
+        API.getFoodByRestaurant(restaurantId)
+
     const createFood = async (food, restaurantId, authToken) =>
         API.createFood(food, restaurantId, authToken)
 
     const deleteFood = async (foodId, restaurantId, authToken) =>
         API.deleteFood(foodId, restaurantId, authToken)
+
+    const getFoodById = async (foodId) =>
+        API.getFoodById(foodId)
+
+    const updateFood = async (food, restaurantId, authToken) =>
+        API.updateFood(food, restaurantId, authToken)
 
     return (
         <APIProviderContext.Provider value={{
@@ -117,6 +122,8 @@ const APIProvider = props => {
             getFoodsCategories,
             createFood,
             deleteFood,
+            getFoodById,
+            updateFood,
             getFoodsCategoriesByRestaurant,
             createRestaurant,
             signIn

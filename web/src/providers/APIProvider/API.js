@@ -86,15 +86,10 @@ export const createFood = async (food, restaurantId, authToken) => {
  * @param {number} restaurantId 
  * @param {string} authToken 
  */
-export const updateFood = async (foodData, restaurantId, authToken) =>
-    getJsonFromFetch(fetch(`${API_URL}/restaurants/${restaurantId}/foods/${foodData.id}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        },
-        body: JSON.stringify(foodData)
-    }))
+export const updateFood = async (foodData, restaurantId, authToken) => {
+    await axiosInstance.put(`/restaurants/${restaurantId}/foods/${foodData.id}`,
+                            foodData, {headers: {"Authorization": `Bearer ${authToken}`}})
+}
 
 /**
  * 

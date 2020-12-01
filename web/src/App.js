@@ -59,7 +59,7 @@ export const App = () => (
                   <PrivateRoute
                     exact
                     path="/signup/storeinformation"
-                    redirectTo="/restaurants"
+                    redirectTo="/storeinformation"
                     redirectIf={!!api.user || api.user?.role !== 1}
                   >
                     <StoreInformation />
@@ -70,6 +70,9 @@ export const App = () => (
           </APIProvider.Consumer>
           <Route exact path="/restaurants">
             <Restaurants />
+          </Route>
+          <Route exact path="/storeinformation">
+            <StoreInformation />
           </Route>
           <Route exact path="/restaurants/:id/foods">
             <RestaurantFoods />

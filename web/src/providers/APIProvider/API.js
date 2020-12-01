@@ -73,9 +73,9 @@ export const getUserById = (userId, token) =>
     })
         .then(({ data }) => data)
 
-export const createRestaurant = async ({ storeName: name, cnpj, phoneNumber: phone, location, userId, token }) =>
+export const createRestaurant = async ({ storeName: name, cnpj, phoneNumber: phone, location, description, category, userId, token }) =>
     axiosInstance.post(`/restaurants`, {
-        name, cnpj, phone, userId, location
+        name, cnpj, phone, userId, location, description, category
     }, {
         headers: {
             "Authorization": `Bearer ${token}`

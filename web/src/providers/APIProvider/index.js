@@ -63,8 +63,8 @@ const APIProvider = props => {
 
     const getRestaurants = () => API.getRestaurants()
 
-    const createRestaurant = async ({ storeName, cnpj, phoneNumber, location }) =>
-        API.createRestaurant({ storeName, cnpj, phoneNumber, location, userId: state.user.id, token: state.authToken })
+    const createRestaurant = async ({ storeName, cnpj, phoneNumber, location, description, category }) =>
+        API.createRestaurant({ storeName, cnpj, phoneNumber, location, description, category, userId: state.user.id, token: state.authToken })
 
     const getRestaurantById = async (restaurantId) =>
         API.getRestaurantById(restaurantId)

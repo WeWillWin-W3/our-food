@@ -12,10 +12,12 @@ export const StoreInformation = () => {
         storeName: '',
         cnpj: '',
         phoneNumber: '',
-        location: ''
+        location: '',
+        description: '',
+        category: ''
     })
 
-    const { storeName, cnpj, phoneNumber, location } = formState
+    const { storeName, cnpj, phoneNumber, location, description, category } = formState
 
     const API = useAPI()
     const history = useHistory()
@@ -25,7 +27,7 @@ export const StoreInformation = () => {
 
     const onSignButtonClicked = async () => {
         try {
-            await API.createRestaurant({ storeName, cnpj, phoneNumber, location })
+            await API.createRestaurant({ storeName, cnpj, phoneNumber, location, description, category })
             history.push('/restaurants')
         } catch (err) {
             console.log(err)
@@ -62,6 +64,18 @@ export const StoreInformation = () => {
                         Localização
                         <InputBox>
                             <Input placeholder="Localização do restaurante" value={location} onChange={setFormFieldWithEvent('location')} />
+                        </InputBox>
+                    </InputHeader>
+                    <InputHeader>
+                        Categoria
+                        <InputBox>
+                            <Input placeholder="Ex: Pizzaria, Comida Japonesa, etc" value={category} onChange={setFormFieldWithEvent('category')} />
+                        </InputBox>
+                    </InputHeader>
+                    <InputHeader>
+                        Descrição
+                        <InputBox>
+                            <Input placeholder="Descrição do restaurante" value={description} onChange={setFormFieldWithEvent('description')} />
                         </InputBox>
                     </InputHeader>
                     <Button full style={{ marginTop: 46 }} onClick={onSignButtonClicked}>

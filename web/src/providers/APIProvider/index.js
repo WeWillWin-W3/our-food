@@ -1,6 +1,31 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import * as API from './API'
 
+const simpleSessionStorageAdapter = (reducer, dispatch) => (action) => {
+    const stateDiff = reducer({ bag: [] }, action)
+
+    Object.entries(stateDiff).forEach(([key, value]) => {
+        if (value) {
+            window.sessionStorage.setItem(key, JSON.stringify(value))
+        } else {
+            window.sessionStorage.removeItem(key)
+        }
+    })
+
+    return dispatch(action)
+}
+
+const getInitialStateFromSessionStorage = (initialState) =>
+    Object.entries(initialState)
+        .reduce((state, [key, defaultValue]) => {
+            const sessionValue = window.sessionStorage.getItem(key)
+
+            return {
+                ...state, [key]: sessionValue ? JSON.parse(sessionValue) : defaultValue
+            }
+        }, initialState)
+
+
 const APIReducer = (state, { type, payload }) => {
     switch (type) {
         case 'start-request':
@@ -33,13 +58,17 @@ const APIReducer = (state, { type, payload }) => {
 const APIProviderContext = createContext({})
 
 const APIProvider = props => {
-    const [state, dispatch] = useReducer(APIReducer, {
+    const [state, defaultDispatch] = useReducer(APIReducer, getInitialStateFromSessionStorage({
         user: undefined,
         authToken: undefined,
         error: undefined,
         loading: false,
         bag: []
-    })
+    }))
+
+    console.log(state)
+
+    const dispatch = simpleSessionStorageAdapter(APIReducer, defaultDispatch)
 
     const logout = () => dispatch({ type: 'user-logout' })
 

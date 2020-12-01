@@ -53,7 +53,7 @@ export const deleteFood = (foodId, restaurantId, authToken) =>
     })
         .then(({ data }) => data)
 
-export const createUser = ({ name, email, password, phone, location, role = 1 }) =>
+export const createUser = ({ name, email, password, phone, location, role = 0 }) =>
     axiosInstance.post("/users", { name, email, password, phone, location, role })
         .then(({ data }) => data)
 
@@ -73,7 +73,10 @@ export const getUserById = (userId, token) =>
     })
         .then(({ data }) => data)
 
-export const createRestaurant = async ({ storeName: name, cnpj, phoneNumber: phone, location, description, category, userId, token }) =>
+export const createRestaurant = async ({
+    storeName: name, cnpj, phoneNumber: phone, location,
+    description, category, userId, token
+}) =>
     axiosInstance.post(`/restaurants`, {
         name, cnpj, phone, userId, location, description, category
     }, {

@@ -13,7 +13,7 @@ import { useAPI } from '../../providers/APIProvider'
 export const Home = () => {
     const [inputText, setInputText] = useState('')
     const [searchResults, setSearchResults] = useState([])
-    const { getRestaurantsByName, user } = useAPI()
+    const { getRestaurantsByName, user, logout } = useAPI()
 
     const getSearchResults = _.throttle(() =>
         getRestaurantsByName(inputText)
@@ -35,7 +35,10 @@ export const Home = () => {
                     <Link to="/restaurants"><NavItem>OurFood Restaurantes</NavItem></Link>
                     {
                         !!user ?
-                            <div>Bem vindo, {user.name}</div> :
+                            <>
+                                <div>Bem vindo, {user.name}</div>
+                                <NavItemButton onClick={logout}>Sair</NavItemButton>
+                            </> :
                             <>
                                 <Link to="/signup"><NavItem>Cadastre-se</NavItem></Link>
                                 <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>

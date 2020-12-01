@@ -28,12 +28,12 @@ export const Checkout = () => {
 
     useEffect(() => {
         if (restaurantId) {
-            return getRestaurantById(restaurantId)
+            getRestaurantById(restaurantId)
                 .then(setRestaurantSelected)
                 .catch(error => console.log(error))
-        }
 
-        console.log(restaurantId)
+            return;
+        }
 
         setRestaurantSelected({ name: "Nenhum restaurante selecionado" })
     }, [getRestaurantById, restaurantId])

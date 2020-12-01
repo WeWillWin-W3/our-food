@@ -14,7 +14,7 @@ import { useAPI } from '../../providers/APIProvider'
 export const NavbarComponent = () => {
     const [foodSearchText, setFoodSearchText] = useState('')
     const [foodSearchResults, setFoodSearchResults] = useState([])
-    const { getFoodsByName, getRestaurantById, user } = useAPI()
+    const { getFoodsByName, getRestaurantById, user, logout } = useAPI()
     const history = useHistory()
 
     const destination = user?.location
@@ -61,7 +61,7 @@ export const NavbarComponent = () => {
                 <Nav>
                     {
                         !!user ?
-                            <div>Bem vindo, {user.name}</div> :
+                            <NavItemButton onClick={logout}>Sair</NavItemButton> :
                             <Link to="/signin"><NavItemButton>Entrar</NavItemButton></Link>
                     }
                     <Link to="/checkout"><NavItem>Sacola</NavItem></Link>

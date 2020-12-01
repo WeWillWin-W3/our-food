@@ -116,7 +116,8 @@ const APIProvider = props => {
             const user = await API.getUserById(userId, authToken)
 
             const restaurant = user.role === RESTAURANT_OWNER_ROLE ?
-                (await API.getRestaurants()).find((restaurant) => restaurant.user_id === user.id) :
+                (await API.getRestaurants())
+                    .find((restaurant) => restaurant.user_id === user.id) :
                 undefined
 
             dispatch({ type: 'user-logged-in', payload: { user, authToken, restaurant } })

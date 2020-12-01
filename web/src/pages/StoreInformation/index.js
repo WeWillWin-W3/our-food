@@ -28,7 +28,7 @@ export const StoreInformation = () => {
     const onSignButtonClicked = async () => {
         try {
             await API.createRestaurant({ storeName, cnpj, phoneNumber, location, description, category })
-            history.push('/restaurants')
+            history.push('/dashboard')
         } catch (err) {
             console.log(err)
         }

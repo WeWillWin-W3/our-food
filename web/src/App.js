@@ -56,8 +56,8 @@ export const App = () => (
                   >
                     <DashboardFindFood />
                   </PrivateRoute>
-                  
-                  <PrivateRoute 
+
+                  <PrivateRoute
                     exact
                     path="/dashboard/foods/create"
                     redirectTo="/signin"
@@ -66,7 +66,7 @@ export const App = () => (
                     <DashboardCreateFood />
                   </PrivateRoute>
 
-                  <PrivateRoute 
+                  <PrivateRoute
                     exact
                     path="/dashboard/foods/edit/:id"
                     redirectTo="/signin"
@@ -74,11 +74,11 @@ export const App = () => (
                   >
                     <DashboardEditFood />
                   </PrivateRoute>
-                  
+
                   <PrivateRoute
                     exact
                     path="/signin"
-                    redirectTo="/restaurants"
+                    redirectTo="/"
                     redirectIf={!!api.user}
                   >
                     <SignIn />
@@ -87,7 +87,7 @@ export const App = () => (
                   <PrivateRoute
                     exact
                     path="/signup"
-                    redirectTo="/restaurants"
+                    redirectTo="/"
                     redirectIf={!!api.user}
                   >
                     <SignUp />
@@ -96,8 +96,8 @@ export const App = () => (
                   <PrivateRoute
                     exact
                     path="/signup/storeinformation"
-                    redirectTo="/storeinformation"
-                    redirectIf={!!api.user || api.user?.role !== 1}
+                    redirectTo="/signup"
+                    redirectIf={!api.user || api.user?.role !== RESTAURANT_OWNER_ROLE}
                   >
                     <StoreInformation />
                   </PrivateRoute>
@@ -107,9 +107,6 @@ export const App = () => (
           </APIProvider.Consumer>
           <Route exact path="/restaurants">
             <Restaurants />
-          </Route>
-          <Route exact path="/storeinformation">
-            <StoreInformation />
           </Route>
           <Route exact path="/restaurants/:id/foods">
             <RestaurantFoods />

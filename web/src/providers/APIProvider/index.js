@@ -58,35 +58,6 @@ const APIReducer = (state, { type, payload }) => {
     }
 }
 
-import { userRole } from '../../constants'
-const { RESTAURANT_OWNER_ROLE } = userRole
-
-const APIReducer = (state, { type, payload }) => {
-    switch (type) {
-        case 'start-request':
-            return { ...state, error: undefined, loading: true }
-        case 'user-created':
-        case 'user-logged-in':
-            return {
-                ...state,
-                authToken: payload.authToken,
-                user: payload.user,
-                restaurant: payload.restaurant,
-                loading: false
-            }
-        case 'user-logout':
-            return { ...state, user: undefined, authToken: undefined }
-        case 'error':
-            return {
-                ...state,
-                error: payload.error,
-                loading: false
-            }
-        default:
-            throw new Error()
-    }
-}
-
 const APIProviderContext = createContext({})
 
 const APIProvider = props => {
@@ -188,7 +159,6 @@ const APIProvider = props => {
             getFoodsCategories,
             addFoodToBag,
             removeFoodFromBag,
-            getFoodsCategories,
             createFood,
             deleteFood,
             getFoodById,
